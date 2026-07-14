@@ -107,6 +107,11 @@ local Library do
 
         MenuKeybind = tostring(Enum.KeyCode.RightAlt), 
 
+        Folders = {
+            Assets = "XraxorLibrary/Assets",
+            Configs = "XraxorLibrary/Configs"
+        },
+
         Flags = { },
 
         Tween = {
@@ -714,6 +719,11 @@ local Library do
 
         Library.Font = SemiBold
     end
+
+    -- Create folders if they don't exist
+    if not isfolder("XraxorLibrary") then makefolder("XraxorLibrary") end
+    if not isfolder("XraxorLibrary/Assets") then makefolder("XraxorLibrary/Assets") end
+    if not isfolder("XraxorLibrary/Configs") then makefolder("XraxorLibrary/Configs") end
 
     Library.Holder = Instances:Create("ScreenGui", {
         Parent = gethui(),
@@ -2584,6 +2594,12 @@ local Library do
                     Library.Flags["UIScale"] = 0.56
                 end
 
+                local OriginalSizes = {
+                    Left = { X = 0, Y = Items["MainFrame"].Instance.AbsoluteSize.Y },
+                    Right = { X = 0, Y = Items["MainFrame"].Instance.AbsoluteSize.Y },
+                    Top = { X = Items["MainFrame"].Instance.AbsoluteSize.X, Y = 0 },
+                    Bottom = { X = Items["MainFrame"].Instance.AbsoluteSize.X, Y = 0 },
+                }
                 Items["MainFrame"]:MakeResizeable(Vector2New(Items["MainFrame"].Instance.AbsoluteSize.X, Items["MainFrame"].Instance.AbsoluteSize.Y), Vector2New(9999, 9999), OriginalSizes)
                 Library:MakeBlurred(Items["MainFrame"], Window)
                 
@@ -3840,7 +3856,9 @@ local Library do
                         for _, Value2 in Value.Sections do 
                             task.spawn(function()
                                 Value2:TweenElements(true)
-                                Library:RefreshConfigsList(ConfigsDropdown)
+                                if ConfigsDropdown then
+                                    Library:RefreshConfigsList(ConfigsDropdown)
+                                end
                             end)
                         end
                     end
