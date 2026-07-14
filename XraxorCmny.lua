@@ -223,7 +223,7 @@ local Library do
 
     local Themes = {
         ["Preset"] = {
-            ["AccentGradient"] = FromRGB(0, 195, 255),   -- Slightly deeper blue accent
+            ["AccentGradient"] = FromRGB(0, 220, 255),   -- Cyan gradient accent
             ["Background 2"] = FromRGB(10, 10, 12),      -- Very dark gray
             ["Background"] = FromRGB(12, 12, 14),        -- Main near-black background
             ["Text"] = FromRGB(235, 235, 235),           -- Slightly dimmed light text
@@ -231,7 +231,7 @@ local Library do
             ["Section Top"] = FromRGB(28, 27, 31),       -- Dark section header
             ["Section Background"] = FromRGB(10, 10, 12),-- Deep black section background
             ["Section Background 2"] = FromRGB(14, 14, 16),-- Alternate section, minimal difference
-            ["Accent"] = FromRGB(0, 116, 224),           -- Darker blue accent for consistency
+            ["Accent"] = FromRGB(0, 100, 255),           -- Deep blue accent
             ["Element"] = FromRGB(16, 16, 18)            -- Deep gray for UI elements
         }
     }
