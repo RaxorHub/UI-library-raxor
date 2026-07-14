@@ -229,15 +229,15 @@ local Library do
     local Themes = {
         ["Preset"] = {
             ["AccentGradient"] = FromRGB(0, 220, 255),   -- Cyan gradient accent
-            ["Background 2"] = FromRGB(10, 10, 12),      -- Very dark gray
-            ["Background"] = FromRGB(12, 12, 14),        -- Main near-black background
+            ["Background 2"] = FromRGB(4, 4, 6),         -- Almost pure black
+            ["Background"] = FromRGB(5, 5, 7),           -- Pure near-black background
             ["Text"] = FromRGB(235, 235, 235),           -- Slightly dimmed light text
-            ["Outline"] = FromRGB(25, 25, 28),           -- Subtle outline, almost invisible
-            ["Section Top"] = FromRGB(28, 27, 31),       -- Dark section header
-            ["Section Background"] = FromRGB(10, 10, 12),-- Deep black section background
-            ["Section Background 2"] = FromRGB(14, 14, 16),-- Alternate section, minimal difference
+            ["Outline"] = FromRGB(15, 15, 18),           -- Very dark outline
+            ["Section Top"] = FromRGB(10, 10, 13),       -- Very dark section header
+            ["Section Background"] = FromRGB(4, 4, 6),   -- Pure black section background
+            ["Section Background 2"] = FromRGB(7, 7, 9), -- Minimal difference
             ["Accent"] = FromRGB(0, 100, 255),           -- Deep blue accent
-            ["Element"] = FromRGB(16, 16, 18)            -- Deep gray for UI elements
+            ["Element"] = FromRGB(8, 8, 10)              -- Near-black UI elements
         }
     }
 
@@ -2172,7 +2172,7 @@ local Library do
                     Name = "\0",
                     BorderColor3 = FromRGB(0, 0, 0),
                     AnchorPoint = Vector2New(0, 0.5),
-                    BackgroundTransparency = 0.30000001192092896,
+                    BackgroundTransparency = 0.05,
                     Position = UDim2New(0, 20, 0.5, 20),
                     Size = UDim2New(0, 100, 0, 30),
                     BorderSizePixel = 0,
@@ -2389,7 +2389,7 @@ local Library do
                 Items["Notification"] = Instances:Create("Frame", {
                     Parent = Library.NotifHolder.Instance,
                     Name = "\0",
-                    BackgroundTransparency = 0.3499999940395355,
+                    BackgroundTransparency = 0.05,
                     BorderColor3 = FromRGB(0, 0, 0),
                     BorderSizePixel = 0,
                     AutomaticSize = Enum.AutomaticSize.XY,
@@ -2575,7 +2575,7 @@ local Library do
                     Name = "\0",
                     BorderColor3 = FromRGB(0, 0, 0),
                     AnchorPoint = Vector2New(0.5, 0.5),
-                    BackgroundTransparency = 0.12,
+                    BackgroundTransparency = 0.0,
                     Position = UDim2New(0.5519999861717224, 0, 0.5, 0),
                     Size = UDim2New(0, 500, 0, 550),
                     ZIndex = 2,
@@ -2609,7 +2609,7 @@ local Library do
                     Visible = true,
                     BorderColor3 = FromRGB(0, 0, 0),
                     AnchorPoint = Vector2New(1, 0),
-                    BackgroundTransparency = 0.15,
+                    BackgroundTransparency = 0.0,
                     Size = UDim2New(0, 225, 1, 0),
                     ZIndex = 2,
                     BorderSizePixel = 0,
@@ -2848,7 +2848,7 @@ local Library do
                     Parent = Items["MainFrame"].Instance,
                     Name = "\0",
                     BorderColor3 = FromRGB(0, 0, 0),
-                    BackgroundTransparency = 0.75,
+                    BackgroundTransparency = 0.0,
                     Position = UDim2New(0, 0, 0, 55),
                     Size = UDim2New(1, 0, 1, -55),
                     ZIndex = 2,
@@ -2946,7 +2946,7 @@ local Library do
                         Name = "\0",
                         BorderColor3 = FromRGB(0, 0, 0),
                         AnchorPoint = Vector2New(0, 1),
-                        BackgroundTransparency = 0.11999999731779099,
+                        BackgroundTransparency = 0.0,
                         Position = UDim2New(0, 2, 1, 0),
                         Size = UDim2New(0, 1, 0, 1),
                         BorderSizePixel = 0,
@@ -2958,7 +2958,7 @@ local Library do
                         Name = "\0",
                         BorderColor3 = FromRGB(0, 0, 0),
                         AnchorPoint = Vector2New(0, 1),
-                        BackgroundTransparency = 0.11999999731779099,
+                        BackgroundTransparency = 0.0,
                         Position = UDim2New(0, 4, 1, 0),
                         Size = UDim2New(0, 1, 0, 1),
                         BorderSizePixel = 0,
@@ -2970,7 +2970,7 @@ local Library do
                         Name = "\0",
                         BorderColor3 = FromRGB(0, 0, 0),
                         AnchorPoint = Vector2New(0, 1),
-                        BackgroundTransparency = 0.11999999731779099,
+                        BackgroundTransparency = 0.0,
                         Position = UDim2New(0, 3, 1, 0),
                         Size = UDim2New(0, 1, 0, 1),
                         BorderSizePixel = 0,
@@ -2982,7 +2982,7 @@ local Library do
                         Name = "\0",
                         BorderColor3 = FromRGB(0, 0, 0),
                         AnchorPoint = Vector2New(0, 1),
-                        BackgroundTransparency = 0.11999999731779099,
+                        BackgroundTransparency = 0.0,
                         Position = UDim2New(0, 3, 1, -1),
                         Size = UDim2New(0, 1, 0, 1),
                         BorderSizePixel = 0,
@@ -2994,7 +2994,7 @@ local Library do
                         Name = "\0",
                         BorderColor3 = FromRGB(0, 0, 0),
                         AnchorPoint = Vector2New(0, 1),
-                        BackgroundTransparency = 0.11999999731779099,
+                        BackgroundTransparency = 0.0,
                         Position = UDim2New(0, 4, 1, -1),
                         Size = UDim2New(0, 1, 0, 1),
                         BorderSizePixel = 0,
@@ -3006,7 +3006,7 @@ local Library do
                         Name = "\0",
                         BorderColor3 = FromRGB(0, 0, 0),
                         AnchorPoint = Vector2New(0, 1),
-                        BackgroundTransparency = 0.11999999731779099,
+                        BackgroundTransparency = 0.0,
                         Position = UDim2New(0, 5, 1, 0),
                         Size = UDim2New(0, 1, 0, 1),
                         BorderSizePixel = 0,
@@ -3035,7 +3035,7 @@ local Library do
                         Position = UDim2New(0, 2, 0, 0),
                         BorderColor3 = FromRGB(0, 0, 0),
                         ZIndex = 2,
-                        BackgroundTransparency = 0.12,
+                        BackgroundTransparency = 0.0,
                         BorderSizePixel = 0,
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })  Items["___7"]:AddToTheme({BackgroundColor3 = "Background"})   
@@ -3044,7 +3044,7 @@ local Library do
                         Parent = Items["LeftTopPixels"].Instance,
                         Name = "\0",
                         Size = UDim2New(0, 1, 0, 1),
-                        BackgroundTransparency = 0.12,
+                        BackgroundTransparency = 0.0,
                         Position = UDim2New(0, 3, 0, 0),
                         BorderColor3 = FromRGB(0, 0, 0),
                         ZIndex = 2,
@@ -3057,7 +3057,7 @@ local Library do
                         Name = "\0",
                         Size = UDim2New(0, 1, 0, 1),
                         Position = UDim2New(0, 4, 0, 0),
-                        BackgroundTransparency = 0.12,
+                        BackgroundTransparency = 0.0,
                         BorderColor3 = FromRGB(0, 0, 0),
                         ZIndex = 2,
                         BorderSizePixel = 0,
@@ -3070,7 +3070,7 @@ local Library do
                         Size = UDim2New(0, 1, 0, 1),
                         Position = UDim2New(0, 5, 0, 0),
                         BorderColor3 = FromRGB(0, 0, 0),
-                        BackgroundTransparency = 0.12,
+                        BackgroundTransparency = 0.0,
                         ZIndex = 2,
                         BorderSizePixel = 0,
                         BackgroundColor3 = FromRGB(255, 255, 255)
@@ -3083,7 +3083,7 @@ local Library do
                         Position = UDim2New(0, 3, 0, 1),
                         BorderColor3 = FromRGB(0, 0, 0),
                         ZIndex = 2,
-                        BackgroundTransparency = 0.12,
+                        BackgroundTransparency = 0.0,
                         BorderSizePixel = 0,
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })  Items["___11"]:AddToTheme({BackgroundColor3 = "Background"})   
@@ -3095,7 +3095,7 @@ local Library do
                         Position = UDim2New(0, 4, 0, 1),
                         BorderColor3 = FromRGB(0, 0, 0),
                         ZIndex = 2,
-                        BackgroundTransparency = 0.12,
+                        BackgroundTransparency = 0.0,
                         BorderSizePixel = 0,
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })  Items["___12"]:AddToTheme({BackgroundColor3 = "Background"})                                      
@@ -4452,7 +4452,7 @@ local Library do
                 Items["GlobalChat"] = Instances:Create("Frame", {
                     Parent = self.ColumnsData[Side].Instance,
                     Name = "\0",
-                    BackgroundTransparency = 0.30000001192092896,
+                    BackgroundTransparency = 0.05,
                     Position = UDim2New(0,0,0,0),
                     BorderColor3 = FromRGB(0, 0, 0),
                     Size = UDim2New(1, 0, 1, 0),
