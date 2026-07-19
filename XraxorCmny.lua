@@ -9231,6 +9231,19 @@ local Library do
             })
         end
 
+        -- ══════════════════════════════════════════
+        --   ABOUT PAGE (tidak bisa diubah user)
+        -- ══════════════════════════════════════════
+        local AboutPage = Window:Page({Name = "About", Icon = "122669828593160"})
+
+        local AboutSection = AboutPage:Section({Name = "SYSTEM INFORMATION", Side = 1}) do
+            AboutSection:Label("Game : [ CURE ] Violence Districts")
+            AboutSection:Label("Status : Online & Secure")
+            AboutSection:Label("License : Premium Active")
+            AboutSection:Label("Script : XraxorHub OP Edition")
+            AboutSection:Label("Last Update : Today")
+        end
+
         return Page
     end
 end
