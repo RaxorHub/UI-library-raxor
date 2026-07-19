@@ -9238,10 +9238,9 @@ local Library do
 
         local AboutSection = AboutPage:Section({Name = "SYSTEM INFORMATION", Side = 1}) do
             AboutSection:Label("Game : [ CURE ] Violence Districts")
-            AboutSection:Label("Status : Online & Secure")
-            AboutSection:Label("License : Premium Active")
-            AboutSection:Label("Script : XraxorHub OP Edition")
-            AboutSection:Label("Last Update : Today")
+            AboutSection:Label("Status : Online")
+            AboutSection:Label("License : 23/7/2026")
+            AboutSection:Label("Last Update : 20/7/2026")
         end
 
         return Page
