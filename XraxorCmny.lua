@@ -4030,61 +4030,31 @@ local Library do
         Library.Watermark = function(self, Data)
             if not self or not self.Holder or not self.Holder.Instance or not self.Holder.Instance.Parent then return end
             if not self.WatermarkFrame then
+                -- Posisi tengah bawah layar, tidak bisa di-drag
                 self.WatermarkFrame = Instances:Create("Frame", {
                     Parent = self.Holder.Instance,
                     Name = "Watermark",
-                    AnchorPoint = Vector2New(0, 0),
-                    Position = UDim2New(0, 15, 0, 15),
-                    Size = UDim2New(0, 0, 0, 28), 
-                    AutomaticSize = Enum.AutomaticSize.X, 
+                    AnchorPoint = Vector2New(0.5, 1),
+                    Position = UDim2New(0.5, 0, 1, -18),
+                    Size = UDim2New(0, 0, 0, 32),
+                    AutomaticSize = Enum.AutomaticSize.X,
                     BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(27, 25, 29),
+                    BackgroundColor3 = FromRGB(20, 20, 22),
                     ZIndex = 10,
-                    Visible = false
+                    Visible = true
                 })
-                self.WatermarkFrame:MakeDraggable()
+                -- TIDAK ada MakeDraggable() — posisi tetap di tengah bawah
 
                 Instances:Create("UICorner", {
                     Parent = self.WatermarkFrame.Instance,
-                    CornerRadius = UDimNew(0, 4)
+                    CornerRadius = UDimNew(0, 20)
                 })
-                
+
                 Instances:Create("UIStroke", {
                     Parent = self.WatermarkFrame.Instance,
-                    Color = FromRGB(0, 0, 0),
+                    Color = FromRGB(55, 55, 60),
                     Thickness = 1,
                     Transparency = 0
-                })
-                local AccentLine = Instances:Create("Frame", {
-                    Parent = self.WatermarkFrame.Instance,
-                    Name = "Accent",
-                    Size = UDim2New(1, 0, 0, 2),
-                    Position = UDim2New(0, 0, 0, 0), 
-                    BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(255, 255, 255),
-                    ZIndex = 12
-                })
-                
-                Instances:Create("UICorner", {
-                    Parent = AccentLine.Instance,
-                    CornerRadius = UDimNew(0, 4)
-                })
-
-                local Gradient = Instances:Create("UIGradient", {
-                    Parent = AccentLine.Instance,
-                    Color = RGBSequence{
-                        RGBSequenceKeypoint(0, Library.Theme.Accent), 
-                        RGBSequenceKeypoint(1, Library.Theme.AccentGradient)
-                    }
-                })
-                
-                Gradient:AddToTheme({
-                    Color = function()
-                        return RGBSequence{
-                            RGBSequenceKeypoint(0, Library.Theme.Accent), 
-                            RGBSequenceKeypoint(1, Library.Theme.AccentGradient)
-                        }
-                    end
                 })
 
                 local Content = Instances:Create("Frame", {
@@ -4100,14 +4070,16 @@ local Library do
                     FillDirection = Enum.FillDirection.Horizontal,
                     SortOrder = Enum.SortOrder.LayoutOrder,
                     VerticalAlignment = Enum.VerticalAlignment.Center,
-                    Padding = UDimNew(0, 6)
+                    HorizontalAlignment = Enum.HorizontalAlignment.Center,
+                    Padding = UDimNew(0, 8)
                 })
 
                 Instances:Create("UIPadding", {
                     Parent = Content.Instance,
-                    PaddingLeft = UDimNew(0, 10),
-                    PaddingRight = UDimNew(0, 10),
-                    PaddingTop = UDimNew(0, 4) 
+                    PaddingLeft = UDimNew(0, 16),
+                    PaddingRight = UDimNew(0, 16),
+                    PaddingTop = UDimNew(0, 0),
+                    PaddingBottom = UDimNew(0, 0)
                 })
 
                 if self.ToClean then
@@ -4125,9 +4097,9 @@ local Library do
                             Parent = ContentFrame,
                             Name = SepName,
                             Text = "|",
-                            TextColor3 = FromRGB(80, 80, 80),
+                            TextColor3 = FromRGB(100, 100, 110),
                             FontFace = Library.Font,
-                            TextSize = 14,
+                            TextSize = 13,
                             BackgroundTransparency = 1,
                             AutomaticSize = Enum.AutomaticSize.XY,
                             LayoutOrder = (Index * 2) - 1,
@@ -4167,7 +4139,7 @@ local Library do
                         ExistingItem = Instances:Create("TextLabel", {
                             Parent = ContentFrame,
                             Name = ItemName,
-                            TextColor3 = FromRGB(240, 240, 240),
+                            TextColor3 = FromRGB(255, 255, 255),
                             FontFace = Library.Font,
                             TextSize = 13,
                             BackgroundTransparency = 1,
