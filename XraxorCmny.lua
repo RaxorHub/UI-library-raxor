@@ -2725,6 +2725,32 @@ local Library do
                         end
                     end)
 
+                    -- FloatingButton: kotak keren menggantikan lingkaran
+                    Instances:Create("UICorner", {
+                        Parent = Items["FloatingButton"].Instance,
+                        CornerRadius = UDimNew(0, 10)
+                    })
+
+                    Instances:Create("UIStroke", {
+                        Parent = Items["FloatingButton"].Instance,
+                        Thickness = 1.5,
+                        Transparency = 0,
+                        Color = FromRGB(255, 255, 255)
+                    }):AddToTheme({Color = "Accent"})
+
+                    Instances:Create("UIGradient", {
+                        Parent = Items["FloatingButton"].Instance,
+                        Name = "\0",
+                        Rotation = 135,
+                        Transparency = NumberSequence.new{
+                            NumberSequenceKeypoint.new(0, 0),
+                            NumberSequenceKeypoint.new(1, 0.55)
+                        },
+                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255,255,255)), RGBSequenceKeypoint(1, FromRGB(255,255,255))}
+                    }):AddToTheme({Color = function()
+                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                    end})
+
                     Items["FloatingLogo"] = Instances:Create("ImageLabel", {
                         Parent = Items["FloatingButton"].Instance,
                         BorderColor3 = FromRGB(0, 0, 0),
@@ -2734,25 +2760,10 @@ local Library do
                         AnchorPoint = Vector2New(0.5, 0.5),
                         Position = UDim2New(0.5, 0, 0.5, 0),
                         ZIndex = 127,
-                        Size = UDim2New(1, -25, 1, -25),
+                        Size = UDim2New(1, -16, 1, -16),
                         BorderSizePixel = 0,
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })
-        
-                    Instances:Create("UICorner", {
-                        Parent = Items["FloatingButton"].Instance,
-                        CornerRadius = UDimNew(1, 0)
-                    }) 
-
-                    Instances:Create("UIGradient", {
-                        Parent = Items["FloatingLogo"].Instance,
-                        Name = "\0",
-                        Enabled = true,
-                        Rotation = -115,
-                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(143, 143, 143))}
-                    }):AddToTheme({Color = function()
-                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                    end})
                 end
 
                 Items["PagePlaceholder"] = Instances:Create("Frame", {
@@ -2784,30 +2795,57 @@ local Library do
                     PaddingLeft = UDimNew(0, 12)
                 })
 
-                Items["Logo"] = Instances:Create("ImageLabel", {
+                -- Logo kotak keren: background gelap + accent border + rounded corner kecil
+                local LogoBox = Instances:Create("Frame", {
                     Parent = Items["MainFrame"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(0, 36, 0, 36),
+                    Position = UDim2New(0, 11, 0, 11),
+                    BorderSizePixel = 0,
+                    BackgroundColor3 = FromRGB(18, 18, 22),
+                    ZIndex = 2,
+                })
+
+                Instances:Create("UICorner", {
+                    Parent = LogoBox.Instance,
+                    CornerRadius = UDimNew(0, 8)
+                })
+
+                local LogoStroke = Instances:Create("UIStroke", {
+                    Parent = LogoBox.Instance,
+                    Thickness = 1.5,
+                    Transparency = 0,
+                    Color = FromRGB(255, 255, 255)
+                }):AddToTheme({Color = "Accent"})
+
+                Instances:Create("UIGradient", {
+                    Parent = LogoBox.Instance,
+                    Name = "\0",
+                    Rotation = 135,
+                    Transparency = NumberSequence.new{
+                        NumberSequenceKeypoint.new(0, 0),
+                        NumberSequenceKeypoint.new(1, 0.5)
+                    },
+                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255,255,255)), RGBSequenceKeypoint(1, FromRGB(255,255,255))}
+                }):AddToTheme({Color = function()
+                    return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                end})
+
+                Items["Logo"] = Instances:Create("ImageLabel", {
+                    Parent = LogoBox.Instance,
                     Name = "\0",
                     ImageColor3 = FromRGB(255, 255, 255),
                     ScaleType = Enum.ScaleType.Fit,
                     BorderColor3 = FromRGB(0, 0, 0),
-                    Size = UDim2New(0, 35, 0, 35),
+                    Size = UDim2New(1, -8, 1, -8),
                     Image = "rbxassetid://"..Window.Logo,
                     BackgroundTransparency = 1,
-                    Position = UDim2New(0, 12, 0, 12),
-                    ZIndex = 2,
+                    AnchorPoint = Vector2New(0.5, 0.5),
+                    Position = UDim2New(0.5, 0, 0.5, 0),
+                    ZIndex = 3,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(255, 255, 255)
-                }) 
-
-                Instances:Create("UIGradient", {
-                    Parent = Items["Logo"].Instance,
-                    Name = "\0",
-                    Enabled = true,
-                    Rotation = -115,
-                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(143, 143, 143))}
-                }):AddToTheme({Color = function()
-                    return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                end})
+                })
                 
                 Items["Title"] = Instances:Create("TextLabel", {
                     Parent = Items["MainFrame"].Instance,
@@ -3938,12 +3976,37 @@ local Library do
                     ZIndex = 51
                 })
 
-                -- make logo circular
+                -- Logo kotak keren di intro
                 Instances:Create("UICorner", {
                     Parent = Intro["Logo"].Instance,
                     Name = "\0",
-                    CornerRadius = UDimNew(1, 0)
+                    CornerRadius = UDimNew(0, 16)
                 })
+
+                Instances:Create("UIStroke", {
+                    Parent = Intro["Logo"].Instance,
+                    Name = "\0",
+                    Thickness = 2,
+                    Transparency = 0,
+                    Color = FromRGB(255, 255, 255)
+                }):AddToTheme({Color = "Accent"})
+
+                -- Background kotak gradient accent di belakang logo intro
+                Intro["Logo"].Instance.BackgroundTransparency = 0
+                Intro["Logo"].Instance.BackgroundColor3 = FromRGB(18, 18, 22)
+
+                Instances:Create("UIGradient", {
+                    Parent = Intro["Logo"].Instance,
+                    Name = "\0",
+                    Rotation = 135,
+                    Transparency = NumberSequence.new{
+                        NumberSequenceKeypoint.new(0, 0),
+                        NumberSequenceKeypoint.new(1, 0.6)
+                    },
+                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255,255,255)), RGBSequenceKeypoint(1, FromRGB(255,255,255))}
+                }):AddToTheme({Color = function()
+                    return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                end})
 
                 Intro["Title"] = Instances:Create("TextLabel", {
                     Parent = Intro["Holder"].Instance,
@@ -4030,31 +4093,61 @@ local Library do
         Library.Watermark = function(self, Data)
             if not self or not self.Holder or not self.Holder.Instance or not self.Holder.Instance.Parent then return end
             if not self.WatermarkFrame then
-                -- Posisi tengah bawah layar, tidak bisa di-drag
                 self.WatermarkFrame = Instances:Create("Frame", {
                     Parent = self.Holder.Instance,
                     Name = "Watermark",
-                    AnchorPoint = Vector2New(0.5, 1),
-                    Position = UDim2New(0.5, 0, 1, -18),
-                    Size = UDim2New(0, 0, 0, 32),
-                    AutomaticSize = Enum.AutomaticSize.X,
+                    AnchorPoint = Vector2New(0, 0),
+                    Position = UDim2New(0, 15, 0, 15),
+                    Size = UDim2New(0, 0, 0, 28), 
+                    AutomaticSize = Enum.AutomaticSize.X, 
                     BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(20, 20, 22),
+                    BackgroundColor3 = FromRGB(27, 25, 29),
                     ZIndex = 10,
-                    Visible = true
+                    Visible = false
                 })
-                -- TIDAK ada MakeDraggable() — posisi tetap di tengah bawah
+                self.WatermarkFrame:MakeDraggable()
 
                 Instances:Create("UICorner", {
                     Parent = self.WatermarkFrame.Instance,
-                    CornerRadius = UDimNew(0, 20)
+                    CornerRadius = UDimNew(0, 4)
                 })
-
+                
                 Instances:Create("UIStroke", {
                     Parent = self.WatermarkFrame.Instance,
-                    Color = FromRGB(55, 55, 60),
+                    Color = FromRGB(0, 0, 0),
                     Thickness = 1,
                     Transparency = 0
+                })
+                local AccentLine = Instances:Create("Frame", {
+                    Parent = self.WatermarkFrame.Instance,
+                    Name = "Accent",
+                    Size = UDim2New(1, 0, 0, 2),
+                    Position = UDim2New(0, 0, 0, 0), 
+                    BorderSizePixel = 0,
+                    BackgroundColor3 = FromRGB(255, 255, 255),
+                    ZIndex = 12
+                })
+                
+                Instances:Create("UICorner", {
+                    Parent = AccentLine.Instance,
+                    CornerRadius = UDimNew(0, 4)
+                })
+
+                local Gradient = Instances:Create("UIGradient", {
+                    Parent = AccentLine.Instance,
+                    Color = RGBSequence{
+                        RGBSequenceKeypoint(0, Library.Theme.Accent), 
+                        RGBSequenceKeypoint(1, Library.Theme.AccentGradient)
+                    }
+                })
+                
+                Gradient:AddToTheme({
+                    Color = function()
+                        return RGBSequence{
+                            RGBSequenceKeypoint(0, Library.Theme.Accent), 
+                            RGBSequenceKeypoint(1, Library.Theme.AccentGradient)
+                        }
+                    end
                 })
 
                 local Content = Instances:Create("Frame", {
@@ -4070,16 +4163,14 @@ local Library do
                     FillDirection = Enum.FillDirection.Horizontal,
                     SortOrder = Enum.SortOrder.LayoutOrder,
                     VerticalAlignment = Enum.VerticalAlignment.Center,
-                    HorizontalAlignment = Enum.HorizontalAlignment.Center,
-                    Padding = UDimNew(0, 8)
+                    Padding = UDimNew(0, 6)
                 })
 
                 Instances:Create("UIPadding", {
                     Parent = Content.Instance,
-                    PaddingLeft = UDimNew(0, 16),
-                    PaddingRight = UDimNew(0, 16),
-                    PaddingTop = UDimNew(0, 0),
-                    PaddingBottom = UDimNew(0, 0)
+                    PaddingLeft = UDimNew(0, 10),
+                    PaddingRight = UDimNew(0, 10),
+                    PaddingTop = UDimNew(0, 4) 
                 })
 
                 if self.ToClean then
@@ -4097,9 +4188,9 @@ local Library do
                             Parent = ContentFrame,
                             Name = SepName,
                             Text = "|",
-                            TextColor3 = FromRGB(100, 100, 110),
+                            TextColor3 = FromRGB(80, 80, 80),
                             FontFace = Library.Font,
-                            TextSize = 13,
+                            TextSize = 14,
                             BackgroundTransparency = 1,
                             AutomaticSize = Enum.AutomaticSize.XY,
                             LayoutOrder = (Index * 2) - 1,
@@ -4139,7 +4230,7 @@ local Library do
                         ExistingItem = Instances:Create("TextLabel", {
                             Parent = ContentFrame,
                             Name = ItemName,
-                            TextColor3 = FromRGB(255, 255, 255),
+                            TextColor3 = FromRGB(240, 240, 240),
                             FontFace = Library.Font,
                             TextSize = 13,
                             BackgroundTransparency = 1,
