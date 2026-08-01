@@ -2577,7 +2577,7 @@ local Library do
                     AnchorPoint = Vector2New(0.5, 0.5),
                     BackgroundTransparency = 0.0,
                     Position = UDim2New(0.5519999861717224, 0, 0.5, 0),
-                    Size = UDim2New(0, 500, 0, 500),
+                    Size = UDim2New(0, 450, 0, 450),
                     ZIndex = 2,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(27, 25, 29)
