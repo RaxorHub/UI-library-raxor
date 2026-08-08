@@ -5099,8 +5099,7 @@ local Library do
                     Parent = Items["Top"].Instance,
                     Name = "\0",
                     Active = false,
-                    -- ДОБАВЛЕНО: Видимость зависит от параметра EnableToggle
-                    Visible = Section.EnableToggle,
+                    Visible = true,
                     BorderColor3 = FromRGB(0, 0, 0),
                     Text = "",
                     AutoButtonColor = false,
@@ -5110,20 +5109,53 @@ local Library do
                     Size = UDim2New(0, 26, 0, 16),
                     ZIndex = 2,
                     BorderSizePixel = 0,
+                    BackgroundTransparency = 1,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })
-                
+
+                -- Arrow V icon
+                Items["ArrowV"] = Instances:Create("ImageLabel", {
+                    Parent = Items["Toggle"].Instance,
+                    Name = "\0",
+                    Image = "rbxassetid://123317177279443",
+                    ImageColor3 = FromRGB(220, 70, 70),
+                    Size = UDim2New(0, 16, 0, 8),
+                    AnchorPoint = Vector2New(0.5, 0.5),
+                    Position = UDim2New(0.5, 0, 0.5, 0),
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    Rotation = 0,
+                    ZIndex = 3,
+                    BorderColor3 = FromRGB(0, 0, 0),
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+
+                -- Buat seluruh header bisa diklik (bukan cuma toggle kecil)
+                Items["HeaderClick"] = Instances:Create("TextButton", {
+                    Parent = Items["TopBackground"].Instance,
+                    Name = "\0",
+                    Text = "",
+                    AutoButtonColor = false,
+                    BackgroundTransparency = 1,
+                    Size = UDim2New(1, 0, 1, 0),
+                    ZIndex = 3,
+                    BorderSizePixel = 0,
+                    BorderColor3 = FromRGB(0, 0, 0),
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+
                 Items["Circle"] = Instances:Create("Frame", {
                     Parent = Items["Toggle"].Instance,
                     Name = "\0",
                     BorderColor3 = FromRGB(0, 0, 0),
                     AnchorPoint = Vector2New(1, 0.5),
                     Position = UDim2New(1, -4, 0.5, 0),
-                    Size = UDim2New(0, 8, 0, 8),
+                    Size = UDim2New(0, 0, 0, 0),
                     ZIndex = 2,
                     BorderSizePixel = 0,
+                    BackgroundTransparency = 1,
                     BackgroundColor3 = FromRGB(255, 255, 255)
-                })  Items["Circle"]:AddToTheme({BackgroundColor3 = "Text"})
+                })
                 
                 Instances:Create("UICorner", {
                     Parent = Items["Circle"].Instance,
@@ -5332,22 +5364,16 @@ local Library do
                 if not Section.IsActive then 
                     Items["Fade"].Instance.Visible = true
                     Items["Fade"]:Tween(nil, {BackgroundTransparency = 0.3})
-    
-                    Items["Gradient"].Instance.Enabled = false
-                    Items["Toggle"]:ChangeItemTheme({BackgroundColor3 = "Element"})
-                    Items["Toggle"]:Tween(nil, {BackgroundColor3 = Library.Theme.Element})
-                    Items["Circle"]:Tween(nil, {AnchorPoint = Vector2New(0, 0.5), Position = UDim2New(0, 4, 0.5, 0), BackgroundColor3 = Library.Theme.Text, BackgroundTransparency = 0.6})
+                    -- Arrow rotate ke atas (tutup)
+                    Items["ArrowV"]:Tween(nil, {Rotation = 180, ImageColor3 = FromRGB(141, 141, 150)})
                 else
                     Items["Fade"]:Tween(nil, {BackgroundTransparency = 1})
                     task.spawn(function() 
                         task.wait(Library.Tween.Time)
                         Items["Fade"].Instance.Visible = false
                     end)
-
-                    Items["Gradient"].Instance.Enabled = true
-                    Items["Toggle"]:ChangeItemTheme({BackgroundColor3 = "Text"})
-                    Items["Toggle"]:Tween(nil, {BackgroundColor3 = Library.Theme.Text})
-                    Items["Circle"]:Tween(nil, {AnchorPoint = Vector2New(1, 0.5), Position = UDim2New(1, -4, 0.5, 0), BackgroundColor3 = Library.Theme.Text, BackgroundTransparency = 0})
+                    -- Arrow rotate ke bawah (buka)
+                    Items["ArrowV"]:Tween(nil, {Rotation = 0, ImageColor3 = FromRGB(220, 70, 70)})
                 end
             end
 
@@ -5369,6 +5395,10 @@ local Library do
             end
 
             Items["Toggle"]:Connect("MouseButton1Down", function()
+                Section:ToggleBackground()
+            end)
+
+            Items["HeaderClick"]:Connect("MouseButton1Down", function()
                 Section:ToggleBackground()
             end)
 
