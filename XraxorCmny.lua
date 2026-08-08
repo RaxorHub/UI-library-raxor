@@ -228,16 +228,16 @@ local Library do
 
     local Themes = {
         ["Preset"] = {
-            ["AccentGradient"] = FromRGB(0, 220, 255),   -- Cyan gradient accent
-            ["Background 2"] = FromRGB(4, 4, 6),         -- Almost pure black
-            ["Background"] = FromRGB(5, 5, 7),           -- Pure near-black background
-            ["Text"] = FromRGB(235, 235, 235),           -- Slightly dimmed light text
-            ["Outline"] = FromRGB(15, 15, 18),           -- Very dark outline
-            ["Section Top"] = FromRGB(10, 10, 13),       -- Very dark section header
-            ["Section Background"] = FromRGB(4, 4, 6),   -- Pure black section background
-            ["Section Background 2"] = FromRGB(7, 7, 9), -- Minimal difference
-            ["Accent"] = FromRGB(0, 100, 255),           -- Deep blue accent
-            ["Element"] = FromRGB(8, 8, 10)              -- Near-black UI elements
+            ["AccentGradient"] = FromRGB(180, 40, 40),      -- Red gradient accent
+            ["Background 2"] = FromRGB(14, 14, 18),         -- Frosted dark panel
+            ["Background"] = FromRGB(10, 10, 14),           -- Deep dark background
+            ["Text"] = FromRGB(240, 240, 245),              -- Pure white text
+            ["Outline"] = FromRGB(255, 255, 255),           -- White outline (transparan di UI)
+            ["Section Top"] = FromRGB(20, 20, 26),          -- Section header frosted
+            ["Section Background"] = FromRGB(16, 16, 22),   -- Section body dark
+            ["Section Background 2"] = FromRGB(18, 18, 24), -- Section container
+            ["Accent"] = FromRGB(220, 70, 70),              -- Red accent
+            ["Element"] = FromRGB(30, 30, 38)               -- White-tinted element bg
         }
     }
 
@@ -2583,6 +2583,22 @@ local Library do
                     BackgroundColor3 = FromRGB(27, 25, 29)
                 })  Items["MainFrame"]:AddToTheme({BackgroundColor3 = "Background"})
 
+                -- Corner radius window utama
+                Instances:Create("UICorner", {
+                    Parent = Items["MainFrame"].Instance,
+                    Name = "\0",
+                    CornerRadius = UDimNew(0, 10)
+                })
+
+                -- Border putih tipis elegan
+                Instances:Create("UIStroke", {
+                    Parent = Items["MainFrame"].Instance,
+                    Name = "\0",
+                    Color = FromRGB(255, 255, 255),
+                    Thickness = 0.8,
+                    Transparency = 0.82
+                })
+
                 if IsMobile then 
                     local UIScale = Instances:Create("UIScale", {
                         Parent = Items["MainFrame"].Instance,
@@ -4231,21 +4247,40 @@ local Library do
                     Size = UDim2New(0, 200, 0, 40),
                     ZIndex = 2,
                     TextSize = 14,
-                    BackgroundColor3 = FromRGB(124, 163, 255)
-                })  Items["Inactive"]:AddToTheme({BackgroundColor3 = "Accent"})
-                
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+
                 Instances:Create("UICorner", {
                     Parent = Items["Inactive"].Instance,
                     Name = "\0",
-                    CornerRadius = UDimNew(0, 5)
+                    CornerRadius = UDimNew(0, 6)
                 })
-                
+
+                -- Border kiri merah saat active (awalnya transparan)
+                Items["ActiveBar"] = Instances:Create("Frame", {
+                    Parent = Items["Inactive"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(0, 2, 0.6, 0),
+                    AnchorPoint = Vector2New(0, 0.5),
+                    Position = UDim2New(0, 6, 0.5, 0),
+                    BackgroundColor3 = FromRGB(220, 70, 70),
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    ZIndex = 3
+                })
+
+                Instances:Create("UICorner", {
+                    Parent = Items["ActiveBar"].Instance,
+                    Name = "\0",
+                    CornerRadius = UDimNew(0, 999)
+                })
+
                 Items.Gradient = Instances:Create("UIGradient", {
                     Parent = Items["Inactive"].Instance,
                     Name = "\0",
                     Transparency = NumSequence{NumSequenceKeypoint(0, 0.41874998807907104), NumSequenceKeypoint(0.445, 0.78125), NumSequenceKeypoint(0.751, 0.9375), NumSequenceKeypoint(1, 1)}
                 })
-                
+
                 Items["Icon"] = Instances:Create("ImageLabel", {
                     Parent = Items["Inactive"].Instance,
                     Name = "\0",
@@ -4259,7 +4294,7 @@ local Library do
                     ZIndex = 2,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(255, 255, 255)
-                })  --Items["Icon"]:AddToTheme({ImageColor3 = "Accent"})
+                })
 
                 Instances:Create("UIGradient", {
                     Parent = Items["Icon"].Instance,
@@ -4268,12 +4303,13 @@ local Library do
                 }):AddToTheme({Color = function()
                     return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
                 end})
-                
+
                 Items["Text"] = Instances:Create("TextLabel", {
                     Parent = Items["Inactive"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(240, 240, 240),
+                    TextTransparency = 0.3,
                     BorderColor3 = FromRGB(0, 0, 0),
                     Text = Page.Name,
                     AutomaticSize = Enum.AutomaticSize.X,
@@ -5003,7 +5039,7 @@ local Library do
                     Parent = Section.Page.ColumnsData[Section.Side].Instance,
                     Name = "\0",
                     BorderColor3 = FromRGB(0, 0, 0),
-                    BackgroundTransparency = 0.6499999761581421,
+                    BackgroundTransparency = 0.55,
                     ClipsDescendants = false,
                     BorderSizePixel = 0,
                     Size = UDim2New(1, 0, 0, 45),
@@ -5011,17 +5047,26 @@ local Library do
                     AutomaticSize = Enum.AutomaticSize.Y,
                     BackgroundColor3 = FromRGB(29, 28, 32)
                 })  Items["Section"]:AddToTheme({BackgroundColor3 = "Section Background 2"})
-                
+
+                -- Border putih tipis di section
+                Instances:Create("UIStroke", {
+                    Parent = Items["Section"].Instance,
+                    Name = "\0",
+                    Color = FromRGB(255, 255, 255),
+                    Thickness = 0.6,
+                    Transparency = 0.88
+                })
+
                 Items["Top"] = Instances:Create("Frame", {
                     Parent = Items["Section"].Instance,
                     Name = "\0",
-                    BackgroundTransparency = 0.6499999761581421,
+                    BackgroundTransparency = 0.5,
                     Size = UDim2New(1, 0, 0, 55),
                     BorderColor3 = FromRGB(0, 0, 0),
                     ZIndex = 2,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(31, 31, 36)
-                })  Items["Top"]:AddToTheme({BackgroundColor3 = "Outline"})
+                })  Items["Top"]:AddToTheme({BackgroundColor3 = "Section Top"})
                 
                 Items["TopBackground"] = Instances:Create("Frame", {
                     Parent = Items["Top"].Instance,
