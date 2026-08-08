@@ -226,20 +226,102 @@ local Library do
         ["RightAlt"]          = "RightAlt"
     }
 
+    -- ═══════════════════════════════════════════════
+    --   THEME PRESETS — switch via Library:SetTheme()
+    --   Keys: "Blood" | "Nebula" | "Neon" | "Midnight" | "Ember" | "Gold"
+    -- ═══════════════════════════════════════════════
     local Themes = {
+        -- 🔴 BLOOD — Dark crimson (default XraxorHub)
         ["Preset"] = {
-            ["AccentGradient"] = FromRGB(180, 40, 40),      -- Red gradient accent
-            ["Background 2"] = FromRGB(14, 14, 18),         -- Frosted dark panel
-            ["Background"] = FromRGB(10, 10, 14),           -- Deep dark background
-            ["Text"] = FromRGB(240, 240, 245),              -- Pure white text
-            ["Outline"] = FromRGB(255, 255, 255),           -- White outline (transparan di UI)
-            ["Section Top"] = FromRGB(20, 20, 26),          -- Section header frosted
-            ["Section Background"] = FromRGB(16, 16, 22),   -- Section body dark
-            ["Section Background 2"] = FromRGB(18, 18, 24), -- Section container
-            ["Accent"] = FromRGB(220, 70, 70),              -- Red accent
-            ["Element"] = FromRGB(30, 30, 38)               -- White-tinted element bg
-        }
+            ["AccentGradient"] = FromRGB(140, 20, 25),
+            ["Background 2"]   = FromRGB(12, 10, 13),
+            ["Background"]     = FromRGB(8, 7, 9),
+            ["Text"]           = FromRGB(245, 238, 248),
+            ["Outline"]        = FromRGB(255, 255, 255),
+            ["Section Top"]    = FromRGB(22, 14, 18),
+            ["Section Background"]   = FromRGB(15, 11, 15),
+            ["Section Background 2"] = FromRGB(17, 13, 17),
+            ["Accent"]         = FromRGB(220, 45, 60),
+            ["Element"]        = FromRGB(32, 20, 28),
+        },
+        -- 🌌 NEBULA — Deep violet/purple
+        ["Nebula"] = {
+            ["AccentGradient"] = FromRGB(75, 15, 155),
+            ["Background 2"]   = FromRGB(10, 8, 20),
+            ["Background"]     = FromRGB(6, 5, 14),
+            ["Text"]           = FromRGB(238, 232, 255),
+            ["Outline"]        = FromRGB(190, 160, 255),
+            ["Section Top"]    = FromRGB(20, 12, 36),
+            ["Section Background"]   = FromRGB(13, 9, 26),
+            ["Section Background 2"] = FromRGB(15, 11, 30),
+            ["Accent"]         = FromRGB(148, 55, 255),
+            ["Element"]        = FromRGB(28, 18, 52),
+        },
+        -- ⚡ NEON — Electric cyan on void black
+        ["Neon"] = {
+            ["AccentGradient"] = FromRGB(0, 110, 175),
+            ["Background 2"]   = FromRGB(5, 8, 14),
+            ["Background"]     = FromRGB(3, 5, 10),
+            ["Text"]           = FromRGB(215, 240, 255),
+            ["Outline"]        = FromRGB(80, 210, 255),
+            ["Section Top"]    = FromRGB(7, 20, 32),
+            ["Section Background"]   = FromRGB(4, 13, 22),
+            ["Section Background 2"] = FromRGB(5, 16, 26),
+            ["Accent"]         = FromRGB(0, 205, 255),
+            ["Element"]        = FromRGB(8, 26, 44),
+        },
+        -- 🌙 MIDNIGHT — Deep navy blue
+        ["Midnight"] = {
+            ["AccentGradient"] = FromRGB(25, 55, 140),
+            ["Background 2"]   = FromRGB(7, 9, 18),
+            ["Background"]     = FromRGB(4, 6, 13),
+            ["Text"]           = FromRGB(195, 215, 255),
+            ["Outline"]        = FromRGB(140, 175, 255),
+            ["Section Top"]    = FromRGB(12, 17, 34),
+            ["Section Background"]   = FromRGB(8, 12, 24),
+            ["Section Background 2"] = FromRGB(10, 14, 28),
+            ["Accent"]         = FromRGB(75, 128, 255),
+            ["Element"]        = FromRGB(16, 22, 46),
+        },
+        -- 🔥 EMBER — Hot molten orange
+        ["Ember"] = {
+            ["AccentGradient"] = FromRGB(155, 45, 0),
+            ["Background 2"]   = FromRGB(12, 7, 4),
+            ["Background"]     = FromRGB(8, 4, 2),
+            ["Text"]           = FromRGB(255, 238, 215),
+            ["Outline"]        = FromRGB(255, 195, 90),
+            ["Section Top"]    = FromRGB(24, 11, 4),
+            ["Section Background"]   = FromRGB(16, 7, 2),
+            ["Section Background 2"] = FromRGB(19, 9, 3),
+            ["Accent"]         = FromRGB(255, 95, 18),
+            ["Element"]        = FromRGB(34, 16, 6),
+        },
+        -- 💛 GOLD — Rich amber on near-black
+        ["Gold"] = {
+            ["AccentGradient"] = FromRGB(155, 95, 0),
+            ["Background 2"]   = FromRGB(11, 9, 5),
+            ["Background"]     = FromRGB(7, 5, 2),
+            ["Text"]           = FromRGB(255, 248, 218),
+            ["Outline"]        = FromRGB(255, 215, 90),
+            ["Section Top"]    = FromRGB(22, 16, 6),
+            ["Section Background"]   = FromRGB(14, 10, 3),
+            ["Section Background 2"] = FromRGB(17, 12, 5),
+            ["Accent"]         = FromRGB(220, 168, 28),
+            ["Element"]        = FromRGB(30, 22, 8),
+        },
     }
+
+    -- ── SetTheme: switch semua warna sekaligus ──────────────────────
+    Library.SetTheme = function(self, ThemeName)
+        local t = Themes[ThemeName]
+        if not t then
+            warn("[XraxorHub] Theme '"..tostring(ThemeName).."' tidak ditemukan.")
+            return
+        end
+        for Key, Color in t do
+            self:ChangeTheme(Key, Color)
+        end
+    end
 
     Library.Theme = TableClone(Themes["Preset"])
 
@@ -4275,6 +4357,17 @@ local Library do
                     CornerRadius = UDimNew(0, 999)
                 })
 
+                -- Glow stroke saat tab aktif (awalnya transparan)
+                Items["ActiveGlow"] = Instances:Create("UIStroke", {
+                    Parent = Items["Inactive"].Instance,
+                    Name = "\0",
+                    Color = FromRGB(220, 70, 70),
+                    Thickness = 1,
+                    Transparency = 1,
+                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+                })
+                Items["ActiveGlow"]:AddToTheme({Color = "Accent"})
+
                 Items.Gradient = Instances:Create("UIGradient", {
                     Parent = Items["Inactive"].Instance,
                     Name = "\0",
@@ -4400,7 +4493,11 @@ local Library do
 
                 local SlideTween
                 if Page.Active then
-                    Items["Inactive"]:Tween(nil, {BackgroundTransparency = 0.25})
+                    Items["Inactive"]:Tween(nil, {BackgroundTransparency = 0.20})
+                    Items["ActiveBar"]:Tween(nil, {BackgroundTransparency = 0})
+                    if Items["ActiveGlow"] then
+                        Items["ActiveGlow"]:Tween(nil, {Transparency = 0.55})
+                    end
                     SlideTween = Items["Page"]:Tween(TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = UDim2New(0, 0, 0, 0)})
 
                     for Index, Value in Page.Sections do 
@@ -4412,6 +4509,10 @@ local Library do
                     end
                 else
                     Items["Inactive"]:Tween(nil, {BackgroundTransparency = 1})
+                    Items["ActiveBar"]:Tween(nil, {BackgroundTransparency = 1})
+                    if Items["ActiveGlow"] then
+                        Items["ActiveGlow"]:Tween(nil, {Transparency = 1})
+                    end
                     SlideTween = Items["Page"]:Tween(TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = UDim2New(0, 0, 0, 60)})
                 end
 
