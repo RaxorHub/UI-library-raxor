@@ -4999,7 +4999,7 @@ local Library do
                     Name = "\0",
                     BorderColor3 = FromRGB(0, 0, 0),
                     BackgroundTransparency = 0.6499999761581421,
-                    ClipsDescendants = true,
+                    ClipsDescendants = false,
                     BorderSizePixel = 0,
                     Size = UDim2New(1, 0, 0, 45),
                     ZIndex = 2,
@@ -5362,11 +5362,15 @@ local Library do
                 Section.IsActive = not Section.IsActive
 
                 if not Section.IsActive then 
+                    -- Sembunyikan konten
                     Items["Fade"].Instance.Visible = true
                     Items["Fade"]:Tween(nil, {BackgroundTransparency = 0.3})
+                    Items["Background"].Instance.Visible = false
                     -- Arrow rotate ke atas (tutup)
                     Items["ArrowV"]:Tween(nil, {Rotation = 180, ImageColor3 = FromRGB(141, 141, 150)})
                 else
+                    -- Tampilkan konten
+                    Items["Background"].Instance.Visible = true
                     Items["Fade"]:Tween(nil, {BackgroundTransparency = 1})
                     task.spawn(function() 
                         task.wait(Library.Tween.Time)
