@@ -4030,31 +4030,32 @@ local Library do
         Library.Watermark = function(self, Data)
             if not self or not self.Holder or not self.Holder.Instance or not self.Holder.Instance.Parent then return end
             if not self.WatermarkFrame then
-                -- Posisi tengah bawah layar, tidak bisa di-drag
+                -- Frame utama: glassmorphism putih tipis, tengah bawah
                 self.WatermarkFrame = Instances:Create("Frame", {
                     Parent = self.Holder.Instance,
                     Name = "Watermark",
                     AnchorPoint = Vector2New(0.5, 1),
                     Position = UDim2New(0.5, 0, 1, -18),
-                    Size = UDim2New(0, 0, 0, 32),
+                    Size = UDim2New(0, 0, 0, 34),
                     AutomaticSize = Enum.AutomaticSize.X,
                     BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(20, 20, 22),
+                    BackgroundColor3 = FromRGB(255, 255, 255),
+                    BackgroundTransparency = 0.88,
                     ZIndex = 10,
                     Visible = true
                 })
-                -- TIDAK ada MakeDraggable() — posisi tetap di tengah bawah
 
                 Instances:Create("UICorner", {
                     Parent = self.WatermarkFrame.Instance,
-                    CornerRadius = UDimNew(0, 20)
+                    CornerRadius = UDimNew(0, 999)
                 })
 
+                -- Border putih tipis elegan
                 Instances:Create("UIStroke", {
                     Parent = self.WatermarkFrame.Instance,
-                    Color = FromRGB(55, 55, 60),
-                    Thickness = 1,
-                    Transparency = 0
+                    Color = FromRGB(255, 255, 255),
+                    Thickness = 0.8,
+                    Transparency = 0.7
                 })
 
                 local Content = Instances:Create("Frame", {
@@ -4071,13 +4072,13 @@ local Library do
                     SortOrder = Enum.SortOrder.LayoutOrder,
                     VerticalAlignment = Enum.VerticalAlignment.Center,
                     HorizontalAlignment = Enum.HorizontalAlignment.Center,
-                    Padding = UDimNew(0, 8)
+                    Padding = UDimNew(0, 10)
                 })
 
                 Instances:Create("UIPadding", {
                     Parent = Content.Instance,
-                    PaddingLeft = UDimNew(0, 16),
-                    PaddingRight = UDimNew(0, 16),
+                    PaddingLeft = UDimNew(0, 18),
+                    PaddingRight = UDimNew(0, 18),
                     PaddingTop = UDimNew(0, 0),
                     PaddingBottom = UDimNew(0, 0)
                 })
@@ -4093,15 +4094,14 @@ local Library do
                     local SepName = "Sep_" .. Index
                     local Sep = ContentFrame:FindFirstChild(SepName)
                     if not Sep then
-                        Sep = Instances:Create("TextLabel", {
+                        -- Divider vertikal tipis elegan
+                        Sep = Instances:Create("Frame", {
                             Parent = ContentFrame,
                             Name = SepName,
-                            Text = "|",
-                            TextColor3 = FromRGB(100, 100, 110),
-                            FontFace = Library.Font,
-                            TextSize = 13,
-                            BackgroundTransparency = 1,
-                            AutomaticSize = Enum.AutomaticSize.XY,
+                            Size = UDim2New(0, 1, 0, 14),
+                            BackgroundColor3 = FromRGB(255, 255, 255),
+                            BackgroundTransparency = 0.65,
+                            BorderSizePixel = 0,
                             LayoutOrder = (Index * 2) - 1,
                             ZIndex = 11
                         }).Instance
@@ -4130,18 +4130,23 @@ local Library do
                             Parent = ContentFrame,
                             Name = ItemName,
                             BackgroundTransparency = 1,
-                            Size = UDim2New(0, 14, 0, 14),
+                            Size = UDim2New(0, 13, 0, 13),
                             ImageColor3 = FromRGB(255, 255, 255),
+                            ImageTransparency = 0.1,
                             LayoutOrder = Index * 2,
                             ZIndex = 11
                         }).Instance
                     else
+                        -- Item pertama = nama brand (putih terang, bold)
+                        -- Item lainnya = stats (putih semi-transparan)
+                        local isBrand = (Index == 1)
                         ExistingItem = Instances:Create("TextLabel", {
                             Parent = ContentFrame,
                             Name = ItemName,
-                            TextColor3 = FromRGB(255, 255, 255),
-                            FontFace = Library.Font,
-                            TextSize = 13,
+                            TextColor3 = isBrand and FromRGB(255, 255, 255) or FromRGB(210, 210, 220),
+                            TextTransparency = isBrand and 0 or 0.15,
+                            FontFace = isBrand and Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold) or Library.Font,
+                            TextSize = isBrand and 13 or 12,
                             BackgroundTransparency = 1,
                             AutomaticSize = Enum.AutomaticSize.XY,
                             LayoutOrder = Index * 2,
