@@ -717,7 +717,7 @@ local Library do
             ["Light"] = Light
         }
 
-        Library.Font = SemiBold
+        Library.Font = Light
     end
 
     -- Create folders if they don't exist
@@ -4052,7 +4052,7 @@ local Library do
                     Name = "Watermark",
                     AnchorPoint = Vector2New(0.5, 1),
                     Position = UDim2New(0.5, 0, 1, -18),
-                    Size = UDim2New(0, 0, 0, 34),
+                    Size = UDim2New(0, 0, 0, 24),
                     AutomaticSize = Enum.AutomaticSize.X,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(255, 255, 255),
