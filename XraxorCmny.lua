@@ -4055,7 +4055,7 @@ local Library do
                     Size = UDim2New(0, 0, 0, 24),
                     AutomaticSize = Enum.AutomaticSize.X,
                     BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(255, 255, 255),
+                    BackgroundColor3 = FromRGB(12, 12, 16),
                     BackgroundTransparency = 0.88,
                     ZIndex = 10,
                     Visible = true
