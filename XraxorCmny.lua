@@ -2603,11 +2603,11 @@ local Library do
                     local UIScale = Instances:Create("UIScale", {
                         Parent = Items["MainFrame"].Instance,
                         Name = "\0",
-                        Scale = 0.56
+                        Scale = 0.32
                     })
 
                     -- keep flag in sync so UI Size slider shows correct value
-                    Library.Flags["UIScale"] = 0.56
+                    Library.Flags["UIScale"] = 0.32
                 end
 
                 local OriginalSizes = {
