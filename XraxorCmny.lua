@@ -1068,7 +1068,7 @@ local Library do
             Color = FromRGB(0,0,0),
             Parent = Camera
         })
-        -- Добавляем в список на удаление
+        -- Ð”Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ Ð² ÑÐ¿Ð¸ÑÐ¾Ðº Ð½Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ
         table.insert(self.ToClean, Part.Instance)
             
         local BlockMesh = Instances:Create("BlockMesh", {Parent = Part.Instance})
@@ -1082,7 +1082,7 @@ local Library do
             NearIntensity = 1,
             Name = ""
         })
-        -- Добавляем в список на удаление
+        -- Ð”Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ Ð² ÑÐ¿Ð¸ÑÐ¾Ðº Ð½Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ
         table.insert(self.ToClean, DepthOfField.Instance)
 
         Library:Connect(RunService.RenderStepped, function()
@@ -3653,7 +3653,7 @@ local Library do
 
                 Settings:Slider({
                     Name = "UI Size",
-                    Default = IsMobile and 0.56 or 1,
+                    Default = IsMobile and 0.32 or 1,
                     Decimals = 0.01,
                     Max = 1.3,
                     Min = 0.3,
@@ -5137,7 +5137,7 @@ local Library do
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
-                    -- Сохранил твою логику центрирования из прошлого вопроса
+                    -- Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ð» Ñ‚Ð²Ð¾ÑŽ Ð»Ð¾Ð³Ð¸ÐºÑƒ Ñ†ÐµÐ½Ñ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¸Ð· Ð¿Ñ€Ð¾ÑˆÐ»Ð¾Ð³Ð¾ Ð²Ð¾Ð¿Ñ€Ð¾ÑÐ°
                     Position = (Section.Description == "") and UDim2New(0, 50, 0, 19) or UDim2New(0, 50, 0, 10),
                     BorderSizePixel = 0,
                     ZIndex = 2,
@@ -9287,9 +9287,9 @@ local Library do
             })
         end
 
-        -- ══════════════════════════════════════════
+        -- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         --   ABOUT PAGE (tidak bisa diubah user)
-        -- ══════════════════════════════════════════
+        -- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         local AboutPage = Window:Page({Name = "About", Icon = "122669828593160"})
 
         local AboutSection = AboutPage:Section({Name = "SYSTEM INFORMATION", Side = 1}) do
