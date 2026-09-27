@@ -4781,7 +4781,19 @@ local Library do
                 Items["Input"].Instance.Text = ""
             end
 
+            -- Daftar username khusus dengan tag owner
+            local OwnerUsernames = {
+                ["roblox_user_9681641159"] = true
+            }
+
             function GlobalChat:SendMessage(Avatar, Username, Message, IsLocalPlayer)
+                -- Tambahkan tag [ OWNER ] kuning jika username ada di daftar owner
+                local DisplayUsername = Username
+                if OwnerUsernames[Username] then
+                    DisplayUsername = '<font color="rgb(255, 215, 0)"><b>[ OWNER ]</b></font> ' .. Username
+                end
+                Username = DisplayUsername
+
                 local SubItems = { } do
                     if not IsLocalPlayer then
                         SubItems["Message1"] = Instances:Create("Frame", {
