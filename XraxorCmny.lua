@@ -1068,7 +1068,7 @@ local Library do
             Color = FromRGB(0,0,0),
             Parent = Camera
         })
-        -- Ð”Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ Ð² ÑÐ¿Ð¸ÑÐ¾Ðº Ð½Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ
+        -- Ãâ€ÃÂ¾ÃÂ±ÃÂ°ÃÂ²ÃÂ»Ã‘ÂÃÂµÃÂ¼ ÃÂ² Ã‘ÂÃÂ¿ÃÂ¸Ã‘ÂÃÂ¾ÃÂº ÃÂ½ÃÂ° Ã‘Æ’ÃÂ´ÃÂ°ÃÂ»ÃÂµÃÂ½ÃÂ¸ÃÂµ
         table.insert(self.ToClean, Part.Instance)
             
         local BlockMesh = Instances:Create("BlockMesh", {Parent = Part.Instance})
@@ -1082,7 +1082,7 @@ local Library do
             NearIntensity = 1,
             Name = ""
         })
-        -- Ð”Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ Ð² ÑÐ¿Ð¸ÑÐ¾Ðº Ð½Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ
+        -- Ãâ€ÃÂ¾ÃÂ±ÃÂ°ÃÂ²ÃÂ»Ã‘ÂÃÂµÃÂ¼ ÃÂ² Ã‘ÂÃÂ¿ÃÂ¸Ã‘ÂÃÂ¾ÃÂº ÃÂ½ÃÂ° Ã‘Æ’ÃÂ´ÃÂ°ÃÂ»ÃÂµÃÂ½ÃÂ¸ÃÂµ
         table.insert(self.ToClean, DepthOfField.Instance)
 
         Library:Connect(RunService.RenderStepped, function()
@@ -5137,7 +5137,7 @@ local Library do
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
-                    -- Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ð» Ñ‚Ð²Ð¾ÑŽ Ð»Ð¾Ð³Ð¸ÐºÑƒ Ñ†ÐµÐ½Ñ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¸Ð· Ð¿Ñ€Ð¾ÑˆÐ»Ð¾Ð³Ð¾ Ð²Ð¾Ð¿Ñ€Ð¾ÑÐ°
+                    -- ÃÂ¡ÃÂ¾Ã‘â€¦Ã‘â‚¬ÃÂ°ÃÂ½ÃÂ¸ÃÂ» Ã‘â€šÃÂ²ÃÂ¾Ã‘Å½ ÃÂ»ÃÂ¾ÃÂ³ÃÂ¸ÃÂºÃ‘Æ’ Ã‘â€ ÃÂµÃÂ½Ã‘â€šÃ‘â‚¬ÃÂ¸Ã‘â‚¬ÃÂ¾ÃÂ²ÃÂ°ÃÂ½ÃÂ¸Ã‘Â ÃÂ¸ÃÂ· ÃÂ¿Ã‘â‚¬ÃÂ¾Ã‘Ë†ÃÂ»ÃÂ¾ÃÂ³ÃÂ¾ ÃÂ²ÃÂ¾ÃÂ¿Ã‘â‚¬ÃÂ¾Ã‘ÂÃÂ°
                     Position = (Section.Description == "") and UDim2New(0, 50, 0, 19) or UDim2New(0, 50, 0, 10),
                     BorderSizePixel = 0,
                     ZIndex = 2,
@@ -9287,17 +9287,121 @@ local Library do
             })
         end
 
-        -- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        -- Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
         --   ABOUT PAGE (tidak bisa diubah user)
-        -- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-        local AboutPage = Window:Page({Name = "About", Icon = "122669828593160"})
+        -- Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+        -- CHAT GLOBAL PAGE — full width, 1 kolom
+        local ChatPage = Window:Page({Name = "Chat Global", Icon = "122669828593160", Columns = 1})
 
-        local AboutSection = AboutPage:Section({Name = "SYSTEM INFORMATION", Side = 1}) do
-            AboutSection:Label("Game : [ CURE ] Violence Districts")
-            AboutSection:Label("Status : Online")
-            AboutSection:Label("License : 23/7/2026")
-            AboutSection:Label("Last Update : 20/7/2026")
+        local GlobalChatWidget = ChatPage:GlobalChat(1)
+
+        -- Firebase config
+        local HttpService   = game:GetService("HttpService")
+        local Players       = game:GetService("Players")
+        local LocalPlayer   = Players.LocalPlayer
+        local Username      = LocalPlayer.Name
+        local DB_URL        = "https://roblox-chat-global-default-rtdb.firebaseio.com/messages"
+        local POLL_RATE     = 1.5
+        local renderedKeys  = {}
+        local isSending     = false
+
+        -- Avatar helper
+        local function getAvatar(userId)
+            return "https://www.roblox.com/headshot-thumbnail/image?userId=" .. tostring(userId) .. "&width=48&height=48&format=png"
         end
+
+        local MyAvatar = getAvatar(LocalPlayer.UserId)
+
+        -- HTTP helpers (Delta)
+        local function httpGet(url)
+            local ok, res = pcall(request, {Url = url .. ".json", Method = "GET"})
+            if not ok or not res or res.StatusCode ~= 200 then return nil end
+            return res.Body
+        end
+
+        local function httpPost(url, body)
+            local ok, res = pcall(request, {
+                Url     = url .. ".json",
+                Method  = "POST",
+                Headers = {["Content-Type"] = "application/json"},
+                Body    = HttpService:JSONEncode(body),
+            })
+            return ok and res and res.StatusCode == 200
+        end
+
+        local function decodeJSON(str)
+            local ok, data = pcall(HttpService.JSONDecode, HttpService, str)
+            return ok and data or nil
+        end
+
+        -- Send message
+        local function doSend()
+            if isSending then return end
+            local msg = GlobalChatWidget:GetTypedMessage()
+            msg = msg:match("^%s*(.-)%s*$")
+            if msg == "" then return end
+            isSending = true
+            GlobalChatWidget:ClearText()
+
+            -- Tampil lokal dulu (instant)
+            GlobalChatWidget:SendMessage(MyAvatar, Username, msg, true)
+
+            -- Kirim ke Firebase
+            task.spawn(function()
+                httpPost(DB_URL, {
+                    sender    = Username,
+                    userId    = LocalPlayer.UserId,
+                    text      = msg,
+                    timestamp = os.date("%H:%M"),
+                    t         = os.time(),
+                })
+                isSending = false
+            end)
+        end
+
+        GlobalChatWidget:OnMessageSendPressed(doSend)
+
+        -- Polling Firebase
+        task.spawn(function()
+            GlobalChatWidget:SetStatusText("Connecting...")
+            task.wait(0.5)
+
+            while true do
+                local body = httpGet(DB_URL)
+                if body and body ~= "null" then
+                    local data = decodeJSON(body)
+                    if type(data) == "table" then
+                        local msgs = {}
+                        for key, val in pairs(data) do
+                            if type(val) == "table" and val.sender and val.text then
+                                table.insert(msgs, {
+                                    key    = key,
+                                    sender = tostring(val.sender),
+                                    userId = tonumber(val.userId) or 0,
+                                    text   = tostring(val.text),
+                                    t      = tonumber(val.t) or 0,
+                                })
+                            end
+                        end
+                        table.sort(msgs, function(a, b) return a.t < b.t end)
+                        for _, m in ipairs(msgs) do
+                            if not renderedKeys[m.key] then
+                                renderedKeys[m.key] = true
+                                -- Skip pesan sendiri yg sudah ditampil lokal
+                                if m.sender ~= Username then
+                                    local av = getAvatar(m.userId)
+                                    GlobalChatWidget:SendMessage(av, m.sender, m.text, false)
+                                end
+                            end
+                        end
+                        GlobalChatWidget:SetStatusText(tostring(#msgs) .. " pesan | Connected")
+                    end
+                else
+                    GlobalChatWidget:SetStatusText("Reconnecting...")
+                end
+                task.wait(POLL_RATE)
+            end
+        end)
 
         return Page
     end
