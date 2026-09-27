@@ -9301,9 +9301,15 @@ local Library do
         local LocalPlayer   = Players.LocalPlayer
         local Username      = LocalPlayer.Name
         local DB_URL        = "https://roblox-chat-global-default-rtdb.firebaseio.com/messages"
+        local ANNOUNCE_URL  = "https://roblox-chat-global-default-rtdb.firebaseio.com/announcements"
         local POLL_RATE     = 1.5
         local renderedKeys  = {}
+        local renderedAnnounceKeys = {}
         local isSending     = false
+
+        -- ✅ Owner config
+        local OWNER_USERNAME = "roblox_user_9681641159"
+        local IsOwner = (Username == OWNER_USERNAME)
 
         -- Avatar helper
         local function getAvatar(userId)
@@ -9334,6 +9340,14 @@ local Library do
             return ok and data or nil
         end
 
+        -- ✅ Format nama: tambah [ OWNER ] jika owner
+        local function formatSenderName(sender)
+            if sender == OWNER_USERNAME then
+                return "[ OWNER ] " .. sender
+            end
+            return sender
+        end
+
         -- Send message
         local function doSend()
             if isSending then return end
@@ -9343,8 +9357,10 @@ local Library do
             isSending = true
             GlobalChatWidget:ClearText()
 
+            local displayName = formatSenderName(Username)
+
             -- Tampil lokal dulu (instant)
-            GlobalChatWidget:SendMessage(MyAvatar, Username, msg, true)
+            GlobalChatWidget:SendMessage(MyAvatar, displayName, msg, true)
 
             -- Kirim ke Firebase
             task.spawn(function()
@@ -9361,12 +9377,68 @@ local Library do
 
         GlobalChatWidget:OnMessageSendPressed(doSend)
 
-        -- Polling Firebase
+        -- ✅ Fitur Announcement khusus Owner
+        if IsOwner then
+            local AnnouncePage = Window:Page({Name = "Announcement", Icon = "107734308617544", Columns = 1})
+            local AnnSection = AnnouncePage:Section({Name = "📢 Global Announcement"})
+
+            local announceText = ""
+
+            AnnSection:Input({
+                Name        = "Teks Pemberitahuan",
+                Placeholder = "Tulis pesan untuk semua user...",
+                Callback    = function(val)
+                    announceText = val
+                end
+            })
+
+            AnnSection:Button({
+                Name     = "🚀 Kirim Announcement",
+                Callback = function()
+                    local msg = announceText:match("^%s*(.-)%s*$")
+                    if msg == "" then
+                        Library:Notification({
+                            Title       = "Announcement",
+                            Description = "Teks tidak boleh kosong!",
+                            Duration    = 2,
+                            Icon        = "107734308617544"
+                        })
+                        return
+                    end
+
+                    -- Kirim ke Firebase node /announcements
+                    task.spawn(function()
+                        local ok = httpPost(ANNOUNCE_URL, {
+                            text = msg,
+                            t    = os.time(),
+                        })
+                        if ok then
+                            Library:Notification({
+                                Title       = "Announcement",
+                                Description = "Pemberitahuan berhasil dikirim!",
+                                Duration    = 3,
+                                Icon        = "107734308617544"
+                            })
+                        else
+                            Library:Notification({
+                                Title       = "Announcement",
+                                Description = "Gagal mengirim pemberitahuan.",
+                                Duration    = 3,
+                                Icon        = "107734308617544"
+                            })
+                        end
+                    end)
+                end
+            })
+        end
+
+        -- Polling Firebase messages
         task.spawn(function()
             GlobalChatWidget:SetStatusText("Connecting...")
             task.wait(0.5)
 
             while true do
+                -- ✅ Poll pesan chat
                 local body = httpGet(DB_URL)
                 if body and body ~= "null" then
                     local data = decodeJSON(body)
@@ -9390,7 +9462,8 @@ local Library do
                                 -- Skip pesan sendiri yg sudah ditampil lokal
                                 if m.sender ~= Username then
                                     local av = getAvatar(m.userId)
-                                    GlobalChatWidget:SendMessage(av, m.sender, m.text, false)
+                                    local displayName = formatSenderName(m.sender)
+                                    GlobalChatWidget:SendMessage(av, displayName, m.text, false)
                                 end
                             end
                         end
@@ -9399,12 +9472,48 @@ local Library do
                 else
                     GlobalChatWidget:SetStatusText("Reconnecting...")
                 end
+
+                -- ✅ Poll announcement dari Firebase
+                local annBody = httpGet(ANNOUNCE_URL)
+                if annBody and annBody ~= "null" then
+                    local annData = decodeJSON(annBody)
+                    if type(annData) == "table" then
+                        local annList = {}
+                        for key, val in pairs(annData) do
+                            if type(val) == "table" and val.text then
+                                table.insert(annList, {
+                                    key  = key,
+                                    text = tostring(val.text),
+                                    t    = tonumber(val.t) or 0,
+                                })
+                            end
+                        end
+                        table.sort(annList, function(a, b) return a.t < b.t end)
+                        for _, ann in ipairs(annList) do
+                            if not renderedAnnounceKeys[ann.key] then
+                                renderedAnnounceKeys[ann.key] = true
+                                -- ✅ Tampilkan toast alert global ke semua user
+                                local Event = game:GetService("ReplicatedStorage").Packages.Networking["RE/Alerts/Raise"]
+                                firesignal(Event.OnClientEvent, {
+                                    WrapText   = false,
+                                    Seconds    = 5.0,
+                                    Unique     = true,
+                                    Lane       = "Feed",
+                                    Color      = Color3.new(0.70980393886566162, 1, 0.53333336114883423),
+                                    Text       = "[ OWNER ] : " .. ann.text,
+                                    Type       = "Toast",
+                                    SingleLine = true,
+                                })
+                            end
+                        end
+                    end
+                end
+
                 task.wait(POLL_RATE)
             end
         end)
 
         return Page
-    end
 end
 
 getgenv().Library = Library
