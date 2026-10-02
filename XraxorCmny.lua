@@ -1068,7 +1068,7 @@ local Library do
             Color = FromRGB(0,0,0),
             Parent = Camera
         })
-        -- Ãâ€ÃÂ¾ÃÂ±ÃÂ°ÃÂ²ÃÂ»Ã‘ÂÃÂµÃÂ¼ ÃÂ² Ã‘ÂÃÂ¿ÃÂ¸Ã‘ÂÃÂ¾ÃÂº ÃÂ½ÃÂ° Ã‘Æ’ÃÂ´ÃÂ°ÃÂ»ÃÂµÃÂ½ÃÂ¸ÃÂµ
+        -- ÃƒÂÃ¢â‚¬ÂÃƒÂÃ‚Â¾ÃƒÂÃ‚Â±ÃƒÂÃ‚Â°ÃƒÂÃ‚Â²ÃƒÂÃ‚Â»Ãƒâ€˜Ã‚ÂÃƒÂÃ‚ÂµÃƒÂÃ‚Â¼ ÃƒÂÃ‚Â² Ãƒâ€˜Ã‚ÂÃƒÂÃ‚Â¿ÃƒÂÃ‚Â¸Ãƒâ€˜Ã‚ÂÃƒÂÃ‚Â¾ÃƒÂÃ‚Âº ÃƒÂÃ‚Â½ÃƒÂÃ‚Â° Ãƒâ€˜Ã†â€™ÃƒÂÃ‚Â´ÃƒÂÃ‚Â°ÃƒÂÃ‚Â»ÃƒÂÃ‚ÂµÃƒÂÃ‚Â½ÃƒÂÃ‚Â¸ÃƒÂÃ‚Âµ
         table.insert(self.ToClean, Part.Instance)
             
         local BlockMesh = Instances:Create("BlockMesh", {Parent = Part.Instance})
@@ -1082,7 +1082,7 @@ local Library do
             NearIntensity = 1,
             Name = ""
         })
-        -- Ãâ€ÃÂ¾ÃÂ±ÃÂ°ÃÂ²ÃÂ»Ã‘ÂÃÂµÃÂ¼ ÃÂ² Ã‘ÂÃÂ¿ÃÂ¸Ã‘ÂÃÂ¾ÃÂº ÃÂ½ÃÂ° Ã‘Æ’ÃÂ´ÃÂ°ÃÂ»ÃÂµÃÂ½ÃÂ¸ÃÂµ
+        -- ÃƒÂÃ¢â‚¬ÂÃƒÂÃ‚Â¾ÃƒÂÃ‚Â±ÃƒÂÃ‚Â°ÃƒÂÃ‚Â²ÃƒÂÃ‚Â»Ãƒâ€˜Ã‚ÂÃƒÂÃ‚ÂµÃƒÂÃ‚Â¼ ÃƒÂÃ‚Â² Ãƒâ€˜Ã‚ÂÃƒÂÃ‚Â¿ÃƒÂÃ‚Â¸Ãƒâ€˜Ã‚ÂÃƒÂÃ‚Â¾ÃƒÂÃ‚Âº ÃƒÂÃ‚Â½ÃƒÂÃ‚Â° Ãƒâ€˜Ã†â€™ÃƒÂÃ‚Â´ÃƒÂÃ‚Â°ÃƒÂÃ‚Â»ÃƒÂÃ‚ÂµÃƒÂÃ‚Â½ÃƒÂÃ‚Â¸ÃƒÂÃ‚Âµ
         table.insert(self.ToClean, DepthOfField.Instance)
 
         Library:Connect(RunService.RenderStepped, function()
@@ -5137,7 +5137,7 @@ local Library do
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
-                    -- ÃÂ¡ÃÂ¾Ã‘â€¦Ã‘â‚¬ÃÂ°ÃÂ½ÃÂ¸ÃÂ» Ã‘â€šÃÂ²ÃÂ¾Ã‘Å½ ÃÂ»ÃÂ¾ÃÂ³ÃÂ¸ÃÂºÃ‘Æ’ Ã‘â€ ÃÂµÃÂ½Ã‘â€šÃ‘â‚¬ÃÂ¸Ã‘â‚¬ÃÂ¾ÃÂ²ÃÂ°ÃÂ½ÃÂ¸Ã‘Â ÃÂ¸ÃÂ· ÃÂ¿Ã‘â‚¬ÃÂ¾Ã‘Ë†ÃÂ»ÃÂ¾ÃÂ³ÃÂ¾ ÃÂ²ÃÂ¾ÃÂ¿Ã‘â‚¬ÃÂ¾Ã‘ÂÃÂ°
+                    -- ÃƒÂÃ‚Â¡ÃƒÂÃ‚Â¾Ãƒâ€˜Ã¢â‚¬Â¦Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â°ÃƒÂÃ‚Â½ÃƒÂÃ‚Â¸ÃƒÂÃ‚Â» Ãƒâ€˜Ã¢â‚¬Å¡ÃƒÂÃ‚Â²ÃƒÂÃ‚Â¾Ãƒâ€˜Ã…Â½ ÃƒÂÃ‚Â»ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â³ÃƒÂÃ‚Â¸ÃƒÂÃ‚ÂºÃƒâ€˜Ã†â€™ Ãƒâ€˜Ã¢â‚¬ ÃƒÂÃ‚ÂµÃƒÂÃ‚Â½Ãƒâ€˜Ã¢â‚¬Å¡Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¸Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â²ÃƒÂÃ‚Â°ÃƒÂÃ‚Â½ÃƒÂÃ‚Â¸Ãƒâ€˜Ã‚Â ÃƒÂÃ‚Â¸ÃƒÂÃ‚Â· ÃƒÂÃ‚Â¿Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾Ãƒâ€˜Ã‹â€ ÃƒÂÃ‚Â»ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â³ÃƒÂÃ‚Â¾ ÃƒÂÃ‚Â²ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â¿Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾Ãƒâ€˜Ã‚ÂÃƒÂÃ‚Â°
                     Position = (Section.Description == "") and UDim2New(0, 50, 0, 19) or UDim2New(0, 50, 0, 10),
                     BorderSizePixel = 0,
                     ZIndex = 2,
@@ -8964,6 +8964,454 @@ local Library do
         end
     end
 
+    -- ╔══════════════════════════════════════════════════════════════╗
+    -- ║         DASHBOARD PAGE — Built-in, Read-Only                ║
+    -- ║  Profil Player | License | Stats                            ║
+    -- ║  Outline animasi: RGB(255,0,0) ↔ RGB(120,0,0) bergerak     ║
+    -- ╚══════════════════════════════════════════════════════════════╝
+    Library.CreateDashboardPage = function(self, Window, keyExpiry)
+        keyExpiry = keyExpiry or 0
+
+        -- Services
+        local RS      = game:GetService("RunService")
+        local Plrs    = game:GetService("Players")
+        local Stats_  = game:GetService("Stats")
+        local LP      = Plrs.LocalPlayer
+
+        -- Helper: format sisa waktu key
+        local function fmtTime(exp)
+            if not exp or exp == 0 then return "Lifetime \226\136\158" end
+            local diff = exp - os.time()
+            if diff <= 0 then return "Expired" end
+            local d = math.floor(diff/86400)
+            local h = math.floor((diff%86400)/3600)
+            local m = math.floor((diff%3600)/60)
+            local s = diff % 60
+            if d > 0 then return d.."d "..h.."h "..m.."m"
+            elseif h > 0 then return h.."h "..m.."m "..s.."s"
+            else return m.."m "..s.."s" end
+        end
+
+        -- Helper: buat Instance sederhana
+        local function New(cls, props, parent)
+            local i = Instance.new(cls)
+            for k,v in pairs(props) do i[k] = v end
+            if parent then i.Parent = parent end
+            return i
+        end
+
+        -- ── DASHBOARD PAGE (Columns = 1, full width) ─────────────
+        local DashPage = Window:Page({
+            Name    = "Dashboard",
+            Icon    = "122669828593160",
+            Columns = 1,
+        })
+
+        local Column = DashPage.ColumnsData[1].Instance
+
+        -- ── OUTER WRAPPER + ANIMATED OUTLINE ─────────────────────
+        local OuterWrap = New("Frame", {
+            Size = UDim2.new(1, 0, 0, 270),
+            BackgroundTransparency = 1,
+            BorderSizePixel = 0,
+            ClipsDescendants = false,
+            ZIndex = 3,
+        }, Column)
+        New("UICorner", {CornerRadius = UDim.new(0,10)}, OuterWrap)
+
+        local MainStroke = New("UIStroke", {
+            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+            Color = Color3.fromRGB(255,0,0),
+            Thickness = 2.5,
+            Transparency = 0,
+        }, OuterWrap)
+
+        -- ── CARD BACKGROUND ───────────────────────────────────────
+        local Card = New("Frame", {
+            Size = UDim2.new(1,0,1,0),
+            BackgroundColor3 = Color3.fromRGB(14,14,18),
+            BackgroundTransparency = 0,
+            BorderSizePixel = 0,
+            ZIndex = 3,
+            ClipsDescendants = true,
+        }, OuterWrap)
+        New("UICorner", {CornerRadius = UDim.new(0,10)}, Card)
+
+        -- ── HEADER BANNER ─────────────────────────────────────────
+        local Banner = New("Frame", {
+            Size = UDim2.new(1,0,0,52),
+            BackgroundColor3 = Color3.fromRGB(18,6,6),
+            BorderSizePixel = 0,
+            ZIndex = 4,
+        }, Card)
+        New("UICorner", {CornerRadius = UDim.new(0,10)}, Banner)
+
+        local BannerGrad = New("UIGradient", {
+            Color = ColorSequence.new({
+                ColorSequenceKeypoint.new(0,   Color3.fromRGB(120,0,0)),
+                ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,30,0)),
+                ColorSequenceKeypoint.new(1,   Color3.fromRGB(255,80,0)),
+            }),
+            Rotation = 90,
+            Transparency = NumberSequence.new({
+                NumberSequenceKeypoint.new(0, 0.1),
+                NumberSequenceKeypoint.new(1, 0.55),
+            }),
+        }, Banner)
+
+        New("TextLabel", {
+            Text = "\226\156\166  VYRE HUB  \226\156\166",
+            Font = Enum.Font.GothamBold,
+            TextSize = 17,
+            TextColor3 = Color3.fromRGB(255,255,255),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,0,1,0),
+            TextXAlignment = Enum.TextXAlignment.Center,
+            ZIndex = 5,
+        }, Banner)
+
+        -- garis bawah banner
+        New("Frame", {
+            Size = UDim2.new(1,0,0,1),
+            Position = UDim2.new(0,0,0,52),
+            BackgroundColor3 = Color3.fromRGB(255,0,0),
+            BackgroundTransparency = 0.3,
+            BorderSizePixel = 0,
+            ZIndex = 4,
+        }, Card)
+
+        -- ── ROW: SECTION 1 (Profil) + SECTION 2 (License) ────────
+        local RowFrame = New("Frame", {
+            Size = UDim2.new(1,-20,0,108),
+            Position = UDim2.new(0,10,0,62),
+            BackgroundTransparency = 1,
+            BorderSizePixel = 0,
+            ZIndex = 4,
+        }, Card)
+
+        -- helper: buat sub-card
+        local function SubCard(xScale, xOff, w)
+            local sc = New("Frame", {
+                Size = UDim2.new(xScale, w, 1, 0),
+                Position = UDim2.new(0, xOff, 0, 0),
+                BackgroundColor3 = Color3.fromRGB(20,18,24),
+                BackgroundTransparency = 0.1,
+                BorderSizePixel = 0,
+                ZIndex = 4,
+            }, RowFrame)
+            New("UICorner", {CornerRadius = UDim.new(0,8)}, sc)
+            local sk = New("UIStroke", {
+                ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                Color = Color3.fromRGB(200,0,0),
+                Thickness = 1,
+                Transparency = 0.5,
+            }, sc)
+            return sc, sk
+        end
+
+        -- ─── SECTION 1: PROFIL ────────────────────────────────────
+        local ProfCard, ProfStroke = SubCard(0.5, 0, -5)
+
+        New("TextLabel", {
+            Text = "\226\151\134 PROFIL PLAYER",
+            Font = Enum.Font.GothamBold,
+            TextSize = 10,
+            TextColor3 = Color3.fromRGB(255,80,80),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-10,0,16),
+            Position = UDim2.new(0,8,0,6),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 5,
+        }, ProfCard)
+
+        -- Avatar frame
+        local AvaF = New("Frame", {
+            Size = UDim2.new(0,54,0,54),
+            Position = UDim2.new(0,8,0,26),
+            BackgroundColor3 = Color3.fromRGB(30,0,0),
+            BorderSizePixel = 0,
+            ZIndex = 5,
+        }, ProfCard)
+        New("UICorner", {CornerRadius = UDim.new(0,7)}, AvaF)
+        New("UIStroke", {
+            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+            Color = Color3.fromRGB(220,0,0),
+            Thickness = 1.5,
+        }, AvaF)
+
+        local AvaImg = New("ImageLabel", {
+            Size = UDim2.new(1,0,1,0),
+            BackgroundTransparency = 1,
+            BorderSizePixel = 0,
+            ZIndex = 6,
+            Image = "https://www.roblox.com/headshot-thumbnail/image?userId="..LP.UserId.."&width=48&height=48&format=png",
+        }, AvaF)
+        New("UICorner", {CornerRadius = UDim.new(0,6)}, AvaImg)
+
+        New("TextLabel", {
+            Text = LP.DisplayName,
+            Font = Enum.Font.GothamBold,
+            TextSize = 13,
+            TextColor3 = Color3.fromRGB(240,240,245),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-72,0,16),
+            Position = UDim2.new(0,68,0,30),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 5,
+        }, ProfCard)
+
+        New("TextLabel", {
+            Text = "@"..LP.Name,
+            Font = Enum.Font.Gotham,
+            TextSize = 11,
+            TextColor3 = Color3.fromRGB(180,180,190),
+            TextTransparency = 0.2,
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-72,0,14),
+            Position = UDim2.new(0,68,0,48),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 5,
+        }, ProfCard)
+
+        New("TextLabel", {
+            Text = "ID: "..tostring(LP.UserId),
+            Font = Enum.Font.Gotham,
+            TextSize = 10,
+            TextColor3 = Color3.fromRGB(140,140,150),
+            TextTransparency = 0.2,
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-72,0,14),
+            Position = UDim2.new(0,68,0,63),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 5,
+        }, ProfCard)
+
+        -- Badge game
+        local GB = New("Frame", {
+            Size = UDim2.new(1,-16,0,18),
+            Position = UDim2.new(0,8,0,86),
+            BackgroundColor3 = Color3.fromRGB(40,0,0),
+            BorderSizePixel = 0,
+            ZIndex = 5,
+        }, ProfCard)
+        New("UICorner", {CornerRadius = UDim.new(0,4)}, GB)
+        New("TextLabel", {
+            Text = "\226\154\161 "..tostring(game.Name or "Unknown"),
+            Font = Enum.Font.GothamBold,
+            TextSize = 10,
+            TextColor3 = Color3.fromRGB(255,120,120),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-8,1,0),
+            Position = UDim2.new(0,6,0,0),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 6,
+        }, GB)
+
+        -- ─── SECTION 2: LICENSE ───────────────────────────────────
+        local LicCard, LicStroke = SubCard(0.5, 0, -5)
+        LicCard.Position = UDim2.new(0.5, 5, 0, 0)
+
+        New("TextLabel", {
+            Text = "\226\151\134 LICENSE",
+            Font = Enum.Font.GothamBold,
+            TextSize = 10,
+            TextColor3 = Color3.fromRGB(255,80,80),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-10,0,16),
+            Position = UDim2.new(0,8,0,6),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 5,
+        }, LicCard)
+
+        -- Icon kunci
+        local LicIF = New("Frame", {
+            Size = UDim2.new(0,46,0,46),
+            Position = UDim2.new(0,8,0,26),
+            BackgroundColor3 = Color3.fromRGB(35,0,0),
+            BorderSizePixel = 0,
+            ZIndex = 5,
+        }, LicCard)
+        New("UICorner", {CornerRadius = UDim.new(0,7)}, LicIF)
+        New("ImageLabel", {
+            Size = UDim2.new(0,28,0,28),
+            Position = UDim2.new(0.5,-14,0.5,-14),
+            BackgroundTransparency = 1,
+            Image = "rbxassetid://122669828593160",
+            ImageColor3 = Color3.fromRGB(255,80,80),
+            ZIndex = 6,
+        }, LicIF)
+
+        local isActive = (keyExpiry == 0) or (keyExpiry > os.time())
+        local LicStatusLbl = New("TextLabel", {
+            Text = isActive and "\226\151\143 ACTIVE" or "\226\151\143 EXPIRED",
+            Font = Enum.Font.GothamBold,
+            TextSize = 13,
+            TextColor3 = isActive and Color3.fromRGB(80,255,120) or Color3.fromRGB(255,60,60),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-64,0,16),
+            Position = UDim2.new(0,60,0,30),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 5,
+        }, LicCard)
+
+        local LicTimeLbl = New("TextLabel", {
+            Text = fmtTime(keyExpiry),
+            Font = Enum.Font.Gotham,
+            TextSize = 11,
+            TextColor3 = Color3.fromRGB(210,210,220),
+            TextTransparency = 0.15,
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-64,0,14),
+            Position = UDim2.new(0,60,0,48),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 5,
+        }, LicCard)
+
+        New("TextLabel", {
+            Text = "Type: Key-Based",
+            Font = Enum.Font.Gotham,
+            TextSize = 10,
+            TextColor3 = Color3.fromRGB(150,150,160),
+            TextTransparency = 0.2,
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-64,0,14),
+            Position = UDim2.new(0,60,0,64),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 5,
+        }, LicCard)
+
+        -- Badge key system
+        local TB = New("Frame", {
+            Size = UDim2.new(1,-16,0,18),
+            Position = UDim2.new(0,8,0,86),
+            BackgroundColor3 = Color3.fromRGB(40,0,0),
+            BorderSizePixel = 0,
+            ZIndex = 5,
+        }, LicCard)
+        New("UICorner", {CornerRadius = UDim.new(0,4)}, TB)
+        New("TextLabel", {
+            Text = "\240\159\148\145 Vyre Hub Key System",
+            Font = Enum.Font.GothamBold,
+            TextSize = 10,
+            TextColor3 = Color3.fromRGB(255,120,120),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-8,1,0),
+            Position = UDim2.new(0,6,0,0),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            ZIndex = 6,
+        }, TB)
+
+        -- ── STATS BAR ─────────────────────────────────────────────
+        local SBar = New("Frame", {
+            Size = UDim2.new(1,-20,0,52),
+            Position = UDim2.new(0,10,0,180),
+            BackgroundColor3 = Color3.fromRGB(17,15,22),
+            BackgroundTransparency = 0.15,
+            BorderSizePixel = 0,
+            ZIndex = 4,
+        }, Card)
+        New("UICorner", {CornerRadius = UDim.new(0,8)}, SBar)
+        local SBStroke = New("UIStroke", {
+            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+            Color = Color3.fromRGB(180,0,0),
+            Thickness = 1,
+            Transparency = 0.55,
+        }, SBar)
+
+        local sbLayout = New("UIListLayout", {
+            FillDirection = Enum.FillDirection.Horizontal,
+            HorizontalAlignment = Enum.HorizontalAlignment.Center,
+            VerticalAlignment = Enum.VerticalAlignment.Center,
+            Padding = UDim.new(0,0),
+        }, SBar)
+
+        local function MakeStat(emoji, label, init)
+            local blk = New("Frame", {
+                Size = UDim2.new(0.333,0,1,0),
+                BackgroundTransparency = 1,
+                BorderSizePixel = 0,
+                ZIndex = 5,
+            }, SBar)
+            -- divider kiri
+            New("Frame", {
+                Size = UDim2.new(0,1,0.6,0),
+                AnchorPoint = Vector2.new(0,0.5),
+                Position = UDim2.new(0,0,0.5,0),
+                BackgroundColor3 = Color3.fromRGB(120,0,0),
+                BackgroundTransparency = 0.5,
+                BorderSizePixel = 0,
+                ZIndex = 5,
+            }, blk)
+            New("TextLabel",{Text=emoji,Font=Enum.Font.GothamBold,TextSize=11,TextColor3=Color3.fromRGB(255,80,80),BackgroundTransparency=1,Size=UDim2.new(1,0,0,14),Position=UDim2.new(0,0,0,6),TextXAlignment=Enum.TextXAlignment.Center,ZIndex=6},blk)
+            local valL = New("TextLabel",{Text=init,Font=Enum.Font.GothamBold,TextSize=13,TextColor3=Color3.fromRGB(240,240,245),BackgroundTransparency=1,Size=UDim2.new(1,0,0,16),Position=UDim2.new(0,0,0,18),TextXAlignment=Enum.TextXAlignment.Center,ZIndex=6},blk)
+            New("TextLabel",{Text=label,Font=Enum.Font.Gotham,TextSize=9,TextColor3=Color3.fromRGB(140,140,150),BackgroundTransparency=1,Size=UDim2.new(1,0,0,12),Position=UDim2.new(0,0,0,34),TextXAlignment=Enum.TextXAlignment.Center,ZIndex=6},blk)
+            return valL
+        end
+
+        local PingVal    = MakeStat("\240\159\223\182", "PING",    "-- ms")
+        local FpsVal     = MakeStat("\240\159\216\142", "FPS",     "--")
+        local PlayersVal = MakeStat("\240\159\221\165", "PLAYERS", tostring(#Plrs:GetPlayers()))
+
+        -- ── FOOTER ────────────────────────────────────────────────
+        New("TextLabel", {
+            Text = "Vyre Hub  \226\128\162  Doors Edition  \226\128\162  Read Only",
+            Font = Enum.Font.Gotham,
+            TextSize = 9,
+            TextColor3 = Color3.fromRGB(100,100,110),
+            TextTransparency = 0.35,
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1,-20,0,20),
+            Position = UDim2.new(0,10,0,244),
+            TextXAlignment = Enum.TextXAlignment.Center,
+            ZIndex = 4,
+        }, Card)
+
+        -- ── ANIMASI OUTLINE (merah bergerak) ──────────────────────
+        local RED1 = Color3.fromRGB(255,0,0)
+        local RED2 = Color3.fromRGB(120,0,0)
+        task.spawn(function()
+            local t = 0
+            while OuterWrap.Parent do
+                local a = (math.sin(t * 2.2) + 1) / 2
+                local col = RED1:Lerp(RED2, a)
+                MainStroke.Color     = col
+                MainStroke.Thickness = 2 + a * 2
+                local dim = RED1:Lerp(RED2, a * 0.65)
+                ProfStroke.Color = dim
+                LicStroke.Color  = dim
+                SBStroke.Color   = dim
+                t += task.wait()
+            end
+        end)
+
+        -- ── UPDATE REALTIME ───────────────────────────────────────
+        local fpsC, fpsT = 0, 0
+        RS.RenderStepped:Connect(function(dt)
+            fpsC += 1
+            fpsT += dt
+            if fpsT >= 1 then
+                FpsVal.Text = tostring(fpsC)
+                fpsC, fpsT  = 0, 0
+            end
+
+            local ok, p = pcall(function()
+                return math.floor(Stats_.Network.ServerStatsItem["Data Ping"]:GetValue())
+            end)
+            PingVal.Text    = (ok and p or 0).." ms"
+            PlayersVal.Text = tostring(#Plrs:GetPlayers())
+
+            if keyExpiry ~= 0 then
+                LicTimeLbl.Text = fmtTime(keyExpiry)
+                if keyExpiry <= os.time() then
+                    LicStatusLbl.Text       = "\226\151\143 EXPIRED"
+                    LicStatusLbl.TextColor3 = Color3.fromRGB(255,60,60)
+                end
+            end
+        end)
+
+        return DashPage
+    end
+
     Library.CreateSettingsPage = function(self, Window, KeybindList)
         local Page = Window:Page({Name = "Settings", Icon = "122669828593160"})
         local ConfigsSection = Page:Section({Name = "Configs", Side = 1}) do 
@@ -9287,10 +9735,10 @@ local Library do
             })
         end
 
-        -- Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+        -- ÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚Â
         --   ABOUT PAGE (tidak bisa diubah user)
-        -- Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-        -- CHAT GLOBAL PAGE — full width, 1 kolom
+        -- ÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚Â
+        -- CHAT GLOBAL PAGE â€” full width, 1 kolom
         local ChatPage = Window:Page({Name = "Chat Global", Icon = "122669828593160", Columns = 1})
 
         local GlobalChatWidget = ChatPage:GlobalChat(1)
