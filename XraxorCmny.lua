@@ -2794,12 +2794,112 @@ local Library do
                 Instances:Create("UIPadding", {
                     Parent = Items["LeftTabs"].Instance,
                     Name = "\0",
-                    PaddingTop = UDimNew(0, 15),
+                    PaddingTop = UDimNew(0, 74),   -- 12 (margin) + 50 (card height) + 12 (gap)
                     PaddingBottom = UDimNew(0, 15),
                     PaddingRight = UDimNew(0, 12),
                     PaddingLeft = UDimNew(0, 12)
                 })
 
+                -- ── VyreHub Header Card ──
+                Items["VyreCard"] = Instances:Create("Frame", {
+                    Parent = Items["MainFrame"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(1, -24, 0, 44),
+                    Position = UDim2New(0, 12, 0, 7),
+                    AnchorPoint = Vector2New(0, 0),
+                    BackgroundColor3 = FromRGB(22, 18, 36),
+                    BackgroundTransparency = 0.2,
+                    BorderSizePixel = 0,
+                    ZIndex = 3,
+                    BorderColor3 = FromRGB(0, 0, 0)
+                })
+                Instances:Create("UICorner", {
+                    Parent = Items["VyreCard"].Instance,
+                    Name = "\0",
+                    CornerRadius = UDimNew(0, 8)
+                })
+                local VyreStroke = Instances:Create("UIStroke", {
+                    Parent = Items["VyreCard"].Instance,
+                    Name = "\0",
+                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                    Thickness = 1,
+                    Transparency = 0.4,
+                    Color = FromRGB(200, 200, 200)
+                })
+                Instances:Create("UIGradient", {
+                    Parent = VyreStroke.Instance,
+                    Name = "\0",
+                    Rotation = 90,
+                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(200, 200, 200)), RGBSequenceKeypoint(1, FromRGB(80, 80, 200))}
+                }):AddToTheme({Color = function()
+                    return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                end})
+
+                -- Logo simbol ¥
+                Items["VyreLogo"] = Instances:Create("TextLabel", {
+                    Parent = Items["VyreCard"].Instance,
+                    Name = "\0",
+                    FontFace = Library.Fonts and Library.Fonts.Bold or Library.Font,
+                    TextColor3 = FromRGB(255, 255, 255),
+                    Text = "¥",
+                    Size = UDim2New(0, 30, 1, -10),
+                    Position = UDim2New(0, 10, 0, 5),
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    ZIndex = 4,
+                    TextSize = 22,
+                    TextXAlignment = Enum.TextXAlignment.Center,
+                    TextYAlignment = Enum.TextYAlignment.Center,
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+                Instances:Create("UIGradient", {
+                    Parent = Items["VyreLogo"].Instance,
+                    Name = "\0",
+                    Rotation = -90,
+                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(180, 160, 255))}
+                }):AddToTheme({Color = function()
+                    return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                end})
+
+                -- Text "VYRE HUB"
+                Items["VyreName"] = Instances:Create("TextLabel", {
+                    Parent = Items["VyreCard"].Instance,
+                    Name = "\0",
+                    FontFace = Library.Fonts and Library.Fonts.Bold or Library.Font,
+                    TextColor3 = FromRGB(240, 240, 255),
+                    Text = "VYRE HUB",
+                    AutomaticSize = Enum.AutomaticSize.X,
+                    Size = UDim2New(0, 0, 0, 16),
+                    Position = UDim2New(0, 46, 0, 8),
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    ZIndex = 4,
+                    TextSize = 14,
+                    TextXAlignment = Enum.TextXAlignment.Left,
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+
+                -- Text "V1.0"
+                Items["VyreVersion"] = Instances:Create("TextLabel", {
+                    Parent = Items["VyreCard"].Instance,
+                    Name = "\0",
+                    FontFace = Library.Font,
+                    TextColor3 = FromRGB(180, 180, 200),
+                    TextTransparency = 0.2,
+                    Text = "V1.0",
+                    AutomaticSize = Enum.AutomaticSize.X,
+                    Size = UDim2New(0, 0, 0, 14),
+                    Position = UDim2New(0, 46, 0, 24),
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    ZIndex = 4,
+                    TextSize = 11,
+                    TextXAlignment = Enum.TextXAlignment.Left,
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+                Items["VyreVersion"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
+
+                -- Logo lama tetap dibuat tapi disembunyikan (agar kode referensi tidak error)
                 Items["Logo"] = Instances:Create("ImageLabel", {
                     Parent = Items["MainFrame"].Instance,
                     Name = "\0",
@@ -2809,11 +2909,12 @@ local Library do
                     Size = UDim2New(0, 35, 0, 35),
                     Image = "rbxassetid://"..Window.Logo,
                     BackgroundTransparency = 1,
+                    Visible = false,
                     Position = UDim2New(0, 12, 0, 12),
                     ZIndex = 2,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(255, 255, 255)
-                }) 
+                })
 
                 Instances:Create("UIGradient", {
                     Parent = Items["Logo"].Instance,
@@ -2831,7 +2932,8 @@ local Library do
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(240, 240, 240),
                     BorderColor3 = FromRGB(0, 0, 0),
-                    Text = Window.Name,
+                    Text = "",
+                    Visible = false,
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
@@ -2847,8 +2949,9 @@ local Library do
                     Name = "\0",
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(240, 240, 240),
-                    TextTransparency = 0.4000000059604645,
-                    Text = Window.SubName,
+                    TextTransparency = 1,
+                    Text = "",
+                    Visible = false,
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BorderSizePixel = 0,
@@ -3679,13 +3782,13 @@ local Library do
                 do
                     local LocalPlayer = Players.LocalPlayer
 
-                    -- Card container — nempel di bawah LeftTabs
+                    -- Card container — nempel di atas LeftTabs (di bawah VyreHub header)
                     Items["PlayerCard"] = Instances:Create("Frame", {
                         Parent = Items["LeftTabs"].Instance,
                         Name = "\0",
                         Size = UDim2New(1, -24, 0, 50),
-                        AnchorPoint = Vector2New(0, 1),
-                        Position = UDim2New(0, 12, 1, -12),
+                        AnchorPoint = Vector2New(0, 0),
+                        Position = UDim2New(0, 12, 0, 12),
                         BackgroundTransparency = 0.35,
                         BackgroundColor3 = FromRGB(18, 16, 30),
                         BorderSizePixel = 0,
@@ -4122,7 +4225,7 @@ local Library do
                     Parent = Intro["Holder"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
-                    Text = Window.Name,
+                    Text = "VYRE HUB",
                     TextColor3 = FromRGB(255, 255, 255),
                     TextTransparency = 1,
                     BackgroundTransparency = 1,
@@ -4136,7 +4239,7 @@ local Library do
                     Parent = Intro["Holder"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
-                    Text = Window.SubName or "",
+                    Text = "V1.0",
                     TextColor3 = FromRGB(200, 200, 200),
                     TextTransparency = 1,
                     BackgroundTransparency = 1,
@@ -5794,7 +5897,7 @@ local Library do
                     Name = "\0",
                     Thickness = 1,
                     Transparency = 0.5,
-                    Color = FromRGB(100, 65, 180)
+                    Color = FromRGB(80, 78, 90)
                 })
 
                 -- ── Pill Fill (gradient saat ON) ──
@@ -5825,7 +5928,7 @@ local Library do
                     Size = UDim2New(0, 12, 0, 12),
                     AnchorPoint = Vector2New(0, 0.5),
                     Position = UDim2New(0, 3, 0.5, 0),   -- posisi OFF (kiri)
-                    BackgroundColor3 = FromRGB(190, 165, 230),  -- light purple, match OFF color
+                    BackgroundColor3 = FromRGB(110, 108, 118),  -- abu netral saat OFF
                     BackgroundTransparency = 0,
                     BorderSizePixel = 0,
                     ZIndex = 4,
@@ -6176,7 +6279,7 @@ local Library do
                     Items["Accent"]:Tween(tweenInfo, {BackgroundTransparency = 1})
                     Items["CheckImage"]:Tween(tweenInfo, {
                         Position = UDim2New(0, 3, 0.5, 0),     -- kiri
-                        BackgroundColor3 = FromRGB(190, 165, 230),  -- light purple, kontras jelas di track gelap
+                        BackgroundColor3 = FromRGB(110, 108, 118),  -- abu netral saat OFF
                         Size = UDim2New(0, 12, 0, 12)
                     })
                     Items["Indicator"]:Tween(tweenInfo, {BackgroundColor3 = FromRGB(35, 28, 58)})
