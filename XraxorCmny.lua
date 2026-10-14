@@ -229,15 +229,15 @@ local Library do
     local Themes = {
         ["Preset"] = {
             ["AccentGradient"] = FromRGB(20, 200, 255),     -- Cyan gradient end
-            ["Background 2"] = FromRGB(10, 10, 18),         -- Deep frosted panel
-            ["Background"] = FromRGB(7, 7, 13),             -- Ultra dark background
+            ["Background 2"] = FromRGB(20, 14, 40),         -- Dark purple panel
+            ["Background"] = FromRGB(15, 10, 32),           -- Deep purple background
             ["Text"] = FromRGB(235, 235, 255),              -- Soft lavender-white text
             ["Outline"] = FromRGB(180, 120, 255),           -- Purple outline
-            ["Section Top"] = FromRGB(16, 14, 28),          -- Section header dark purple
-            ["Section Background"] = FromRGB(13, 12, 22),   -- Section body dark
-            ["Section Background 2"] = FromRGB(15, 13, 25), -- Section container
+            ["Section Top"] = FromRGB(28, 20, 55),          -- Section header purple
+            ["Section Background"] = FromRGB(22, 16, 46),   -- Section body purple
+            ["Section Background 2"] = FromRGB(25, 18, 50), -- Section container purple
             ["Accent"] = FromRGB(130, 60, 255),             -- Purple accent
-            ["Element"] = FromRGB(22, 20, 38)               -- Dark purple element bg
+            ["Element"] = FromRGB(35, 25, 65)               -- Purple element bg
         }
     }
 
@@ -5605,10 +5605,106 @@ local Library do
                     if type(Value.RefreshPosition) == "function" then
                         Value:RefreshPosition(Bool)
                     end
-                    if not Debounce then 
+                    if not Debounce then
                         task.wait(0.03)
                     end
                 end
+            end
+
+            -- ──────────────────────────────────────────────────────
+            -- Section:SearchBox()
+            -- Tambahkan search bar di atas elemen-elemen section.
+            -- Usage: local Search = Section:SearchBox()
+            -- Filter real-time berdasarkan nama elemen (Toggle, Slider, dll).
+            -- ──────────────────────────────────────────────────────
+            function Section:SearchBox()
+                -- Geser Content ke bawah biar ada ruang search bar
+                Items["Content"].Instance.Position = UDim2New(0, 12, 0, 38)
+
+                -- Wrapper bar
+                local SearchBar = Instances:Create("Frame", {
+                    Parent = Items["Background"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(1, -24, 0, 20),
+                    Position = UDim2New(0, 12, 0, 8),
+                    BackgroundColor3 = FromRGB(35, 25, 65),
+                    BorderSizePixel = 0,
+                    ZIndex = 3,
+                    BorderColor3 = FromRGB(0, 0, 0),
+                })
+                SearchBar:AddToTheme({BackgroundColor3 = "Element"})
+                Instances:Create("UICorner", {
+                    Parent = SearchBar.Instance,
+                    Name = "\0",
+                    CornerRadius = UDimNew(0, 5)
+                })
+                Instances:Create("UIStroke", {
+                    Parent = SearchBar.Instance,
+                    Name = "\0",
+                    Color = FromRGB(100, 65, 180),
+                    Thickness = 1,
+                    Transparency = 0.5
+                })
+
+                -- Ikon kaca pembesar
+                local SearchIcon = Instances:Create("ImageLabel", {
+                    Parent = SearchBar.Instance,
+                    Name = "\0",
+                    Image = "rbxassetid://6031094667",
+                    Size = UDim2New(0, 11, 0, 11),
+                    AnchorPoint = Vector2New(0, 0.5),
+                    Position = UDim2New(0, 5, 0.5, 0),
+                    BackgroundTransparency = 1,
+                    ImageColor3 = FromRGB(130, 60, 255),
+                    ZIndex = 4,
+                    BorderSizePixel = 0,
+                    BorderColor3 = FromRGB(0, 0, 0),
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+                SearchIcon:AddToTheme({ImageColor3 = "Accent"})
+
+                -- Input teks
+                local SearchInput = Instances:Create("TextBox", {
+                    Parent = SearchBar.Instance,
+                    Name = "\0",
+                    FontFace = Library.Font,
+                    CursorPosition = -1,
+                    Text = "",
+                    PlaceholderText = "Search...",
+                    PlaceholderColor3 = FromRGB(110, 80, 160),
+                    TextColor3 = FromRGB(235, 235, 255),
+                    TextXAlignment = Enum.TextXAlignment.Left,
+                    Size = UDim2New(1, -22, 1, 0),
+                    Position = UDim2New(0, 20, 0, 0),
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    ClearTextOnFocus = false,
+                    TextSize = 12,
+                    ZIndex = 4,
+                    BorderColor3 = FromRGB(0, 0, 0),
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+                SearchInput:AddToTheme({TextColor3 = "Text"})
+
+                -- Filter elemen saat teks berubah
+                Library:Connect(SearchInput.Instance:GetPropertyChangedSignal("Text"), function()
+                    Library:Thread(function()
+                        local Query = StringLower(SearchInput.Instance.Text)
+                        for _, Element in Section.Elements do
+                            if type(Element.SetVisibility) == "function" and Element.Name then
+                                if Query == "" then
+                                    Element:SetVisibility(true)
+                                elseif StringFind(StringLower(Element.Name), Library:EscapePattern(Query)) then
+                                    Element:SetVisibility(true)
+                                else
+                                    Element:SetVisibility(false)
+                                end
+                            end
+                        end
+                    end)
+                end)
+
+                return SearchInput
             end
 
             Items["Toggle"]:Connect("MouseButton1Down", function()
@@ -5686,7 +5782,7 @@ local Library do
                     Size = UDim2New(0, 34, 0, 18),
                     AnchorPoint = Vector2New(1, 0.5),
                     Position = UDim2New(1, 0, 0.5, 0),
-                    BackgroundColor3 = FromRGB(28, 24, 44),
+                    BackgroundColor3 = FromRGB(35, 28, 58),
                     BackgroundTransparency = 0,
                     BorderSizePixel = 0,
                     ZIndex = 2,
@@ -5697,8 +5793,8 @@ local Library do
                     Parent = Items["Indicator"].Instance,
                     Name = "\0",
                     Thickness = 1,
-                    Transparency = 0.6,
-                    Color = FromRGB(80, 50, 140)
+                    Transparency = 0.5,
+                    Color = FromRGB(100, 65, 180)
                 })
 
                 -- ── Pill Fill (gradient saat ON) ──
@@ -5729,7 +5825,7 @@ local Library do
                     Size = UDim2New(0, 12, 0, 12),
                     AnchorPoint = Vector2New(0, 0.5),
                     Position = UDim2New(0, 3, 0.5, 0),   -- posisi OFF (kiri)
-                    BackgroundColor3 = FromRGB(160, 140, 200),
+                    BackgroundColor3 = FromRGB(190, 165, 230),  -- light purple, match OFF color
                     BackgroundTransparency = 0,
                     BorderSizePixel = 0,
                     ZIndex = 4,
@@ -5739,10 +5835,10 @@ local Library do
 
                 -- Hover glow effect di track
                 Items["Toggle"]:OnHover(function()
-                    Items["Indicator"]:Tween(TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = FromRGB(38, 30, 60)})
+                    Items["Indicator"]:Tween(TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = FromRGB(50, 38, 80)})
                 end)
                 Items["Toggle"]:OnHoverLeave(function()
-                    Items["Indicator"]:Tween(TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = FromRGB(28, 24, 44)})
+                    Items["Indicator"]:Tween(TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = FromRGB(35, 28, 58)})
                 end)
             end
 
@@ -6066,7 +6162,7 @@ local Library do
 
                 local tweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
 
-                if Toggle.Value then 
+                if Toggle.Value then
                     -- ON: fill muncul, knob geser ke kanan, warna putih cerah
                     Items["Accent"]:Tween(tweenInfo, {BackgroundTransparency = 0})
                     Items["CheckImage"]:Tween(tweenInfo, {
@@ -6074,16 +6170,16 @@ local Library do
                         BackgroundColor3 = FromRGB(255, 255, 255),
                         Size = UDim2New(0, 12, 0, 12)
                     })
-                    Items["Indicator"]:Tween(tweenInfo, {BackgroundColor3 = FromRGB(28, 24, 44)})
+                    Items["Indicator"]:Tween(tweenInfo, {BackgroundColor3 = FromRGB(35, 28, 58)})
                 else
-                    -- OFF: fill hilang, knob balik ke kiri, warna redup
+                    -- OFF: fill hilang, knob balik ke kiri, warna redup tapi visible
                     Items["Accent"]:Tween(tweenInfo, {BackgroundTransparency = 1})
                     Items["CheckImage"]:Tween(tweenInfo, {
                         Position = UDim2New(0, 3, 0.5, 0),     -- kiri
-                        BackgroundColor3 = FromRGB(100, 80, 140),
+                        BackgroundColor3 = FromRGB(190, 165, 230),  -- light purple, kontras jelas di track gelap
                         Size = UDim2New(0, 12, 0, 12)
                     })
-                    Items["Indicator"]:Tween(tweenInfo, {BackgroundColor3 = FromRGB(28, 24, 44)})
+                    Items["Indicator"]:Tween(tweenInfo, {BackgroundColor3 = FromRGB(35, 28, 58)})
                 end
 
                 if Toggle.Callback then 
@@ -6524,13 +6620,15 @@ local Library do
             end
 
             function Toggle:RefreshPosition(Bool)
-                if Bool then 
-                    Items["Indicator"]:Tween(TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = UDim2New(0, 0, 0, 0)})
-                    Items["Text"]:Tween(TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = UDim2New(0, 24, 0, 0)})
+                if Bool then
+                    -- Slide IN: kembalikan ke posisi normal
+                    Items["Indicator"]:Tween(TweenInfo.new(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = UDim2New(1, 0, 0.5, 0)})
+                    Items["Text"]:Tween(TweenInfo.new(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = UDim2New(0, 0, 0.5, 0)})
                 else
-                    Items["Indicator"].Instance.Position = UDim2New(0, 60, 0, 0)
-                    Items["Text"].Instance.Position = UDim2New(0, 84, 0, 0)
-                end 
+                    -- Slide OUT: geser ke kanan (off-screen)
+                    Items["Indicator"].Instance.Position = UDim2New(1, 60, 0.5, 0)
+                    Items["Text"].Instance.Position = UDim2New(0, 60, 0.5, 0)
+                end
             end
 
             Items["Toggle"]:Connect("InputBegan", function(Input)
