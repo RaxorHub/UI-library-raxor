@@ -228,16 +228,16 @@ local Library do
 
     local Themes = {
         ["Preset"] = {
-            ["AccentGradient"] = FromRGB(180, 40, 40),      -- Red gradient accent
-            ["Background 2"] = FromRGB(14, 14, 18),         -- Frosted dark panel
-            ["Background"] = FromRGB(10, 10, 14),           -- Deep dark background
-            ["Text"] = FromRGB(240, 240, 245),              -- Pure white text
-            ["Outline"] = FromRGB(255, 255, 255),           -- White outline (transparan di UI)
-            ["Section Top"] = FromRGB(20, 20, 26),          -- Section header frosted
-            ["Section Background"] = FromRGB(16, 16, 22),   -- Section body dark
-            ["Section Background 2"] = FromRGB(18, 18, 24), -- Section container
-            ["Accent"] = FromRGB(220, 70, 70),              -- Red accent
-            ["Element"] = FromRGB(30, 30, 38)               -- White-tinted element bg
+            ["AccentGradient"] = FromRGB(20, 200, 255),     -- Cyan gradient end
+            ["Background 2"] = FromRGB(10, 10, 18),         -- Deep frosted panel
+            ["Background"] = FromRGB(7, 7, 13),             -- Ultra dark background
+            ["Text"] = FromRGB(235, 235, 255),              -- Soft lavender-white text
+            ["Outline"] = FromRGB(180, 120, 255),           -- Purple outline
+            ["Section Top"] = FromRGB(16, 14, 28),          -- Section header dark purple
+            ["Section Background"] = FromRGB(13, 12, 22),   -- Section body dark
+            ["Section Background 2"] = FromRGB(15, 13, 25), -- Section container
+            ["Accent"] = FromRGB(130, 60, 255),             -- Purple accent
+            ["Element"] = FromRGB(22, 20, 38)               -- Dark purple element bg
         }
     }
 
@@ -1204,7 +1204,7 @@ local Library do
                     end)
                     
                     Items["PaletteIcon"]:OnHoverLeave(function()
-                        Items["PaletteIcon"]:Tween(nil, {ImageColor3 = FromRGB(141, 141, 150)})
+                        Items["PaletteIcon"]:Tween(nil, {ImageColor3 = FromRGB(80, 60, 130)})
                     end)
                 end
                 
@@ -4263,7 +4263,7 @@ local Library do
                     Size = UDim2New(0, 2, 0.6, 0),
                     AnchorPoint = Vector2New(0, 0.5),
                     Position = UDim2New(0, 6, 0.5, 0),
-                    BackgroundColor3 = FromRGB(220, 70, 70),
+                    BackgroundColor3 = FromRGB(130, 60, 255),
                     BackgroundTransparency = 1,
                     BorderSizePixel = 0,
                     ZIndex = 3
@@ -5080,29 +5080,35 @@ local Library do
                     BackgroundColor3 = FromRGB(26, 26, 30)
                 })  Items["TopBackground"]:AddToTheme({BackgroundColor3 = "Section Top"})
                 
-                Items["Icon"] = Instances:Create("ImageLabel", {
+                -- Left accent line (menggantikan icon)
+                Items["LeftAccentLine"] = Instances:Create("Frame", {
                     Parent = Items["TopBackground"].Instance,
                     Name = "\0",
-                    ImageColor3 = FromRGB(255, 255, 255),
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    Size = UDim2New(0, 21, 0, 20),
+                    Size = UDim2New(0, 2, 0.55, 0),
                     AnchorPoint = Vector2New(0, 0.5),
-                    Image = "rbxassetid://"..Section.Icon,
-                    BackgroundTransparency = 1,
-                    Position = UDim2New(0, 15, 0.5, 0),
-                    ZIndex = 2,
+                    Position = UDim2New(0, 8, 0.5, 0),
+                    BackgroundColor3 = FromRGB(130, 60, 255),
+                    BackgroundTransparency = 0,
                     BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
+                    ZIndex = 3,
+                    BorderColor3 = FromRGB(0, 0, 0)
                 })
-                
-                Instances:Create("UIGradient", {
-                    Parent = Items["Icon"].Instance,
+
+                Instances:Create("UICorner", {
+                    Parent = Items["LeftAccentLine"].Instance,
                     Name = "\0",
-                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(131, 131, 131)), RGBSequenceKeypoint(1, FromRGB(255, 255, 255))}
+                    CornerRadius = UDimNew(0, 999)
+                })
+
+                Instances:Create("UIGradient", {
+                    Parent = Items["LeftAccentLine"].Instance,
+                    Name = "\0",
+                    Rotation = 90,
+                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(130, 60, 255)), RGBSequenceKeypoint(1, FromRGB(20, 200, 255))}
                 }):AddToTheme({Color = function()
                     return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
                 end})
-                
+
                 Items["Description"] = Instances:Create("TextLabel", {
                     Parent = Items["TopBackground"].Instance,
                     Name = "\0",
@@ -5113,7 +5119,7 @@ local Library do
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
-                    Position = UDim2New(0, 50, 0, 28),
+                    Position = UDim2New(0, 18, 0, 28),
                     BorderSizePixel = 0,
                     TextTransparency = 0.4,
                     ZIndex = 2,
@@ -5131,17 +5137,17 @@ local Library do
                     Parent = Items["TopBackground"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
-                    TextColor3 = FromRGB(248, 248, 248),
+                    TextColor3 = FromRGB(235, 235, 255),
                     BorderColor3 = FromRGB(0, 0, 0),
                     Text = Section.Name,
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
                     -- ÃƒÂÃ‚Â¡ÃƒÂÃ‚Â¾Ãƒâ€˜Ã¢â‚¬Â¦Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â°ÃƒÂÃ‚Â½ÃƒÂÃ‚Â¸ÃƒÂÃ‚Â» Ãƒâ€˜Ã¢â‚¬Å¡ÃƒÂÃ‚Â²ÃƒÂÃ‚Â¾Ãƒâ€˜Ã…Â½ ÃƒÂÃ‚Â»ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â³ÃƒÂÃ‚Â¸ÃƒÂÃ‚ÂºÃƒâ€˜Ã†â€™ Ãƒâ€˜Ã¢â‚¬ ÃƒÂÃ‚ÂµÃƒÂÃ‚Â½Ãƒâ€˜Ã¢â‚¬Å¡Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¸Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â²ÃƒÂÃ‚Â°ÃƒÂÃ‚Â½ÃƒÂÃ‚Â¸Ãƒâ€˜Ã‚Â ÃƒÂÃ‚Â¸ÃƒÂÃ‚Â· ÃƒÂÃ‚Â¿Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾Ãƒâ€˜Ã‹â€ ÃƒÂÃ‚Â»ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â³ÃƒÂÃ‚Â¾ ÃƒÂÃ‚Â²ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â¿Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾Ãƒâ€˜Ã‚ÂÃƒÂÃ‚Â°
-                    Position = (Section.Description == "") and UDim2New(0, 50, 0, 19) or UDim2New(0, 50, 0, 10),
+                    Position = (Section.Description == "") and UDim2New(0, 18, 0, 19) or UDim2New(0, 18, 0, 10),
                     BorderSizePixel = 0,
                     ZIndex = 2,
-                    TextSize = 15,
+                    TextSize = 14,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })  Items["Title"]:AddToTheme({TextColor3 = "Text"})
                 
@@ -5168,7 +5174,7 @@ local Library do
                     Parent = Items["Toggle"].Instance,
                     Name = "\0",
                     Image = "rbxassetid://123317177279443",
-                    ImageColor3 = FromRGB(220, 70, 70),
+                    ImageColor3 = FromRGB(130, 60, 255),
                     Size = UDim2New(0, 16, 0, 8),
                     AnchorPoint = Vector2New(0.5, 0.5),
                     Position = UDim2New(0.5, 0, 0.5, 0),
@@ -5417,7 +5423,7 @@ local Library do
                     Items["Fade"]:Tween(nil, {BackgroundTransparency = 0.3})
                     Items["Background"].Instance.Visible = false
                     -- Arrow rotate ke atas (tutup)
-                    Items["ArrowV"]:Tween(nil, {Rotation = 180, ImageColor3 = FromRGB(141, 141, 150)})
+                    Items["ArrowV"]:Tween(nil, {Rotation = 180, ImageColor3 = FromRGB(80, 60, 130)})
                 else
                     -- Tampilkan konten
                     Items["Background"].Instance.Visible = true
@@ -5427,7 +5433,7 @@ local Library do
                         Items["Fade"].Instance.Visible = false
                     end)
                     -- Arrow rotate ke bawah (buka)
-                    Items["ArrowV"]:Tween(nil, {Rotation = 0, ImageColor3 = FromRGB(220, 70, 70)})
+                    Items["ArrowV"]:Tween(nil, {Rotation = 0, ImageColor3 = FromRGB(130, 60, 255)})
                 end
             end
 
@@ -7026,7 +7032,7 @@ local Library do
                     return 
                 end
 
-                Items["ArrowIcon"]:Tween(nil, {ImageColor3 = FromRGB(141, 141, 150)})
+                Items["ArrowIcon"]:Tween(nil, {ImageColor3 = FromRGB(80, 60, 130)})
                 Items["Gradient"].Instance.Enabled = false
             end)
 
@@ -7087,7 +7093,7 @@ local Library do
                         RenderStepped = nil
                     end
 
-                    Items["ArrowIcon"]:Tween(nil, {Rotation = 0, ImageColor3 = FromRGB(141, 141, 150)})
+                    Items["ArrowIcon"]:Tween(nil, {Rotation = 0, ImageColor3 = FromRGB(80, 60, 130)})
                     Items["Gradient"].Instance.Enabled = false
                 end
 
@@ -7563,6 +7569,273 @@ local Library do
 
             Label.Section.Elements[#Label.Section.Elements+1] = Label
             return Label
+        end
+
+        -- ─────────────────────────────────────────────────────
+        --   NEW FEATURE: Section:Divider()
+        --   Pemisah visual bergradient antara elemen
+        -- ─────────────────────────────────────────────────────
+        Library.Sections.Divider = function(self, Data)
+            Data = Data or { }
+
+            local Divider = {
+                Window = self.Window,
+                Page = self.Page,
+                Section = self,
+                Text = Data.Text or Data.text or ""
+            }
+
+            local Items = { } do
+                Items["Divider"] = Instances:Create("Frame", {
+                    Parent = Divider.Section.Items["Content"].Instance,
+                    Name = "\0",
+                    BackgroundTransparency = 1,
+                    Size = UDim2New(1, 0, 0, (Divider.Text ~= "") and 22 or 10),
+                    BorderColor3 = FromRGB(0, 0, 0),
+                    BorderSizePixel = 0,
+                    AutomaticSize = Enum.AutomaticSize.None,
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+
+                if Divider.Text ~= "" then
+                    -- Label teks di tengah
+                    Items["Label"] = Instances:Create("TextLabel", {
+                        Parent = Items["Divider"].Instance,
+                        Name = "\0",
+                        FontFace = Library.Font,
+                        TextColor3 = FromRGB(150, 100, 255),
+                        TextTransparency = 0.15,
+                        Text = Divider.Text,
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        Size = UDim2New(0, 0, 0, 14),
+                        AnchorPoint = Vector2New(0.5, 0),
+                        Position = UDim2New(0.5, 0, 0, 0),
+                        BorderSizePixel = 0,
+                        BackgroundTransparency = 1,
+                        ZIndex = 2,
+                        TextSize = 11,
+                        BackgroundColor3 = FromRGB(255, 255, 255)
+                    })
+                    Items["Label"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
+
+                    -- Line kiri
+                    Items["LineLeft"] = Instances:Create("Frame", {
+                        Parent = Items["Divider"].Instance,
+                        Name = "\0",
+                        AnchorPoint = Vector2New(1, 0),
+                        Position = UDim2New(0.5, -6, 0, 7),
+                        Size = UDim2New(0.5, -30, 0, 1),
+                        BorderSizePixel = 0,
+                        BackgroundColor3 = FromRGB(130, 60, 255),
+                        BackgroundTransparency = 0.4,
+                        ZIndex = 2,
+                        BorderColor3 = FromRGB(0, 0, 0)
+                    })
+                    Instances:Create("UIGradient", {
+                        Parent = Items["LineLeft"].Instance,
+                        Name = "\0",
+                        Rotation = 180,
+                        Transparency = NumSequence{NumSequenceKeypoint(0, 0), NumSequenceKeypoint(1, 1)}
+                    })
+
+                    -- Line kanan
+                    Items["LineRight"] = Instances:Create("Frame", {
+                        Parent = Items["Divider"].Instance,
+                        Name = "\0",
+                        AnchorPoint = Vector2New(0, 0),
+                        Position = UDim2New(0.5, 6, 0, 7),
+                        Size = UDim2New(0.5, -30, 0, 1),
+                        BorderSizePixel = 0,
+                        BackgroundColor3 = FromRGB(130, 60, 255),
+                        BackgroundTransparency = 0.4,
+                        ZIndex = 2,
+                        BorderColor3 = FromRGB(0, 0, 0)
+                    })
+                    Instances:Create("UIGradient", {
+                        Parent = Items["LineRight"].Instance,
+                        Name = "\0",
+                        Rotation = 0,
+                        Transparency = NumSequence{NumSequenceKeypoint(0, 0), NumSequenceKeypoint(1, 1)}
+                    })
+                else
+                    -- Hanya garis tanpa teks
+                    Items["Line"] = Instances:Create("Frame", {
+                        Parent = Items["Divider"].Instance,
+                        Name = "\0",
+                        AnchorPoint = Vector2New(0.5, 0.5),
+                        Position = UDim2New(0.5, 0, 0.5, 0),
+                        Size = UDim2New(1, 0, 0, 1),
+                        BorderSizePixel = 0,
+                        BackgroundColor3 = FromRGB(130, 60, 255),
+                        BackgroundTransparency = 0.5,
+                        ZIndex = 2,
+                        BorderColor3 = FromRGB(0, 0, 0)
+                    })
+                    Instances:Create("UIGradient", {
+                        Parent = Items["Line"].Instance,
+                        Name = "\0",
+                        Rotation = 0,
+                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(0, 0, 0)), RGBSequenceKeypoint(0.5, FromRGB(130, 60, 255)), RGBSequenceKeypoint(1, FromRGB(0, 0, 0))}
+                    }):AddToTheme({Color = function()
+                        return RGBSequence{RGBSequenceKeypoint(0, FromRGB(0, 0, 0)), RGBSequenceKeypoint(0.5, Library.Theme.Accent), RGBSequenceKeypoint(1, FromRGB(0, 0, 0))}
+                    end})
+                end
+            end
+
+            function Divider:RefreshPosition(Bool)
+                -- No animation needed for divider
+            end
+
+            function Divider:SetText(Text)
+                if Items["Label"] then
+                    Items["Label"].Instance.Text = tostring(Text)
+                end
+            end
+
+            Divider.Section.Elements[#Divider.Section.Elements+1] = Divider
+            return Divider
+        end
+
+        -- ─────────────────────────────────────────────────────
+        --   NEW FEATURE: Section:ProgressBar()
+        --   Progress bar animatable dengan label dan percentage
+        -- ─────────────────────────────────────────────────────
+        Library.Sections.ProgressBar = function(self, Data)
+            Data = Data or { }
+
+            local Progress = {
+                Window = self.Window,
+                Page = self.Page,
+                Section = self,
+
+                Name = Data.Name or Data.name or "Progress",
+                Value = Data.Default or Data.default or 0,
+                Max = Data.Max or Data.max or 100,
+                Min = Data.Min or Data.min or 0,
+                Suffix = Data.Suffix or Data.suffix or "",
+                Flag = Data.Flag or Data.flag or Library:NextFlag()
+            }
+
+            Library.Flags[Progress.Flag] = Progress.Value
+
+            local Items = { } do
+                Items["Container"] = Instances:Create("Frame", {
+                    Parent = Progress.Section.Items["Content"].Instance,
+                    Name = "\0",
+                    BackgroundTransparency = 1,
+                    Size = UDim2New(1, 0, 0, 36),
+                    BorderColor3 = FromRGB(0, 0, 0),
+                    BorderSizePixel = 0,
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+
+                Items["Label"] = Instances:Create("TextLabel", {
+                    Parent = Items["Container"].Instance,
+                    Name = "\0",
+                    FontFace = Library.Font,
+                    TextColor3 = FromRGB(235, 235, 255),
+                    TextTransparency = 0.3,
+                    Text = Progress.Name,
+                    AutomaticSize = Enum.AutomaticSize.X,
+                    Size = UDim2New(0, 0, 0, 14),
+                    Position = UDim2New(0, 0, 0, 0),
+                    BorderSizePixel = 0,
+                    BackgroundTransparency = 1,
+                    ZIndex = 2,
+                    TextSize = 13,
+                    TextXAlignment = Enum.TextXAlignment.Left,
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })  Items["Label"]:AddToTheme({TextColor3 = "Text"})
+
+                Items["ValueLabel"] = Instances:Create("TextLabel", {
+                    Parent = Items["Container"].Instance,
+                    Name = "\0",
+                    FontFace = Library.Font,
+                    TextColor3 = FromRGB(130, 60, 255),
+                    TextTransparency = 0,
+                    Text = tostring(Progress.Value) .. Progress.Suffix,
+                    AutomaticSize = Enum.AutomaticSize.X,
+                    Size = UDim2New(0, 0, 0, 14),
+                    AnchorPoint = Vector2New(1, 0),
+                    Position = UDim2New(1, 0, 0, 0),
+                    BorderSizePixel = 0,
+                    BackgroundTransparency = 1,
+                    ZIndex = 2,
+                    TextSize = 13,
+                    TextXAlignment = Enum.TextXAlignment.Right,
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })  Items["ValueLabel"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
+
+                Items["Track"] = Instances:Create("Frame", {
+                    Parent = Items["Container"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(1, 0, 0, 5),
+                    Position = UDim2New(0, 0, 0, 20),
+                    BackgroundTransparency = 0.7,
+                    BackgroundColor3 = FromRGB(50, 40, 80),
+                    BorderSizePixel = 0,
+                    ZIndex = 2,
+                    BorderColor3 = FromRGB(0, 0, 0)
+                })
+                Instances:Create("UICorner", { Parent = Items["Track"].Instance, Name = "\0", CornerRadius = UDimNew(0, 99) })
+
+                local pct = MathClamp((Progress.Value - Progress.Min) / (Progress.Max - Progress.Min), 0, 1)
+                Items["Fill"] = Instances:Create("Frame", {
+                    Parent = Items["Track"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(pct, 0, 1, 0),
+                    BackgroundTransparency = 0,
+                    BackgroundColor3 = FromRGB(130, 60, 255),
+                    BorderSizePixel = 0,
+                    ZIndex = 3,
+                    BorderColor3 = FromRGB(0, 0, 0)
+                })
+                Instances:Create("UICorner", { Parent = Items["Fill"].Instance, Name = "\0", CornerRadius = UDimNew(0, 99) })
+                Instances:Create("UIGradient", {
+                    Parent = Items["Fill"].Instance,
+                    Name = "\0",
+                    Rotation = 0,
+                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(130, 60, 255)), RGBSequenceKeypoint(1, FromRGB(20, 200, 255))}
+                }):AddToTheme({Color = function()
+                    return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                end})
+
+                -- Glow dot di ujung fill
+                Items["Dot"] = Instances:Create("Frame", {
+                    Parent = Items["Track"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(0, 9, 0, 9),
+                    AnchorPoint = Vector2New(0.5, 0.5),
+                    Position = UDim2New(pct, 0, 0.5, 0),
+                    BackgroundTransparency = 0,
+                    BackgroundColor3 = FromRGB(200, 150, 255),
+                    BorderSizePixel = 0,
+                    ZIndex = 4,
+                    BorderColor3 = FromRGB(0, 0, 0)
+                })
+                Instances:Create("UICorner", { Parent = Items["Dot"].Instance, Name = "\0", CornerRadius = UDimNew(0, 99) })
+            end
+
+            function Progress:Set(Value)
+                Value = MathClamp(Value, Progress.Min, Progress.Max)
+                Progress.Value = Value
+                Library.Flags[Progress.Flag] = Value
+                local pct = MathClamp((Value - Progress.Min) / (Progress.Max - Progress.Min), 0, 1)
+                Items["Fill"]:Tween(TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2New(pct, 0, 1, 0)})
+                Items["Dot"]:Tween(TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2New(pct, 0, 0.5, 0)})
+                Items["ValueLabel"].Instance.Text = tostring(MathFloor(Value)) .. Progress.Suffix
+            end
+
+            function Progress:Get()
+                return Progress.Value
+            end
+
+            function Progress:RefreshPosition(Bool)
+                -- no animation
+            end
+
+            Progress.Section.Elements[#Progress.Section.Elements+1] = Progress
+            return Progress
         end
 
         Library.Sections.Keybind = function(self, Data)
