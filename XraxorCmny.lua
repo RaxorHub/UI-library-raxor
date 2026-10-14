@@ -228,16 +228,16 @@ local Library do
 
     local Themes = {
         ["Preset"] = {
-            ["AccentGradient"] = FromRGB(180, 40, 40),      -- Red gradient accent
-            ["Background 2"] = FromRGB(14, 14, 18),         -- Frosted dark panel
-            ["Background"] = FromRGB(10, 10, 14),           -- Deep dark background
-            ["Text"] = FromRGB(240, 240, 245),              -- Pure white text
+            ["AccentGradient"] = FromRGB(155, 155, 155),    -- Mono gradient
+            ["Background 2"] = FromRGB(13, 13, 17),
+            ["Background"] = FromRGB(9, 9, 12),
+            ["Text"] = FromRGB(238, 238, 242),
             ["Outline"] = FromRGB(255, 255, 255),           -- White outline (transparan di UI)
-            ["Section Top"] = FromRGB(20, 20, 26),          -- Section header frosted
-            ["Section Background"] = FromRGB(16, 16, 22),   -- Section body dark
-            ["Section Background 2"] = FromRGB(18, 18, 24), -- Section container
-            ["Accent"] = FromRGB(220, 70, 70),              -- Red accent
-            ["Element"] = FromRGB(30, 30, 38)               -- White-tinted element bg
+            ["Section Top"] = FromRGB(16, 16, 21),
+            ["Section Background"] = FromRGB(12, 12, 16),
+            ["Section Background 2"] = FromRGB(14, 14, 19),
+            ["Accent"] = FromRGB(222, 222, 222),            -- Mono white
+            ["Element"] = FromRGB(21, 21, 26)
         }
     }
 
@@ -2590,14 +2590,50 @@ local Library do
                     CornerRadius = UDimNew(0, 10)
                 })
 
-                -- Border putih tipis elegan
-                Instances:Create("UIStroke", {
+                -- Glass top-highlight window (monochrome)
+                do
+                    local _whl = Instance.new("Frame")
+                    _whl.Name = "\0"
+                    _whl.Size = UDim2New(1, 0, 0, 1)
+                    _whl.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                    _whl.BackgroundTransparency = 0.65
+                    _whl.BorderSizePixel = 0
+                    _whl.ZIndex = 3
+                    _whl.Parent = Items["MainFrame"].Instance
+                    local _whlc = Instance.new("UICorner")
+                    _whlc.CornerRadius = UDim.new(0, 10)
+                    _whlc.Parent = _whl
+                end
+
+                -- Border spinning gradient monochrome
+                local _BorderStroke = Instances:Create("UIStroke", {
                     Parent = Items["MainFrame"].Instance,
                     Name = "\0",
                     Color = FromRGB(255, 255, 255),
-                    Thickness = 0.8,
-                    Transparency = 0.82
+                    Thickness = 1.5,
+                    Transparency = 0.12,
+                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
                 })
+                local _BorderGrad = Instances:Create("UIGradient", {
+                    Parent = _BorderStroke.Instance,
+                    Name = "\0",
+                    Color = ColorSequence.new({
+                        ColorSequenceKeypoint.new(0,    Color3.fromRGB(12, 12, 12)),
+                        ColorSequenceKeypoint.new(0.28, Color3.fromRGB(255, 255, 255)),
+                        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(190, 190, 190)),
+                        ColorSequenceKeypoint.new(0.72, Color3.fromRGB(255, 255, 255)),
+                        ColorSequenceKeypoint.new(1,    Color3.fromRGB(12, 12, 12)),
+                    })
+                })
+                do
+                    local _bRot = 0
+                    Library:Connect(RunService.RenderStepped, function(dt)
+                        if Window.IsOpen then
+                            _bRot = (_bRot + dt * 52) % 360
+                            _BorderGrad.Instance.Rotation = _bRot
+                        end
+                    end)
+                end
 
                 if IsMobile then 
                     local UIScale = Instances:Create("UIScale", {
@@ -4263,7 +4299,7 @@ local Library do
                     Size = UDim2New(0, 2, 0.6, 0),
                     AnchorPoint = Vector2New(0, 0.5),
                     Position = UDim2New(0, 6, 0.5, 0),
-                    BackgroundColor3 = FromRGB(220, 70, 70),
+                    BackgroundColor3 = FromRGB(218, 218, 218),
                     BackgroundTransparency = 1,
                     BorderSizePixel = 0,
                     ZIndex = 3
@@ -5085,10 +5121,11 @@ local Library do
                     Name = "\0",
                     ImageColor3 = FromRGB(255, 255, 255),
                     BorderColor3 = FromRGB(0, 0, 0),
-                    Size = UDim2New(0, 21, 0, 20),
+                    Size = UDim2New(0, 0, 0, 0),
                     AnchorPoint = Vector2New(0, 0.5),
                     Image = "rbxassetid://"..Section.Icon,
                     BackgroundTransparency = 1,
+                    Visible = false,
                     Position = UDim2New(0, 15, 0.5, 0),
                     ZIndex = 2,
                     BorderSizePixel = 0,
@@ -5113,7 +5150,7 @@ local Library do
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
-                    Position = UDim2New(0, 50, 0, 28),
+                    Position = UDim2New(0, 15, 0, 28),
                     BorderSizePixel = 0,
                     TextTransparency = 0.4,
                     ZIndex = 2,
@@ -5126,6 +5163,21 @@ local Library do
                     Name = "\0",
                     CornerRadius = UDimNew(0, 4)
                 })
+
+                -- Glass highlight atas section (monochrome)
+                do
+                    local _hl = Instance.new("Frame")
+                    _hl.Name = "\0"
+                    _hl.Size = UDim2New(1, 0, 0, 1)
+                    _hl.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                    _hl.BackgroundTransparency = 0.7
+                    _hl.BorderSizePixel = 0
+                    _hl.ZIndex = 10
+                    _hl.Parent = Items["TopBackground"].Instance
+                    local _hlc = Instance.new("UICorner")
+                    _hlc.CornerRadius = UDim.new(0, 4)
+                    _hlc.Parent = _hl
+                end
                 
                 Items["Title"] = Instances:Create("TextLabel", {
                     Parent = Items["TopBackground"].Instance,
@@ -5138,7 +5190,7 @@ local Library do
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
                     -- ÃƒÂÃ‚Â¡ÃƒÂÃ‚Â¾Ãƒâ€˜Ã¢â‚¬Â¦Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â°ÃƒÂÃ‚Â½ÃƒÂÃ‚Â¸ÃƒÂÃ‚Â» Ãƒâ€˜Ã¢â‚¬Å¡ÃƒÂÃ‚Â²ÃƒÂÃ‚Â¾Ãƒâ€˜Ã…Â½ ÃƒÂÃ‚Â»ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â³ÃƒÂÃ‚Â¸ÃƒÂÃ‚ÂºÃƒâ€˜Ã†â€™ Ãƒâ€˜Ã¢â‚¬ ÃƒÂÃ‚ÂµÃƒÂÃ‚Â½Ãƒâ€˜Ã¢â‚¬Å¡Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¸Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â²ÃƒÂÃ‚Â°ÃƒÂÃ‚Â½ÃƒÂÃ‚Â¸Ãƒâ€˜Ã‚Â ÃƒÂÃ‚Â¸ÃƒÂÃ‚Â· ÃƒÂÃ‚Â¿Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾Ãƒâ€˜Ã‹â€ ÃƒÂÃ‚Â»ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â³ÃƒÂÃ‚Â¾ ÃƒÂÃ‚Â²ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â¿Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾Ãƒâ€˜Ã‚ÂÃƒÂÃ‚Â°
-                    Position = (Section.Description == "") and UDim2New(0, 50, 0, 19) or UDim2New(0, 50, 0, 10),
+                    Position = (Section.Description == "") and UDim2New(0, 15, 0, 19) or UDim2New(0, 15, 0, 10),
                     BorderSizePixel = 0,
                     ZIndex = 2,
                     TextSize = 15,
@@ -5168,7 +5220,7 @@ local Library do
                     Parent = Items["Toggle"].Instance,
                     Name = "\0",
                     Image = "rbxassetid://123317177279443",
-                    ImageColor3 = FromRGB(220, 70, 70),
+                    ImageColor3 = FromRGB(185, 185, 185),
                     Size = UDim2New(0, 16, 0, 8),
                     AnchorPoint = Vector2New(0.5, 0.5),
                     Position = UDim2New(0.5, 0, 0.5, 0),
@@ -5417,7 +5469,7 @@ local Library do
                     Items["Fade"]:Tween(nil, {BackgroundTransparency = 0.3})
                     Items["Background"].Instance.Visible = false
                     -- Arrow rotate ke atas (tutup)
-                    Items["ArrowV"]:Tween(nil, {Rotation = 180, ImageColor3 = FromRGB(141, 141, 150)})
+                    Items["ArrowV"]:Tween(nil, {Rotation = 180, ImageColor3 = FromRGB(85, 85, 85)})
                 else
                     -- Tampilkan konten
                     Items["Background"].Instance.Visible = true
@@ -5427,7 +5479,30 @@ local Library do
                         Items["Fade"].Instance.Visible = false
                     end)
                     -- Arrow rotate ke bawah (buka)
-                    Items["ArrowV"]:Tween(nil, {Rotation = 0, ImageColor3 = FromRGB(220, 70, 70)})
+                    Items["ArrowV"]:Tween(nil, {Rotation = 0, ImageColor3 = FromRGB(200, 200, 200)})
+                    -- Scanline sweep effect (monochrome)
+                    if not Section._scanActive and Items["Top"] and Items["Top"].Instance and Items["Top"].Instance.Parent then
+                        Section._scanActive = true
+                        Items["Top"].Instance.ClipsDescendants = true
+                        task.spawn(function()
+                            local _scan = Instance.new("Frame")
+                            _scan.Name               = " "
+                            _scan.Size               = UDim2.new(1, 0, 0, 1)
+                            _scan.Position           = UDim2.new(0, 0, 0, 0)
+                            _scan.BackgroundColor3   = Color3.fromRGB(255, 255, 255)
+                            _scan.BackgroundTransparency = 0.48
+                            _scan.BorderSizePixel    = 0
+                            _scan.ZIndex             = 11
+                            _scan.Parent             = Items["Top"].Instance
+                            local _st = TweenService:Create(_scan,
+                                TweenInfo.new(0.55, Enum.EasingStyle.Linear),
+                                { Position = UDim2.new(0, 0, 1, 0), BackgroundTransparency = 1 })
+                            _st:Play()
+                            _st.Completed:Wait()
+                            _scan:Destroy()
+                            Section._scanActive = false
+                        end)
+                    end
                 end
             end
 
