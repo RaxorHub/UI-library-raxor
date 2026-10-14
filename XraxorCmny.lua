@@ -3673,6 +3673,163 @@ local Library do
                     end
                 })
 
+                -- ─────────────────────────────────────────────────────
+                --   PLAYER CARD — pojok kiri bawah LeftTabs
+                -- ─────────────────────────────────────────────────────
+                do
+                    local LocalPlayer = Players.LocalPlayer
+
+                    -- Card container — nempel di bawah LeftTabs
+                    Items["PlayerCard"] = Instances:Create("Frame", {
+                        Parent = Items["LeftTabs"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(1, -24, 0, 50),
+                        AnchorPoint = Vector2New(0, 1),
+                        Position = UDim2New(0, 12, 1, -12),
+                        BackgroundTransparency = 0.35,
+                        BackgroundColor3 = FromRGB(18, 16, 30),
+                        BorderSizePixel = 0,
+                        ZIndex = 5,
+                        BorderColor3 = FromRGB(0, 0, 0)
+                    })
+                    Items["PlayerCard"]:AddToTheme({BackgroundColor3 = "Section Background 2"})
+
+                    Instances:Create("UICorner", {
+                        Parent = Items["PlayerCard"].Instance,
+                        Name = "\0",
+                        CornerRadius = UDimNew(0, 8)
+                    })
+
+                    -- Border gradient tipis di atas card
+                    local CardStroke = Instances:Create("UIStroke", {
+                        Parent = Items["PlayerCard"].Instance,
+                        Name = "\0",
+                        ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                        Thickness = 1,
+                        Transparency = 0.55,
+                        Color = FromRGB(130, 60, 255)
+                    })
+                    Instances:Create("UIGradient", {
+                        Parent = CardStroke.Instance,
+                        Name = "\0",
+                        Rotation = 90,
+                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(130, 60, 255)), RGBSequenceKeypoint(1, FromRGB(20, 200, 255))}
+                    }):AddToTheme({Color = function()
+                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                    end})
+
+                    -- Avatar image
+                    Items["PlayerAvatar"] = Instances:Create("ImageLabel", {
+                        Parent = Items["PlayerCard"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 36, 0, 36),
+                        Position = UDim2New(0, 7, 0, 7),
+                        BackgroundTransparency = 0.2,
+                        BackgroundColor3 = FromRGB(30, 20, 50),
+                        BorderSizePixel = 0,
+                        ZIndex = 6,
+                        Image = "",
+                        BorderColor3 = FromRGB(0, 0, 0)
+                    })
+                    Instances:Create("UICorner", {
+                        Parent = Items["PlayerAvatar"].Instance,
+                        Name = "\0",
+                        CornerRadius = UDimNew(0, 6)
+                    })
+                    Instances:Create("UIStroke", {
+                        Parent = Items["PlayerAvatar"].Instance,
+                        Name = "\0",
+                        Thickness = 1,
+                        Transparency = 0.5,
+                        Color = FromRGB(130, 60, 255)
+                    })
+
+                    -- Glow dot (online indicator)
+                    Items["OnlineDot"] = Instances:Create("Frame", {
+                        Parent = Items["PlayerCard"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 8, 0, 8),
+                        AnchorPoint = Vector2New(1, 1),
+                        Position = UDim2New(0, 43, 0, 43),
+                        BackgroundColor3 = FromRGB(60, 220, 100),
+                        BackgroundTransparency = 0,
+                        BorderSizePixel = 0,
+                        ZIndex = 7,
+                        BorderColor3 = FromRGB(0, 0, 0)
+                    })
+                    Instances:Create("UICorner", { Parent = Items["OnlineDot"].Instance, Name = "\0", CornerRadius = UDimNew(0, 99) })
+                    Instances:Create("UIStroke", {
+                        Parent = Items["OnlineDot"].Instance,
+                        Name = "\0",
+                        Thickness = 1.5,
+                        Color = FromRGB(10, 10, 18),
+                        Transparency = 0
+                    })
+
+                    -- Username label
+                    Items["PlayerName"] = Instances:Create("TextLabel", {
+                        Parent = Items["PlayerCard"].Instance,
+                        Name = "\0",
+                        FontFace = Library.Fonts.SemiBold,
+                        TextColor3 = FromRGB(235, 235, 255),
+                        TextTransparency = 0,
+                        Text = LocalPlayer.DisplayName,
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        Size = UDim2New(0, 0, 0, 14),
+                        Position = UDim2New(0, 51, 0, 10),
+                        BorderSizePixel = 0,
+                        BackgroundTransparency = 1,
+                        ZIndex = 6,
+                        TextSize = 13,
+                        TextXAlignment = Enum.TextXAlignment.Left,
+                        BackgroundColor3 = FromRGB(255, 255, 255)
+                    })
+
+                    -- @username kecil di bawah
+                    Items["PlayerHandle"] = Instances:Create("TextLabel", {
+                        Parent = Items["PlayerCard"].Instance,
+                        Name = "\0",
+                        FontFace = Library.Font,
+                        TextColor3 = FromRGB(130, 60, 255),
+                        TextTransparency = 0.2,
+                        Text = "@" .. LocalPlayer.Name,
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        Size = UDim2New(0, 0, 0, 12),
+                        Position = UDim2New(0, 51, 0, 27),
+                        BorderSizePixel = 0,
+                        BackgroundTransparency = 1,
+                        ZIndex = 6,
+                        TextSize = 11,
+                        TextXAlignment = Enum.TextXAlignment.Left,
+                        BackgroundColor3 = FromRGB(255, 255, 255)
+                    })
+                    Items["PlayerHandle"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
+
+                    -- Load avatar async
+                    task.spawn(function()
+                        local ok, thumbUrl = pcall(function()
+                            return game:GetService("Players"):GetUserThumbnailAsync(
+                                LocalPlayer.UserId,
+                                Enum.ThumbnailType.HeadShot,
+                                Enum.ThumbnailSize.Size60x60
+                            )
+                        end)
+                        if ok and thumbUrl and Items["PlayerAvatar"] and Items["PlayerAvatar"].Instance then
+                            Items["PlayerAvatar"].Instance.Image = thumbUrl
+                        end
+                    end)
+
+                    -- Pulsing glow animasi pada dot
+                    Library:Thread(function()
+                        while Items["OnlineDot"] and Items["OnlineDot"].Instance and Items["OnlineDot"].Instance.Parent do
+                            Items["OnlineDot"]:Tween(TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {BackgroundTransparency = 0.5})
+                            task.wait(0.8)
+                            Items["OnlineDot"]:Tween(TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {BackgroundTransparency = 0})
+                            task.wait(0.8)
+                        end
+                    end)
+                end
+
                 Window.Items = Items
             end
             
@@ -5484,6 +5641,7 @@ local Library do
             }
 
             local Items = { } do 
+                -- Wrapper button utama (full width, tinggi 20px)
                 Items["Toggle"] = Instances:Create("TextButton", {
                     Parent = Toggle.Section.Items["Content"].Instance,
                     Name = "\0",
@@ -5494,101 +5652,102 @@ local Library do
                     AutoButtonColor = false,
                     BackgroundTransparency = 1,
                     BorderSizePixel = 0,
-                    Size = UDim2New(1, 0, 0, 18),
+                    Size = UDim2New(1, 0, 0, 20),
                     ZIndex = 2,
                     TextSize = 14,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })
-                
-                Items["Indicator"] = Instances:Create("Frame", {
-                    Parent = Items["Toggle"].Instance,
-                    Name = "\0",
-                    Size = UDim2New(0, 18, 0, 18),
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    ZIndex = 2,
-                    BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(124, 163, 255)
-                })  Items["Indicator"]:AddToTheme({BackgroundColor3 = "Element"})
-                
-                Instances:Create("UICorner", {
-                    Parent = Items["Indicator"].Instance,
-                    Name = "\0",
-                    CornerRadius = UDimNew(0, 3)
-                })
-                
-                Items["Accent"] = Instances:Create("Frame", {
-                    Parent = Items["Indicator"].Instance,
-                    Name = "\0",
-                    Size = UDim2New(0, 0, 0, 0),
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    ZIndex = 2,
-                    BorderSizePixel = 0,
-                    BackgroundColor3 = FromRGB(255, 255, 255),
-                    AnchorPoint = Vector2New(0.5, 0.5),
-                    Position = UDim2New(0.5, 0, 0.5, 0)
-                })  --Items["Accent"]:AddToTheme({BackgroundColor3 = "Accent"})
 
-                Instances:Create("UICorner", {
-                    Parent = Items["Accent"].Instance,
-                    Name = "\0",
-                    CornerRadius = UDimNew(0, 3)
-                })
-
-                Items["CheckImage"] = Instances:Create("ImageLabel", {
-                    Parent = Items["Accent"].Instance,
-                    Name = "\0",
-                    BorderColor3 = FromRGB(0, 0, 0),
-                    Size = UDim2New(0, 0, 0, 0),
-                    AnchorPoint = Vector2New(0.5, 0.5),
-                    Image = "rbxassetid://121760666525660",
-                    BackgroundTransparency = 1,
-                    Position = UDim2New(0.5, 0, 0.5, 0),
-                    ZIndex = 2,
-                    BorderSizePixel = 0,
-                    ImageTransparency = 1,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
-                })  Items["CheckImage"]:AddToTheme({ImageColor3 = "Text"})
-                
+                -- ── Label teks nama toggle ──
                 Items["Text"] = Instances:Create("TextLabel", {
                     Parent = Items["Toggle"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
-                    TextColor3 = FromRGB(240, 240, 240),
-                    TextTransparency = 0.30000001192092896,
+                    TextColor3 = FromRGB(235, 235, 255),
+                    TextTransparency = 0.25,
                     Text = Toggle.Name,
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
-                    Position = UDim2New(0, 24, 0, 0),
+                    Position = UDim2New(0, 0, 0.5, 0),
+                    AnchorPoint = Vector2New(0, 0.5),
                     BorderSizePixel = 0,
                     BackgroundTransparency = 1,
                     TextXAlignment = Enum.TextXAlignment.Left,
                     BorderColor3 = FromRGB(0, 0, 0),
                     ZIndex = 2,
-                    TextSize = 14,
+                    TextSize = 13,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })  Items["Text"]:AddToTheme({TextColor3 = "Text"})
 
+                -- ── Pill Track (background switch) ──
+                Items["Indicator"] = Instances:Create("Frame", {
+                    Parent = Items["Toggle"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(0, 34, 0, 18),
+                    AnchorPoint = Vector2New(1, 0.5),
+                    Position = UDim2New(1, 0, 0.5, 0),
+                    BackgroundColor3 = FromRGB(28, 24, 44),
+                    BackgroundTransparency = 0,
+                    BorderSizePixel = 0,
+                    ZIndex = 2,
+                    BorderColor3 = FromRGB(0, 0, 0)
+                })
+                Instances:Create("UICorner", { Parent = Items["Indicator"].Instance, Name = "\0", CornerRadius = UDimNew(0, 99) })
+                Instances:Create("UIStroke", {
+                    Parent = Items["Indicator"].Instance,
+                    Name = "\0",
+                    Thickness = 1,
+                    Transparency = 0.6,
+                    Color = FromRGB(80, 50, 140)
+                })
+
+                -- ── Pill Fill (gradient saat ON) ──
+                Items["Accent"] = Instances:Create("Frame", {
+                    Parent = Items["Indicator"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(1, 0, 1, 0),
+                    BackgroundColor3 = FromRGB(130, 60, 255),
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    ZIndex = 2,
+                    BorderColor3 = FromRGB(0, 0, 0)
+                })
+                Instances:Create("UICorner", { Parent = Items["Accent"].Instance, Name = "\0", CornerRadius = UDimNew(0, 99) })
                 Items["Gradient"] = Instances:Create("UIGradient", {
                     Parent = Items["Accent"].Instance,
                     Name = "\0",
-                    Enabled = true,
-                    Rotation = -115,
-                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(143, 143, 143))}
+                    Rotation = 0,
+                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(130, 60, 255)), RGBSequenceKeypoint(1, FromRGB(20, 200, 255))}
                 })  Items["Gradient"]:AddToTheme({Color = function()
                     return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
                 end})
 
-                Items["Toggle"]:OnHover(function()
-                    Items["Indicator"]:Tween(TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2New(0, 21, 0, 21), Position = UDim2New(0, -3, 0, -3)})
-                end)
+                -- ── Knob (bulatan putih yang geser) ──
+                Items["CheckImage"] = Instances:Create("Frame", {
+                    Parent = Items["Indicator"].Instance,
+                    Name = "\0",
+                    Size = UDim2New(0, 12, 0, 12),
+                    AnchorPoint = Vector2New(0, 0.5),
+                    Position = UDim2New(0, 3, 0.5, 0),   -- posisi OFF (kiri)
+                    BackgroundColor3 = FromRGB(160, 140, 200),
+                    BackgroundTransparency = 0,
+                    BorderSizePixel = 0,
+                    ZIndex = 4,
+                    BorderColor3 = FromRGB(0, 0, 0)
+                })
+                Instances:Create("UICorner", { Parent = Items["CheckImage"].Instance, Name = "\0", CornerRadius = UDimNew(0, 99) })
 
+                -- Hover glow effect di track
+                Items["Toggle"]:OnHover(function()
+                    Items["Indicator"]:Tween(TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = FromRGB(38, 30, 60)})
+                end)
                 Items["Toggle"]:OnHoverLeave(function()
-                    Items["Indicator"]:Tween(TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2New(0, 18, 0, 18), Position = UDim2New(0, 0, 0, 0)})
+                    Items["Indicator"]:Tween(TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = FromRGB(28, 24, 44)})
                 end)
             end
 
-                Items["Indicator"].Instance.Position = UDim2New(0, 60, 0, 0)
-            Items["Text"].Instance.Position = UDim2New(0, 84, 0, 0)
+            Items["Indicator"].Instance.Position = UDim2New(1, 0, 0.5, 0)
+            Items["Text"].Instance.Position = UDim2New(0, 0, 0.5, 0)
 
             --Toggle.Section.Items["Fade"].Instance.Size = UDim2New(1, 0, 0, Toggle.Section.Items["Content"].Instance.AbsoluteSize.X - 180)
 
@@ -5905,16 +6064,26 @@ local Library do
                 Toggle.Value = Value 
                 Library.Flags[Toggle.Flag] = Value 
 
+                local tweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
+
                 if Toggle.Value then 
-                    Items["Accent"]:Tween(TweenInfo.new(Library.Tween.Time + 0.1, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {BackgroundTransparency = 0, Size = UDim2New(1, 0, 1, 0)})
-                    Items["CheckImage"]:Tween(nil, {ImageTransparency = 0, Size = UDim2New(0, 10, 0, 9)})
-
-                    --Items["Gradient"].Instance.Enabled = true 
+                    -- ON: fill muncul, knob geser ke kanan, warna putih cerah
+                    Items["Accent"]:Tween(tweenInfo, {BackgroundTransparency = 0})
+                    Items["CheckImage"]:Tween(tweenInfo, {
+                        Position = UDim2New(1, -15, 0.5, 0),   -- kanan
+                        BackgroundColor3 = FromRGB(255, 255, 255),
+                        Size = UDim2New(0, 12, 0, 12)
+                    })
+                    Items["Indicator"]:Tween(tweenInfo, {BackgroundColor3 = FromRGB(28, 24, 44)})
                 else
-                    Items["Accent"]:Tween(TweenInfo.new(Library.Tween.Time + 0.05, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {BackgroundTransparency = 1, Size = UDim2New(0, 0, 0, 0)})
-                    Items["CheckImage"]:Tween(nil, {ImageTransparency = 1, Size = UDim2New(0, 0, 0, 0)})
-
-                    --Items["Gradient"].Instance.Enabled = false
+                    -- OFF: fill hilang, knob balik ke kiri, warna redup
+                    Items["Accent"]:Tween(tweenInfo, {BackgroundTransparency = 1})
+                    Items["CheckImage"]:Tween(tweenInfo, {
+                        Position = UDim2New(0, 3, 0.5, 0),     -- kiri
+                        BackgroundColor3 = FromRGB(100, 80, 140),
+                        Size = UDim2New(0, 12, 0, 12)
+                    })
+                    Items["Indicator"]:Tween(tweenInfo, {BackgroundColor3 = FromRGB(28, 24, 44)})
                 end
 
                 if Toggle.Callback then 
