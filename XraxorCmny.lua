@@ -2794,7 +2794,7 @@ local Library do
                 Instances:Create("UIPadding", {
                     Parent = Items["LeftTabs"].Instance,
                     Name = "\0",
-                    PaddingTop = UDimNew(0, 118),  -- 6 + 44 (VyreCard) + 8 + 50 (PlayerCard) + 10
+                    PaddingTop = UDimNew(0, 118),  -- ruang untuk VyreCard+PlayerCard di overlay atas
                     PaddingBottom = UDimNew(0, 15),
                     PaddingRight = UDimNew(0, 12),
                     PaddingLeft = UDimNew(0, 12)
@@ -3684,16 +3684,17 @@ local Library do
                     local LocalPlayer = Players.LocalPlayer
 
                     -- ── VyreHub Card (di atas Avatar Card) ──
+                    -- Parent ke Content (non-scroll) bukan LeftTabs, supaya tidak ikut scroll
                     Items["VyreCard"] = Instances:Create("Frame", {
-                        Parent = Items["LeftTabs"].Instance,
+                        Parent = Items["Content"].Instance,
                         Name = "\0",
-                        Size = UDim2New(1, -24, 0, 44),
+                        Size = UDim2New(0, 201, 0, 44),
                         AnchorPoint = Vector2New(0, 0),
                         Position = UDim2New(0, 12, 0, 6),
                         BackgroundColor3 = FromRGB(18, 14, 30),
                         BackgroundTransparency = 0.2,
                         BorderSizePixel = 0,
-                        ZIndex = 5,
+                        ZIndex = 10,
                         BorderColor3 = FromRGB(0, 0, 0)
                     })
                     Instances:Create("UICorner", {
@@ -3729,7 +3730,7 @@ local Library do
                         BackgroundTransparency = 1,
                         ScaleType = Enum.ScaleType.Fit,
                         BorderSizePixel = 0,
-                        ZIndex = 6,
+                        ZIndex = 11,
                         ImageColor3 = FromRGB(255, 255, 255),
                         BorderColor3 = FromRGB(0, 0, 0)
                     })
@@ -3754,7 +3755,7 @@ local Library do
                         Position = UDim2New(0, 46, 0, 8),
                         BackgroundTransparency = 1,
                         BorderSizePixel = 0,
-                        ZIndex = 6,
+                        ZIndex = 11,
                         TextSize = 13,
                         TextXAlignment = Enum.TextXAlignment.Left,
                         BackgroundColor3 = FromRGB(255, 255, 255)
@@ -3773,24 +3774,24 @@ local Library do
                         Position = UDim2New(0, 46, 0, 25),
                         BackgroundTransparency = 1,
                         BorderSizePixel = 0,
-                        ZIndex = 6,
+                        ZIndex = 11,
                         TextSize = 11,
                         TextXAlignment = Enum.TextXAlignment.Left,
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })
                     Items["VyreVersion"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
 
-                    -- Card container — di bawah VyreCard, nempel di atas nav tabs
+                    -- PlayerCard juga di Content (non-scroll), tepat di bawah VyreCard
                     Items["PlayerCard"] = Instances:Create("Frame", {
-                        Parent = Items["LeftTabs"].Instance,
+                        Parent = Items["Content"].Instance,
                         Name = "\0",
-                        Size = UDim2New(1, -24, 0, 50),
+                        Size = UDim2New(0, 201, 0, 50),
                         AnchorPoint = Vector2New(0, 0),
-                        Position = UDim2New(0, 12, 0, 58),  -- 6 (margin) + 44 (VyreCard) + 8 (gap)
+                        Position = UDim2New(0, 12, 0, 58),  -- 6 + 44 (VyreCard) + 8 (gap)
                         BackgroundTransparency = 0.35,
                         BackgroundColor3 = FromRGB(18, 16, 30),
                         BorderSizePixel = 0,
-                        ZIndex = 5,
+                        ZIndex = 10,
                         BorderColor3 = FromRGB(0, 0, 0)
                     })
                     Items["PlayerCard"]:AddToTheme({BackgroundColor3 = "Section Background 2"})
