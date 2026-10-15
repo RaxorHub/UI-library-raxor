@@ -2794,7 +2794,7 @@ local Library do
                 Instances:Create("UIPadding", {
                     Parent = Items["LeftTabs"].Instance,
                     Name = "\0",
-                    PaddingTop = UDimNew(0, 130),  -- 12 + 44 (VyreCard) + 12 + 50 (PlayerCard) + 12
+                    PaddingTop = UDimNew(0, 118),  -- 6 + 44 (VyreCard) + 8 + 50 (PlayerCard) + 10
                     PaddingBottom = UDimNew(0, 15),
                     PaddingRight = UDimNew(0, 12),
                     PaddingLeft = UDimNew(0, 12)
@@ -3689,7 +3689,7 @@ local Library do
                         Name = "\0",
                         Size = UDim2New(1, -24, 0, 44),
                         AnchorPoint = Vector2New(0, 0),
-                        Position = UDim2New(0, 12, 0, 12),
+                        Position = UDim2New(0, 12, 0, 6),
                         BackgroundColor3 = FromRGB(18, 14, 30),
                         BackgroundTransparency = 0.2,
                         BorderSizePixel = 0,
@@ -3786,7 +3786,7 @@ local Library do
                         Name = "\0",
                         Size = UDim2New(1, -24, 0, 50),
                         AnchorPoint = Vector2New(0, 0),
-                        Position = UDim2New(0, 12, 0, 68),  -- 12 (margin) + 44 (VyreCard) + 12 (gap)
+                        Position = UDim2New(0, 12, 0, 58),  -- 6 (margin) + 44 (VyreCard) + 8 (gap)
                         BackgroundTransparency = 0.35,
                         BackgroundColor3 = FromRGB(18, 16, 30),
                         BorderSizePixel = 0,
