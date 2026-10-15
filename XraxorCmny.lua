@@ -2641,6 +2641,19 @@ local Library do
                 Items["LeftTabs"]:AddToTheme({ScrollBarImageColor3 = "Accent"})
                 Library:MakeBlurred(Items["LeftTabs"], Window)
 
+                -- Overlay non-scroll di atas LeftTabs, untuk VyreCard & PlayerCard
+                Items["SidebarOverlay"] = Instances:Create("Frame", {
+                    Parent = Items["MainFrame"].Instance,
+                    Name = "\0",
+                    AnchorPoint = Vector2New(0, 0),
+                    Position = UDim2New(0, 0, 0, 55),
+                    Size = UDim2New(0, 225, 0, 116),  -- 6+44+8+50+8
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    ZIndex = 10,
+                    BorderColor3 = FromRGB(0, 0, 0)
+                })
+
                 local Gui = Items["MainFrame"].Instance
 
                 local Dragging = false 
@@ -3684,11 +3697,11 @@ local Library do
                     local LocalPlayer = Players.LocalPlayer
 
                     -- ── VyreHub Card (di atas Avatar Card) ──
-                    -- Parent ke Content (non-scroll) bukan LeftTabs, supaya tidak ikut scroll
+                    -- Parent ke SidebarOverlay (non-scroll), posisi fixed
                     Items["VyreCard"] = Instances:Create("Frame", {
-                        Parent = Items["Content"].Instance,
+                        Parent = Items["SidebarOverlay"].Instance,
                         Name = "\0",
-                        Size = UDim2New(0, 201, 0, 44),
+                        Size = UDim2New(1, -24, 0, 44),
                         AnchorPoint = Vector2New(0, 0),
                         Position = UDim2New(0, 12, 0, 6),
                         BackgroundColor3 = FromRGB(18, 14, 30),
@@ -3781,11 +3794,11 @@ local Library do
                     })
                     Items["VyreVersion"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
 
-                    -- PlayerCard juga di Content (non-scroll), tepat di bawah VyreCard
+                    -- PlayerCard di SidebarOverlay, tepat di bawah VyreCard
                     Items["PlayerCard"] = Instances:Create("Frame", {
-                        Parent = Items["Content"].Instance,
+                        Parent = Items["SidebarOverlay"].Instance,
                         Name = "\0",
-                        Size = UDim2New(0, 201, 0, 50),
+                        Size = UDim2New(1, -24, 0, 50),
                         AnchorPoint = Vector2New(0, 0),
                         Position = UDim2New(0, 12, 0, 58),  -- 6 + 44 (VyreCard) + 8 (gap)
                         BackgroundTransparency = 0.35,
