@@ -2641,19 +2641,6 @@ local Library do
                 Items["LeftTabs"]:AddToTheme({ScrollBarImageColor3 = "Accent"})
                 Library:MakeBlurred(Items["LeftTabs"], Window)
 
-                -- Overlay non-scroll di atas LeftTabs, untuk VyreCard & PlayerCard
-                Items["SidebarOverlay"] = Instances:Create("Frame", {
-                    Parent = Items["MainFrame"].Instance,
-                    Name = "\0",
-                    AnchorPoint = Vector2New(0, 0),
-                    Position = UDim2New(0, 0, 0, 55),
-                    Size = UDim2New(0, 225, 0, 116),  -- 6+44+8+50+8
-                    BackgroundTransparency = 1,
-                    BorderSizePixel = 0,
-                    ZIndex = 10,
-                    BorderColor3 = FromRGB(0, 0, 0)
-                })
-
                 local Gui = Items["MainFrame"].Instance
 
                 local Dragging = false 
@@ -2807,13 +2794,12 @@ local Library do
                 Instances:Create("UIPadding", {
                     Parent = Items["LeftTabs"].Instance,
                     Name = "\0",
-                    PaddingTop = UDimNew(0, 118),  -- ruang untuk VyreCard+PlayerCard di overlay atas
+                    PaddingTop = UDimNew(0, 15),
                     PaddingBottom = UDimNew(0, 15),
                     PaddingRight = UDimNew(0, 12),
                     PaddingLeft = UDimNew(0, 12)
                 })
 
-                -- Logo lama tetap dibuat tapi disembunyikan (agar kode referensi tidak error)
                 Items["Logo"] = Instances:Create("ImageLabel", {
                     Parent = Items["MainFrame"].Instance,
                     Name = "\0",
@@ -2823,12 +2809,11 @@ local Library do
                     Size = UDim2New(0, 35, 0, 35),
                     Image = "rbxassetid://"..Window.Logo,
                     BackgroundTransparency = 1,
-                    Visible = false,
                     Position = UDim2New(0, 12, 0, 12),
                     ZIndex = 2,
                     BorderSizePixel = 0,
                     BackgroundColor3 = FromRGB(255, 255, 255)
-                })
+                }) 
 
                 Instances:Create("UIGradient", {
                     Parent = Items["Logo"].Instance,
@@ -2846,8 +2831,7 @@ local Library do
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(240, 240, 240),
                     BorderColor3 = FromRGB(0, 0, 0),
-                    Text = "",
-                    Visible = false,
+                    Text = Window.Name,
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
@@ -2863,9 +2847,8 @@ local Library do
                     Name = "\0",
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(240, 240, 240),
-                    TextTransparency = 1,
-                    Text = "",
-                    Visible = false,
+                    TextTransparency = 0.4000000059604645,
+                    Text = Window.SubName,
                     AutomaticSize = Enum.AutomaticSize.X,
                     Size = UDim2New(0, 0, 0, 15),
                     BorderSizePixel = 0,
@@ -3696,115 +3679,17 @@ local Library do
                 do
                     local LocalPlayer = Players.LocalPlayer
 
-                    -- ── VyreHub Card (di atas Avatar Card) ──
-                    -- Parent ke SidebarOverlay (non-scroll), posisi fixed
-                    Items["VyreCard"] = Instances:Create("Frame", {
-                        Parent = Items["SidebarOverlay"].Instance,
-                        Name = "\0",
-                        Size = UDim2New(1, -24, 0, 44),
-                        AnchorPoint = Vector2New(0, 0),
-                        Position = UDim2New(0, 12, 0, 6),
-                        BackgroundColor3 = FromRGB(18, 14, 30),
-                        BackgroundTransparency = 0.2,
-                        BorderSizePixel = 0,
-                        ZIndex = 10,
-                        BorderColor3 = FromRGB(0, 0, 0)
-                    })
-                    Instances:Create("UICorner", {
-                        Parent = Items["VyreCard"].Instance,
-                        Name = "\0",
-                        CornerRadius = UDimNew(0, 8)
-                    })
-                    local VyreStroke = Instances:Create("UIStroke", {
-                        Parent = Items["VyreCard"].Instance,
-                        Name = "\0",
-                        ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-                        Thickness = 1,
-                        Transparency = 0.4,
-                        Color = FromRGB(200, 200, 200)
-                    })
-                    Instances:Create("UIGradient", {
-                        Parent = VyreStroke.Instance,
-                        Name = "\0",
-                        Rotation = 90,
-                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(200, 200, 200)), RGBSequenceKeypoint(1, FromRGB(80, 80, 200))}
-                    }):AddToTheme({Color = function()
-                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                    end})
-
-                    -- Logo placeholder (ganti Window.Logo dengan asset ID custom lo)
-                    Items["VyreLogo"] = Instances:Create("ImageLabel", {
-                        Parent = Items["VyreCard"].Instance,
-                        Name = "\0",
-                        Size = UDim2New(0, 30, 0, 30),
-                        Position = UDim2New(0, 8, 0.5, 0),
-                        AnchorPoint = Vector2New(0, 0.5),
-                        Image = "rbxassetid://"..Window.Logo,
-                        BackgroundTransparency = 1,
-                        ScaleType = Enum.ScaleType.Fit,
-                        BorderSizePixel = 0,
-                        ZIndex = 11,
-                        ImageColor3 = FromRGB(255, 255, 255),
-                        BorderColor3 = FromRGB(0, 0, 0)
-                    })
-                    Instances:Create("UIGradient", {
-                        Parent = Items["VyreLogo"].Instance,
-                        Name = "\0",
-                        Rotation = -90,
-                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(180, 160, 255))}
-                    }):AddToTheme({Color = function()
-                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                    end})
-
-                    -- Text "VYRE HUB"
-                    Items["VyreName"] = Instances:Create("TextLabel", {
-                        Parent = Items["VyreCard"].Instance,
-                        Name = "\0",
-                        FontFace = Library.Fonts and Library.Fonts.Bold or Library.Font,
-                        TextColor3 = FromRGB(240, 240, 255),
-                        Text = "VYRE HUB",
-                        AutomaticSize = Enum.AutomaticSize.X,
-                        Size = UDim2New(0, 0, 0, 15),
-                        Position = UDim2New(0, 46, 0, 8),
-                        BackgroundTransparency = 1,
-                        BorderSizePixel = 0,
-                        ZIndex = 11,
-                        TextSize = 13,
-                        TextXAlignment = Enum.TextXAlignment.Left,
-                        BackgroundColor3 = FromRGB(255, 255, 255)
-                    })
-
-                    -- Text "V1.0"
-                    Items["VyreVersion"] = Instances:Create("TextLabel", {
-                        Parent = Items["VyreCard"].Instance,
-                        Name = "\0",
-                        FontFace = Library.Font,
-                        TextColor3 = FromRGB(180, 180, 200),
-                        TextTransparency = 0.2,
-                        Text = "V1.0",
-                        AutomaticSize = Enum.AutomaticSize.X,
-                        Size = UDim2New(0, 0, 0, 12),
-                        Position = UDim2New(0, 46, 0, 25),
-                        BackgroundTransparency = 1,
-                        BorderSizePixel = 0,
-                        ZIndex = 11,
-                        TextSize = 11,
-                        TextXAlignment = Enum.TextXAlignment.Left,
-                        BackgroundColor3 = FromRGB(255, 255, 255)
-                    })
-                    Items["VyreVersion"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
-
-                    -- PlayerCard di SidebarOverlay, tepat di bawah VyreCard
+                    -- Card container — nempel di bawah LeftTabs
                     Items["PlayerCard"] = Instances:Create("Frame", {
-                        Parent = Items["SidebarOverlay"].Instance,
+                        Parent = Items["LeftTabs"].Instance,
                         Name = "\0",
                         Size = UDim2New(1, -24, 0, 50),
-                        AnchorPoint = Vector2New(0, 0),
-                        Position = UDim2New(0, 12, 0, 58),  -- 6 + 44 (VyreCard) + 8 (gap)
+                        AnchorPoint = Vector2New(0, 1),
+                        Position = UDim2New(0, 12, 1, -12),
                         BackgroundTransparency = 0.35,
                         BackgroundColor3 = FromRGB(18, 16, 30),
                         BorderSizePixel = 0,
-                        ZIndex = 10,
+                        ZIndex = 5,
                         BorderColor3 = FromRGB(0, 0, 0)
                     })
                     Items["PlayerCard"]:AddToTheme({BackgroundColor3 = "Section Background 2"})
@@ -3833,65 +3718,40 @@ local Library do
                         return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
                     end})
 
-                    -- Avatar image
-                    Items["PlayerAvatar"] = Instances:Create("ImageLabel", {
+                    -- Logo (ganti ID dengan asset custom lo)
+                    Items["VyreLogo"] = Instances:Create("ImageLabel", {
                         Parent = Items["PlayerCard"].Instance,
                         Name = "\0",
-                        Size = UDim2New(0, 36, 0, 36),
-                        Position = UDim2New(0, 7, 0, 7),
-                        BackgroundTransparency = 0.2,
-                        BackgroundColor3 = FromRGB(30, 20, 50),
+                        Size = UDim2New(0, 32, 0, 32),
+                        Position = UDim2New(0, 7, 0, 9),
+                        BackgroundTransparency = 1,
+                        ScaleType = Enum.ScaleType.Fit,
                         BorderSizePixel = 0,
                         ZIndex = 6,
-                        Image = "",
+                        Image = "rbxassetid://" .. Window.Logo,
+                        ImageColor3 = FromRGB(255, 255, 255),
                         BorderColor3 = FromRGB(0, 0, 0)
                     })
-                    Instances:Create("UICorner", {
-                        Parent = Items["PlayerAvatar"].Instance,
+                    Instances:Create("UIGradient", {
+                        Parent = Items["VyreLogo"].Instance,
                         Name = "\0",
-                        CornerRadius = UDimNew(0, 6)
-                    })
-                    Instances:Create("UIStroke", {
-                        Parent = Items["PlayerAvatar"].Instance,
-                        Name = "\0",
-                        Thickness = 1,
-                        Transparency = 0.5,
-                        Color = FromRGB(200, 200, 200)
-                    })
+                        Rotation = -90,
+                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(180, 160, 255))}
+                    }):AddToTheme({Color = function()
+                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                    end})
 
-                    -- Glow dot (online indicator)
-                    Items["OnlineDot"] = Instances:Create("Frame", {
-                        Parent = Items["PlayerCard"].Instance,
-                        Name = "\0",
-                        Size = UDim2New(0, 8, 0, 8),
-                        AnchorPoint = Vector2New(1, 1),
-                        Position = UDim2New(0, 43, 0, 43),
-                        BackgroundColor3 = FromRGB(60, 220, 100),
-                        BackgroundTransparency = 0,
-                        BorderSizePixel = 0,
-                        ZIndex = 7,
-                        BorderColor3 = FromRGB(0, 0, 0)
-                    })
-                    Instances:Create("UICorner", { Parent = Items["OnlineDot"].Instance, Name = "\0", CornerRadius = UDimNew(0, 99) })
-                    Instances:Create("UIStroke", {
-                        Parent = Items["OnlineDot"].Instance,
-                        Name = "\0",
-                        Thickness = 1.5,
-                        Color = FromRGB(10, 10, 18),
-                        Transparency = 0
-                    })
-
-                    -- Username label
-                    Items["PlayerName"] = Instances:Create("TextLabel", {
+                    -- Text "VYRE HUB"
+                    Items["VyreName"] = Instances:Create("TextLabel", {
                         Parent = Items["PlayerCard"].Instance,
                         Name = "\0",
                         FontFace = Library.Fonts.SemiBold,
                         TextColor3 = FromRGB(235, 235, 255),
                         TextTransparency = 0,
-                        Text = LocalPlayer.DisplayName,
+                        Text = "VYRE HUB",
                         AutomaticSize = Enum.AutomaticSize.X,
                         Size = UDim2New(0, 0, 0, 14),
-                        Position = UDim2New(0, 51, 0, 10),
+                        Position = UDim2New(0, 47, 0, 10),
                         BorderSizePixel = 0,
                         BackgroundTransparency = 1,
                         ZIndex = 6,
@@ -3900,17 +3760,17 @@ local Library do
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })
 
-                    -- @username kecil di bawah
-                    Items["PlayerHandle"] = Instances:Create("TextLabel", {
+                    -- Text "V1.0"
+                    Items["VyreVersion"] = Instances:Create("TextLabel", {
                         Parent = Items["PlayerCard"].Instance,
                         Name = "\0",
                         FontFace = Library.Font,
                         TextColor3 = FromRGB(200, 200, 200),
                         TextTransparency = 0.2,
-                        Text = "@" .. LocalPlayer.Name,
+                        Text = "V1.0",
                         AutomaticSize = Enum.AutomaticSize.X,
                         Size = UDim2New(0, 0, 0, 12),
-                        Position = UDim2New(0, 51, 0, 27),
+                        Position = UDim2New(0, 47, 0, 27),
                         BorderSizePixel = 0,
                         BackgroundTransparency = 1,
                         ZIndex = 6,
@@ -3918,31 +3778,7 @@ local Library do
                         TextXAlignment = Enum.TextXAlignment.Left,
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })
-                    Items["PlayerHandle"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
-
-                    -- Load avatar async
-                    task.spawn(function()
-                        local ok, thumbUrl = pcall(function()
-                            return game:GetService("Players"):GetUserThumbnailAsync(
-                                LocalPlayer.UserId,
-                                Enum.ThumbnailType.HeadShot,
-                                Enum.ThumbnailSize.Size60x60
-                            )
-                        end)
-                        if ok and thumbUrl and Items["PlayerAvatar"] and Items["PlayerAvatar"].Instance then
-                            Items["PlayerAvatar"].Instance.Image = thumbUrl
-                        end
-                    end)
-
-                    -- Pulsing glow animasi pada dot
-                    Library:Thread(function()
-                        while Items["OnlineDot"] and Items["OnlineDot"].Instance and Items["OnlineDot"].Instance.Parent do
-                            Items["OnlineDot"]:Tween(TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {BackgroundTransparency = 0.5})
-                            task.wait(0.8)
-                            Items["OnlineDot"]:Tween(TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {BackgroundTransparency = 0})
-                            task.wait(0.8)
-                        end
-                    end)
+                    Items["VyreVersion"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
                 end
 
                 Window.Items = Items
@@ -4237,7 +4073,7 @@ local Library do
                     Parent = Intro["Holder"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
-                    Text = "VYRE HUB",
+                    Text = Window.Name,
                     TextColor3 = FromRGB(255, 255, 255),
                     TextTransparency = 1,
                     BackgroundTransparency = 1,
@@ -4251,7 +4087,7 @@ local Library do
                     Parent = Intro["Holder"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
-                    Text = "V1.0",
+                    Text = Window.SubName or "",
                     TextColor3 = FromRGB(200, 200, 200),
                     TextTransparency = 1,
                     BackgroundTransparency = 1,
