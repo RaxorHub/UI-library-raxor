@@ -2794,110 +2794,11 @@ local Library do
                 Instances:Create("UIPadding", {
                     Parent = Items["LeftTabs"].Instance,
                     Name = "\0",
-                    PaddingTop = UDimNew(0, 74),   -- 12 (margin) + 50 (card height) + 12 (gap)
+                    PaddingTop = UDimNew(0, 130),  -- 12 + 44 (VyreCard) + 12 + 50 (PlayerCard) + 12
                     PaddingBottom = UDimNew(0, 15),
                     PaddingRight = UDimNew(0, 12),
                     PaddingLeft = UDimNew(0, 12)
                 })
-
-                -- ── VyreHub Header Card ──
-                Items["VyreCard"] = Instances:Create("Frame", {
-                    Parent = Items["MainFrame"].Instance,
-                    Name = "\0",
-                    Size = UDim2New(1, -24, 0, 44),
-                    Position = UDim2New(0, 12, 0, 7),
-                    AnchorPoint = Vector2New(0, 0),
-                    BackgroundColor3 = FromRGB(22, 18, 36),
-                    BackgroundTransparency = 0.2,
-                    BorderSizePixel = 0,
-                    ZIndex = 3,
-                    BorderColor3 = FromRGB(0, 0, 0)
-                })
-                Instances:Create("UICorner", {
-                    Parent = Items["VyreCard"].Instance,
-                    Name = "\0",
-                    CornerRadius = UDimNew(0, 8)
-                })
-                local VyreStroke = Instances:Create("UIStroke", {
-                    Parent = Items["VyreCard"].Instance,
-                    Name = "\0",
-                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-                    Thickness = 1,
-                    Transparency = 0.4,
-                    Color = FromRGB(200, 200, 200)
-                })
-                Instances:Create("UIGradient", {
-                    Parent = VyreStroke.Instance,
-                    Name = "\0",
-                    Rotation = 90,
-                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(200, 200, 200)), RGBSequenceKeypoint(1, FromRGB(80, 80, 200))}
-                }):AddToTheme({Color = function()
-                    return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                end})
-
-                -- Logo simbol ¥
-                Items["VyreLogo"] = Instances:Create("TextLabel", {
-                    Parent = Items["VyreCard"].Instance,
-                    Name = "\0",
-                    FontFace = Library.Fonts and Library.Fonts.Bold or Library.Font,
-                    TextColor3 = FromRGB(255, 255, 255),
-                    Text = "¥",
-                    Size = UDim2New(0, 30, 1, -10),
-                    Position = UDim2New(0, 10, 0, 5),
-                    BackgroundTransparency = 1,
-                    BorderSizePixel = 0,
-                    ZIndex = 4,
-                    TextSize = 22,
-                    TextXAlignment = Enum.TextXAlignment.Center,
-                    TextYAlignment = Enum.TextYAlignment.Center,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
-                })
-                Instances:Create("UIGradient", {
-                    Parent = Items["VyreLogo"].Instance,
-                    Name = "\0",
-                    Rotation = -90,
-                    Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(180, 160, 255))}
-                }):AddToTheme({Color = function()
-                    return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                end})
-
-                -- Text "VYRE HUB"
-                Items["VyreName"] = Instances:Create("TextLabel", {
-                    Parent = Items["VyreCard"].Instance,
-                    Name = "\0",
-                    FontFace = Library.Fonts and Library.Fonts.Bold or Library.Font,
-                    TextColor3 = FromRGB(240, 240, 255),
-                    Text = "VYRE HUB",
-                    AutomaticSize = Enum.AutomaticSize.X,
-                    Size = UDim2New(0, 0, 0, 16),
-                    Position = UDim2New(0, 46, 0, 8),
-                    BackgroundTransparency = 1,
-                    BorderSizePixel = 0,
-                    ZIndex = 4,
-                    TextSize = 14,
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
-                })
-
-                -- Text "V1.0"
-                Items["VyreVersion"] = Instances:Create("TextLabel", {
-                    Parent = Items["VyreCard"].Instance,
-                    Name = "\0",
-                    FontFace = Library.Font,
-                    TextColor3 = FromRGB(180, 180, 200),
-                    TextTransparency = 0.2,
-                    Text = "V1.0",
-                    AutomaticSize = Enum.AutomaticSize.X,
-                    Size = UDim2New(0, 0, 0, 14),
-                    Position = UDim2New(0, 46, 0, 24),
-                    BackgroundTransparency = 1,
-                    BorderSizePixel = 0,
-                    ZIndex = 4,
-                    TextSize = 11,
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    BackgroundColor3 = FromRGB(255, 255, 255)
-                })
-                Items["VyreVersion"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
 
                 -- Logo lama tetap dibuat tapi disembunyikan (agar kode referensi tidak error)
                 Items["Logo"] = Instances:Create("ImageLabel", {
@@ -3782,13 +3683,110 @@ local Library do
                 do
                     local LocalPlayer = Players.LocalPlayer
 
-                    -- Card container — nempel di atas LeftTabs (di bawah VyreHub header)
+                    -- ── VyreHub Card (di atas Avatar Card) ──
+                    Items["VyreCard"] = Instances:Create("Frame", {
+                        Parent = Items["LeftTabs"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(1, -24, 0, 44),
+                        AnchorPoint = Vector2New(0, 0),
+                        Position = UDim2New(0, 12, 0, 12),
+                        BackgroundColor3 = FromRGB(18, 14, 30),
+                        BackgroundTransparency = 0.2,
+                        BorderSizePixel = 0,
+                        ZIndex = 5,
+                        BorderColor3 = FromRGB(0, 0, 0)
+                    })
+                    Instances:Create("UICorner", {
+                        Parent = Items["VyreCard"].Instance,
+                        Name = "\0",
+                        CornerRadius = UDimNew(0, 8)
+                    })
+                    local VyreStroke = Instances:Create("UIStroke", {
+                        Parent = Items["VyreCard"].Instance,
+                        Name = "\0",
+                        ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                        Thickness = 1,
+                        Transparency = 0.4,
+                        Color = FromRGB(200, 200, 200)
+                    })
+                    Instances:Create("UIGradient", {
+                        Parent = VyreStroke.Instance,
+                        Name = "\0",
+                        Rotation = 90,
+                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(200, 200, 200)), RGBSequenceKeypoint(1, FromRGB(80, 80, 200))}
+                    }):AddToTheme({Color = function()
+                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                    end})
+
+                    -- Logo placeholder (ganti Window.Logo dengan asset ID custom lo)
+                    Items["VyreLogo"] = Instances:Create("ImageLabel", {
+                        Parent = Items["VyreCard"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 30, 0, 30),
+                        Position = UDim2New(0, 8, 0.5, 0),
+                        AnchorPoint = Vector2New(0, 0.5),
+                        Image = "rbxassetid://"..Window.Logo,
+                        BackgroundTransparency = 1,
+                        ScaleType = Enum.ScaleType.Fit,
+                        BorderSizePixel = 0,
+                        ZIndex = 6,
+                        ImageColor3 = FromRGB(255, 255, 255),
+                        BorderColor3 = FromRGB(0, 0, 0)
+                    })
+                    Instances:Create("UIGradient", {
+                        Parent = Items["VyreLogo"].Instance,
+                        Name = "\0",
+                        Rotation = -90,
+                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(180, 160, 255))}
+                    }):AddToTheme({Color = function()
+                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
+                    end})
+
+                    -- Text "VYRE HUB"
+                    Items["VyreName"] = Instances:Create("TextLabel", {
+                        Parent = Items["VyreCard"].Instance,
+                        Name = "\0",
+                        FontFace = Library.Fonts and Library.Fonts.Bold or Library.Font,
+                        TextColor3 = FromRGB(240, 240, 255),
+                        Text = "VYRE HUB",
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        Size = UDim2New(0, 0, 0, 15),
+                        Position = UDim2New(0, 46, 0, 8),
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        ZIndex = 6,
+                        TextSize = 13,
+                        TextXAlignment = Enum.TextXAlignment.Left,
+                        BackgroundColor3 = FromRGB(255, 255, 255)
+                    })
+
+                    -- Text "V1.0"
+                    Items["VyreVersion"] = Instances:Create("TextLabel", {
+                        Parent = Items["VyreCard"].Instance,
+                        Name = "\0",
+                        FontFace = Library.Font,
+                        TextColor3 = FromRGB(180, 180, 200),
+                        TextTransparency = 0.2,
+                        Text = "V1.0",
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        Size = UDim2New(0, 0, 0, 12),
+                        Position = UDim2New(0, 46, 0, 25),
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        ZIndex = 6,
+                        TextSize = 11,
+                        TextXAlignment = Enum.TextXAlignment.Left,
+                        BackgroundColor3 = FromRGB(255, 255, 255)
+                    })
+                    Items["VyreVersion"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
+
+                    -- Card container — di bawah VyreCard, nempel di atas nav tabs
                     Items["PlayerCard"] = Instances:Create("Frame", {
                         Parent = Items["LeftTabs"].Instance,
                         Name = "\0",
                         Size = UDim2New(1, -24, 0, 50),
                         AnchorPoint = Vector2New(0, 0),
-                        Position = UDim2New(0, 12, 0, 12),
+                        Position = UDim2New(0, 12, 0, 68),  -- 12 (margin) + 44 (VyreCard) + 12 (gap)
                         BackgroundTransparency = 0.35,
                         BackgroundColor3 = FromRGB(18, 16, 30),
                         BorderSizePixel = 0,
