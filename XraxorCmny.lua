@@ -2714,7 +2714,7 @@ local Library do
                     Instances:Create("UICorner", {
                         Parent = Items["FloatingBar"].Instance,
                         Name = "\0",
-                        CornerRadius = UDimNew(0, 16)
+                        CornerRadius = UDimNew(0, 6)
                     })
 
                     Instances:Create("UIStroke", {
@@ -2841,13 +2841,13 @@ local Library do
                     })
 
                     -- FPS label
-                    Items["FloatingBarFps"] = Instances:Create("TextLabel", {
+                    Items["FloatingBarFpsLabel"] = Instances:Create("TextLabel", {
                         Parent = Items["FloatingBar"].Instance,
                         Name = "\0",
-                        Text = "Fps 0",
+                        Text = "Fps ",
                         FontFace = Library.Font,
                         TextSize = 12,
-                        TextColor3 = FromRGB(180, 255, 180),
+                        TextColor3 = FromRGB(240, 240, 240),
                         TextTransparency = 0,
                         BackgroundTransparency = 1,
                         BorderSizePixel = 0,
@@ -2855,6 +2855,23 @@ local Library do
                         AutomaticSize = Enum.AutomaticSize.X,
                         ZIndex = 128,
                         LayoutOrder = 7,
+                        TextXAlignment = Enum.TextXAlignment.Left
+                    })
+
+                    Items["FloatingBarFps"] = Instances:Create("TextLabel", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Text = "0",
+                        FontFace = Library.Font,
+                        TextSize = 12,
+                        TextColor3 = FromRGB(100, 255, 120),
+                        TextTransparency = 0,
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        Size = UDim2New(0, 0, 1, 0),
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        ZIndex = 128,
+                        LayoutOrder = 8,
                         TextXAlignment = Enum.TextXAlignment.Left
                     })
 
@@ -2866,7 +2883,7 @@ local Library do
                         BackgroundTransparency = 1,
                         BorderSizePixel = 0,
                         ZIndex = 128,
-                        LayoutOrder = 8
+                        LayoutOrder = 9
                     })
                     Instances:Create("Frame", {
                         Parent = Items["FloatingBar"].Instance,
@@ -2876,7 +2893,7 @@ local Library do
                         BackgroundTransparency = 0.5,
                         BorderSizePixel = 0,
                         ZIndex = 128,
-                        LayoutOrder = 9
+                        LayoutOrder = 10
                     })
                     Instances:Create("Frame", {
                         Parent = Items["FloatingBar"].Instance,
@@ -2885,24 +2902,41 @@ local Library do
                         BackgroundTransparency = 1,
                         BorderSizePixel = 0,
                         ZIndex = 128,
-                        LayoutOrder = 10
+                        LayoutOrder = 11
                     })
 
-                    -- MS label
-                    Items["FloatingBarMs"] = Instances:Create("TextLabel", {
+                    -- MS label: "Ms " putih + angka berwarna
+                    Items["FloatingBarMsLabel"] = Instances:Create("TextLabel", {
                         Parent = Items["FloatingBar"].Instance,
                         Name = "\0",
-                        Text = "Ms 0",
+                        Text = "Ms ",
                         FontFace = Library.Font,
                         TextSize = 12,
-                        TextColor3 = FromRGB(180, 220, 255),
+                        TextColor3 = FromRGB(240, 240, 240),
                         TextTransparency = 0,
                         BackgroundTransparency = 1,
                         BorderSizePixel = 0,
                         Size = UDim2New(0, 0, 1, 0),
                         AutomaticSize = Enum.AutomaticSize.X,
                         ZIndex = 128,
-                        LayoutOrder = 11,
+                        LayoutOrder = 12,
+                        TextXAlignment = Enum.TextXAlignment.Left
+                    })
+
+                    Items["FloatingBarMs"] = Instances:Create("TextLabel", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Text = "0",
+                        FontFace = Library.Font,
+                        TextSize = 12,
+                        TextColor3 = FromRGB(100, 200, 255),
+                        TextTransparency = 0,
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        Size = UDim2New(0, 0, 1, 0),
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        ZIndex = 128,
+                        LayoutOrder = 13,
                         TextXAlignment = Enum.TextXAlignment.Left
                     })
 
@@ -2961,7 +2995,7 @@ local Library do
                                 fpsColor = FromRGB(255, 90, 90)
                             end
                             if Items["FloatingBarFps"] and Items["FloatingBarFps"].Instance then
-                                Items["FloatingBarFps"].Instance.Text = "Fps " .. fps
+                                Items["FloatingBarFps"].Instance.Text = tostring(fps)
                                 Items["FloatingBarFps"].Instance.TextColor3 = fpsColor
                             end
                         end
@@ -2983,7 +3017,7 @@ local Library do
                                 msColor = FromRGB(255, 90, 90)
                             end
                             if Items["FloatingBarMs"] and Items["FloatingBarMs"].Instance then
-                                Items["FloatingBarMs"].Instance.Text = "Ms " .. ms
+                                Items["FloatingBarMs"].Instance.Text = tostring(ms)
                                 Items["FloatingBarMs"].Instance.TextColor3 = msColor
                             end
                         end
