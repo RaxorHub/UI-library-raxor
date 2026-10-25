@@ -2704,7 +2704,7 @@ local Library do
                         Position = UDim2New(0.5, 0, 0, 14),
                         Size = UDim2New(0, 220, 0, 32),
                         BackgroundColor3 = FromRGB(15, 15, 18),
-                        BackgroundTransparency = 0.18,
+                        BackgroundTransparency = 0,
                         BorderSizePixel = 0,
                         ZIndex = 127,
                         AutomaticSize = Enum.AutomaticSize.X,
@@ -3891,7 +3891,7 @@ local Library do
 
                 Settings:Slider({
                     Name = "Background Transparency",
-                    Default = 0.12,
+                    Default = 0,
                     Decimals = 0.01,
                     Max = 1,
                     Min = 0,
