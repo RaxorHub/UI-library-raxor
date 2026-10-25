@@ -2690,86 +2690,7 @@ local Library do
                     end
                 end)
 
-                if IsMobile then
-                    Items["FloatingButton"] = Instances:Create("TextButton", {
-                        Parent = Library.Holder.Instance,
-                        Text = "",
-                        AutoButtonColor = false,
-                        Name = "\0",
-                        Position = UDim2New(0.5, 0, 0, 20),
-                        AnchorPoint = Vector2New(0.5, 0),
-                        Visible = true,
-                        BorderColor3 = FromRGB(0, 0, 0),
-                        Size = UDim2New(0, 50, 0, 50),
-                        BorderSizePixel = 0,
-                        BackgroundTransparency = 0.5,
-                        ZIndex = 127,
-                        BackgroundColor3 = Library.Theme.Background
-                    })  Items["FloatingButton"]:AddToTheme({BackgroundColor3 = "Background"})
 
-                    local Gui = Items["FloatingButton"].Instance
-
-                    local Dragging = false 
-                    local DragStart
-                    local StartPosition 
-        
-                    local Set = function(Input)
-                        local DragDelta = Input.Position - DragStart
-                        Items["FloatingButton"]:Tween(TweenInfo.new(0.16, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2New(StartPosition.X.Scale, StartPosition.X.Offset + DragDelta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + DragDelta.Y)})
-                    end
-        
-                    Items["FloatingButton"]:Connect("InputBegan", function(Input)
-                        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                            Dragging = true
-        
-                            DragStart = Input.Position
-                            StartPosition = Gui.Position
-        
-                            Input.Changed:Connect(function()
-                                if Input.UserInputState == Enum.UserInputState.End then
-                                    Dragging = false
-                                end
-                            end)
-                        end
-                    end)
-        
-                    Library:Connect(UserInputService.InputChanged, function(Input)
-                        if Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch then
-                            if Dragging then
-                                Set(Input)
-                            end
-                        end
-                    end)
-
-                    Items["FloatingLogo"] = Instances:Create("ImageLabel", {
-                        Parent = Items["FloatingButton"].Instance,
-                        BorderColor3 = FromRGB(0, 0, 0),
-                        Name = "\0",
-                        Image = "rbxassetid://" .. Window.Logo,
-                        BackgroundTransparency = 1,
-                        AnchorPoint = Vector2New(0.5, 0.5),
-                        Position = UDim2New(0.5, 0, 0.5, 0),
-                        ZIndex = 127,
-                        Size = UDim2New(1, -25, 1, -25),
-                        BorderSizePixel = 0,
-                        BackgroundColor3 = FromRGB(255, 255, 255)
-                    })
-        
-                    Instances:Create("UICorner", {
-                        Parent = Items["FloatingButton"].Instance,
-                        CornerRadius = UDimNew(1, 0)
-                    }) 
-
-                    Instances:Create("UIGradient", {
-                        Parent = Items["FloatingLogo"].Instance,
-                        Name = "\0",
-                        Enabled = true,
-                        Rotation = -115,
-                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(143, 143, 143))}
-                    }):AddToTheme({Color = function()
-                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                    end})
-                end
 
                 Items["PagePlaceholder"] = Instances:Create("Frame", {
                     Parent = Items["MainFrame"].Instance,
@@ -3120,9 +3041,7 @@ local Library do
                 function Window:SetTransparency()
                     Items["MainFrame"].Instance.BackgroundTransparency = Library.Flags["BackgroundTransparency"] 
                     Items["LeftTabs"].Instance.BackgroundTransparency = Library.Flags["BackgroundTransparency"]  
-                    if IsMobile then
-                        Items["FloatingButton"].Instance.BackgroundTransparency = Library.Flags["BackgroundTransparency"]  
-                    end
+
 
                     for _, Value in Items do 
                         if _:find("___") then
@@ -3834,13 +3753,7 @@ local Library do
                 end)
             end
 
-            if IsMobile then 
-                Items["FloatingButton"]:Connect("InputBegan", function(Input)
-                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then 
-                        Window:SetOpen(not Window.IsOpen)
-                    end
-                end)
-            end
+
 
             --[[
             function Window:GetClosestFrame(Position, Instances)
