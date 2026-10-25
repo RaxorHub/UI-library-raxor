@@ -2692,6 +2692,304 @@ local Library do
 
 
 
+                -- ─────────────────────────────────────────────────────
+                --   FLOATING HUD BAR — atas tengah layar (modern)
+                -- ─────────────────────────────────────────────────────
+                do
+                    -- Container utama pill bar
+                    Items["FloatingBar"] = Instances:Create("Frame", {
+                        Parent = Library.Holder.Instance,
+                        Name = "\0",
+                        AnchorPoint = Vector2New(0.5, 0),
+                        Position = UDim2New(0.5, 0, 0, 14),
+                        Size = UDim2New(0, 220, 0, 32),
+                        BackgroundColor3 = FromRGB(15, 15, 18),
+                        BackgroundTransparency = 0.18,
+                        BorderSizePixel = 0,
+                        ZIndex = 127,
+                        AutomaticSize = Enum.AutomaticSize.X,
+                    })
+                    Items["FloatingBar"]:AddToTheme({BackgroundColor3 = "Background"})
+
+                    Instances:Create("UICorner", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        CornerRadius = UDimNew(0, 16)
+                    })
+
+                    Instances:Create("UIStroke", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Color = FromRGB(255, 255, 255),
+                        Thickness = 0.8,
+                        Transparency = 0.78
+                    })
+
+                    -- Layout horizontal
+                    Instances:Create("UIListLayout", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        FillDirection = Enum.FillDirection.Horizontal,
+                        VerticalAlignment = Enum.VerticalAlignment.Center,
+                        HorizontalAlignment = Enum.HorizontalAlignment.Center,
+                        Padding = UDimNew(0, 0),
+                        SortOrder = Enum.SortOrder.LayoutOrder
+                    })
+
+                    Instances:Create("UIPadding", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        PaddingLeft = UDimNew(0, 10),
+                        PaddingRight = UDimNew(0, 12),
+                        PaddingTop = UDimNew(0, 0),
+                        PaddingBottom = UDimNew(0, 0)
+                    })
+
+                    -- Logo icon
+                    Items["FloatingBarLogo"] = Instances:Create("ImageLabel", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Image = "rbxassetid://115067664630733",
+                        Size = UDim2New(0, 18, 0, 18),
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        ZIndex = 128,
+                        LayoutOrder = 1,
+                        ImageColor3 = FromRGB(255, 255, 255)
+                    })
+                    Items["FloatingBarLogo"]:AddToTheme({ImageColor3 = "Accent"})
+
+                    -- Spacer kecil antara logo dan nama
+                    Instances:Create("Frame", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 6, 0, 1),
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        ZIndex = 128,
+                        LayoutOrder = 2
+                    })
+
+                    -- "Vyre Hub"
+                    Items["FloatingBarName"] = Instances:Create("TextLabel", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Text = "Vyre Hub",
+                        FontFace = Library.Fonts and Library.Fonts.SemiBold or Library.Font,
+                        TextSize = 13,
+                        TextColor3 = FromRGB(235, 235, 255),
+                        TextTransparency = 0,
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        Size = UDim2New(0, 0, 1, 0),
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        ZIndex = 128,
+                        LayoutOrder = 3,
+                        TextXAlignment = Enum.TextXAlignment.Left
+                    })
+                    Items["FloatingBarName"]:AddToTheme({TextColor3 = "Text"})
+
+                    -- Divider 1
+                    local function makeDivider(order)
+                        local d = Instances:Create("Frame", {
+                            Parent = Items["FloatingBar"].Instance,
+                            Name = "\0",
+                            Size = UDim2New(0, 1, 0, 14),
+                            BackgroundColor3 = FromRGB(120, 120, 120),
+                            BackgroundTransparency = 0.5,
+                            BorderSizePixel = 0,
+                            ZIndex = 128,
+                            LayoutOrder = order
+                        })
+                        Instances:Create("UIPadding", {
+                            Parent = d.Instance,
+                            Name = "\0",
+                            PaddingLeft = UDimNew(0, 8),
+                            PaddingRight = UDimNew(0, 8)
+                        })
+                        return d
+                    end
+
+                    -- Divider setelah nama
+                    Instances:Create("Frame", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 17, 0, 1),
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        ZIndex = 128,
+                        LayoutOrder = 4
+                    })
+                    Instances:Create("Frame", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 1, 0, 14),
+                        BackgroundColor3 = FromRGB(120, 120, 120),
+                        BackgroundTransparency = 0.5,
+                        BorderSizePixel = 0,
+                        ZIndex = 128,
+                        LayoutOrder = 5
+                    })
+                    Instances:Create("Frame", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 8, 0, 1),
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        ZIndex = 128,
+                        LayoutOrder = 6
+                    })
+
+                    -- FPS label
+                    Items["FloatingBarFps"] = Instances:Create("TextLabel", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Text = "Fps 0",
+                        FontFace = Library.Font,
+                        TextSize = 12,
+                        TextColor3 = FromRGB(180, 255, 180),
+                        TextTransparency = 0,
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        Size = UDim2New(0, 0, 1, 0),
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        ZIndex = 128,
+                        LayoutOrder = 7,
+                        TextXAlignment = Enum.TextXAlignment.Left
+                    })
+
+                    -- Spacer + divider sebelum MS
+                    Instances:Create("Frame", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 8, 0, 1),
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        ZIndex = 128,
+                        LayoutOrder = 8
+                    })
+                    Instances:Create("Frame", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 1, 0, 14),
+                        BackgroundColor3 = FromRGB(120, 120, 120),
+                        BackgroundTransparency = 0.5,
+                        BorderSizePixel = 0,
+                        ZIndex = 128,
+                        LayoutOrder = 9
+                    })
+                    Instances:Create("Frame", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Size = UDim2New(0, 8, 0, 1),
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        ZIndex = 128,
+                        LayoutOrder = 10
+                    })
+
+                    -- MS label
+                    Items["FloatingBarMs"] = Instances:Create("TextLabel", {
+                        Parent = Items["FloatingBar"].Instance,
+                        Name = "\0",
+                        Text = "Ms 0",
+                        FontFace = Library.Font,
+                        TextSize = 12,
+                        TextColor3 = FromRGB(180, 220, 255),
+                        TextTransparency = 0,
+                        BackgroundTransparency = 1,
+                        BorderSizePixel = 0,
+                        Size = UDim2New(0, 0, 1, 0),
+                        AutomaticSize = Enum.AutomaticSize.X,
+                        ZIndex = 128,
+                        LayoutOrder = 11,
+                        TextXAlignment = Enum.TextXAlignment.Left
+                    })
+
+                    -- Drag support
+                    do
+                        local Gui = Items["FloatingBar"].Instance
+                        local Dragging = false
+                        local DragStart, StartPosition
+
+                        Items["FloatingBar"]:Connect("InputBegan", function(Input)
+                            if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                                Dragging = true
+                                DragStart = Input.Position
+                                StartPosition = Gui.Position
+                                Input.Changed:Connect(function()
+                                    if Input.UserInputState == Enum.UserInputState.End then
+                                        Dragging = false
+                                    end
+                                end)
+                            end
+                        end)
+
+                        Library:Connect(UserInputService.InputChanged, function(Input)
+                            if (Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch) and Dragging then
+                                local Delta = Input.Position - DragStart
+                                Items["FloatingBar"]:Tween(TweenInfo.new(0.05, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                                    Position = UDim2New(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
+                                })
+                            end
+                        end)
+                    end
+
+                    -- Toggle window saat bar di-tap
+                    Items["FloatingBar"]:Connect("InputBegan", function(Input)
+                        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                            Window:SetOpen(not Window.IsOpen)
+                        end
+                    end)
+
+                    -- FPS & MS updater
+                    local _lastFpsTime = tick()
+                    local _frameCount = 0
+                    Library:Connect(RunService.RenderStepped, function()
+                        _frameCount = _frameCount + 1
+                        local now = tick()
+                        if now - _lastFpsTime >= 1 then
+                            local fps = math.floor(_frameCount / (now - _lastFpsTime))
+                            _frameCount = 0
+                            _lastFpsTime = now
+                            local fpsColor
+                            if fps >= 55 then
+                                fpsColor = FromRGB(100, 255, 120)
+                            elseif fps >= 30 then
+                                fpsColor = FromRGB(255, 220, 80)
+                            else
+                                fpsColor = FromRGB(255, 90, 90)
+                            end
+                            if Items["FloatingBarFps"] and Items["FloatingBarFps"].Instance then
+                                Items["FloatingBarFps"].Instance.Text = "Fps " .. fps
+                                Items["FloatingBarFps"].Instance.TextColor3 = fpsColor
+                            end
+                        end
+                    end)
+
+                    task.spawn(function()
+                        while true do
+                            task.wait(2)
+                            local ok, ping = pcall(function()
+                                return game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue()
+                            end)
+                            local ms = ok and math.floor(ping) or 0
+                            local msColor
+                            if ms <= 80 then
+                                msColor = FromRGB(100, 200, 255)
+                            elseif ms <= 150 then
+                                msColor = FromRGB(255, 220, 80)
+                            else
+                                msColor = FromRGB(255, 90, 90)
+                            end
+                            if Items["FloatingBarMs"] and Items["FloatingBarMs"].Instance then
+                                Items["FloatingBarMs"].Instance.Text = "Ms " .. ms
+                                Items["FloatingBarMs"].Instance.TextColor3 = msColor
+                            end
+                        end
+                    end)
+                end
+
                 Items["PagePlaceholder"] = Instances:Create("Frame", {
                     Parent = Items["MainFrame"].Instance,
                     Name = "\0",
@@ -3592,113 +3890,7 @@ local Library do
                     end
                 })
 
-                -- ─────────────────────────────────────────────────────
-                --   PLAYER CARD — pojok kiri bawah LeftTabs
-                -- ─────────────────────────────────────────────────────
-                do
-                    local LocalPlayer = Players.LocalPlayer
 
-                    -- Card container — nempel di bawah LeftTabs
-                    Items["PlayerCard"] = Instances:Create("Frame", {
-                        Parent = Items["LeftTabs"].Instance,
-                        Name = "\0",
-                        Size = UDim2New(1, -24, 0, 50),
-                        AnchorPoint = Vector2New(0, 1),
-                        Position = UDim2New(0, 12, 1, -12),
-                        BackgroundTransparency = 0.35,
-                        BackgroundColor3 = FromRGB(18, 16, 30),
-                        BorderSizePixel = 0,
-                        ZIndex = 5,
-                        BorderColor3 = FromRGB(0, 0, 0)
-                    })
-                    Items["PlayerCard"]:AddToTheme({BackgroundColor3 = "Section Background 2"})
-
-                    Instances:Create("UICorner", {
-                        Parent = Items["PlayerCard"].Instance,
-                        Name = "\0",
-                        CornerRadius = UDimNew(0, 8)
-                    })
-
-                    -- Border gradient tipis di atas card
-                    local CardStroke = Instances:Create("UIStroke", {
-                        Parent = Items["PlayerCard"].Instance,
-                        Name = "\0",
-                        ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-                        Thickness = 1,
-                        Transparency = 0.55,
-                        Color = FromRGB(200, 200, 200)
-                    })
-                    Instances:Create("UIGradient", {
-                        Parent = CardStroke.Instance,
-                        Name = "\0",
-                        Rotation = 90,
-                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(200, 200, 200)), RGBSequenceKeypoint(1, FromRGB(20, 200, 255))}
-                    }):AddToTheme({Color = function()
-                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                    end})
-
-                    -- Logo (ganti ID dengan asset custom lo)
-                    Items["VyreLogo"] = Instances:Create("ImageLabel", {
-                        Parent = Items["PlayerCard"].Instance,
-                        Name = "\0",
-                        Size = UDim2New(0, 32, 0, 32),
-                        Position = UDim2New(0, 7, 0, 9),
-                        BackgroundTransparency = 1,
-                        ScaleType = Enum.ScaleType.Fit,
-                        BorderSizePixel = 0,
-                        ZIndex = 6,
-                        Image = "rbxassetid://" .. Window.Logo,
-                        ImageColor3 = FromRGB(255, 255, 255),
-                        BorderColor3 = FromRGB(0, 0, 0)
-                    })
-                    Instances:Create("UIGradient", {
-                        Parent = Items["VyreLogo"].Instance,
-                        Name = "\0",
-                        Rotation = -90,
-                        Color = RGBSequence{RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(180, 160, 255))}
-                    }):AddToTheme({Color = function()
-                        return RGBSequence{RGBSequenceKeypoint(0, Library.Theme.Accent), RGBSequenceKeypoint(1, Library.Theme.AccentGradient)}
-                    end})
-
-                    -- Text "VYRE HUB"
-                    Items["VyreName"] = Instances:Create("TextLabel", {
-                        Parent = Items["PlayerCard"].Instance,
-                        Name = "\0",
-                        FontFace = Library.Fonts.SemiBold,
-                        TextColor3 = FromRGB(235, 235, 255),
-                        TextTransparency = 0,
-                        Text = "VYRE HUB",
-                        AutomaticSize = Enum.AutomaticSize.X,
-                        Size = UDim2New(0, 0, 0, 14),
-                        Position = UDim2New(0, 47, 0, 10),
-                        BorderSizePixel = 0,
-                        BackgroundTransparency = 1,
-                        ZIndex = 6,
-                        TextSize = 13,
-                        TextXAlignment = Enum.TextXAlignment.Left,
-                        BackgroundColor3 = FromRGB(255, 255, 255)
-                    })
-
-                    -- Text "V1.0"
-                    Items["VyreVersion"] = Instances:Create("TextLabel", {
-                        Parent = Items["PlayerCard"].Instance,
-                        Name = "\0",
-                        FontFace = Library.Font,
-                        TextColor3 = FromRGB(200, 200, 200),
-                        TextTransparency = 0.2,
-                        Text = "V1.0",
-                        AutomaticSize = Enum.AutomaticSize.X,
-                        Size = UDim2New(0, 0, 0, 12),
-                        Position = UDim2New(0, 47, 0, 27),
-                        BorderSizePixel = 0,
-                        BackgroundTransparency = 1,
-                        ZIndex = 6,
-                        TextSize = 11,
-                        TextXAlignment = Enum.TextXAlignment.Left,
-                        BackgroundColor3 = FromRGB(255, 255, 255)
-                    })
-                    Items["VyreVersion"]:AddToTheme({TextColor3 = function() return Library.Theme.Accent end})
-                end
 
                 Window.Items = Items
             end
